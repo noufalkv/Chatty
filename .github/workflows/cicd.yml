@@ -20,10 +20,10 @@ jobs:
                   node-version: "18"
 
             - name: Install dependencies
-              run: cd ${{ matrix.service }} && npm ci
+              run: cd ${{ matrix.service }} && npm ci --legacy-peer-deps
 
             - name: Fix npm vulnerabilities
-              run: cd ${{ matrix.service }} && npm audit fix --force
+              run: cd ${{ matrix.service }} && npm audit fix --force --legacy-peer-deps
 
             - name: Run ESLint
               run: cd ${{ matrix.service }} && npx eslint .
