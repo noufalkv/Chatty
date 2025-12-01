@@ -5,7 +5,10 @@ const BackgroundHeaderSkeleton = ({ tabItems }) => {
   return (
     <>
       <div className="profile-banner" data-testid="profile-banner-skeleton">
-        <div className="profile-banner-image" style={{ border: '1px solid white', backgroundColor: '#EFF1F6' }}></div>
+        <div
+          className="profile-banner-image"
+          style={{ border: '1px solid white', backgroundColor: '#EFF1F6' }}
+        ></div>
         <div className="profile-banner-data">
           <div className="profile-pic">
             <Skeleton baseColor="#EFF1F6" height={180} width={180} />
@@ -38,7 +41,7 @@ const BackgroundHeaderSkeleton = ({ tabItems }) => {
 };
 
 BackgroundHeaderSkeleton.propTypes = {
-  tabItems: PropTypes.array
+  tabItems: PropTypes.array,
 };
 
 export default BackgroundHeaderSkeleton;

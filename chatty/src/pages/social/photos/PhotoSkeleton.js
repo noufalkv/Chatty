@@ -8,7 +8,12 @@ const PhotoSkeleton = () => {
         <div className="gallery-images">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((post, index) => (
             <div key={index}>
-              <Skeleton baseColor="#EFF1F6" height={352} width={352} style={{ borderRadius: '16px' }} />
+              <Skeleton
+                baseColor="#EFF1F6"
+                height={352}
+                width={352}
+                style={{ borderRadius: '16px' }}
+              />
             </div>
           ))}
         </div>

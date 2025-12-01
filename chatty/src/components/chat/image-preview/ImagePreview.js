@@ -15,6 +15,6 @@ const ImagePreview = ({ image, onRemoveImage }) => {
 
 ImagePreview.propTypes = {
   image: PropTypes.string,
-  onRemoveImage: PropTypes.func
+  onRemoveImage: PropTypes.func,
 };
 export default ImagePreview;

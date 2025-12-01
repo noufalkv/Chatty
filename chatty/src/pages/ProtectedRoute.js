@@ -54,7 +54,7 @@ const ProtectedRoute = ({ children }) => {
   }
 };
 ProtectedRoute.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default ProtectedRoute;

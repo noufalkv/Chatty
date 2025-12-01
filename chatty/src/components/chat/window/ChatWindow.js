@@ -71,7 +71,7 @@ const ChatWindow = () => {
         chatMessages,
         gifUrl,
         selectedImage,
-        isRead: checkUserOne && checkUserTwo
+        isRead: checkUserOne && checkUserTwo,
       });
       await chatService.saveChatMessage(messageData);
     } catch (error) {
@@ -105,7 +105,12 @@ const ChatWindow = () => {
 
   useEffect(() => {
     if (rendered) {
-      ChatUtils.socketIOMessageReceived(chatMessages, searchParams.get('username'), setConversationId, setChatMessages);
+      ChatUtils.socketIOMessageReceived(
+        chatMessages,
+        searchParams.get('username'),
+        setConversationId,
+        setChatMessages
+      );
     }
     if (!rendered) setRendered(true);
     ChatUtils.usersOnline(setOnlineUsers);
@@ -114,7 +119,12 @@ const ChatWindow = () => {
   }, [searchParams, rendered]);
 
   useEffect(() => {
-    ChatUtils.socketIOMessageReaction(chatMessages, searchParams.get('username'), setConversationId, setChatMessages);
+    ChatUtils.socketIOMessageReaction(
+      chatMessages,
+      searchParams.get('username'),
+      setConversationId,
+      setChatMessages
+    );
   }, [chatMessages, searchParams]);
 
   return (
@@ -138,7 +148,9 @@ const ChatWindow = () => {
             <div className="chat-title-items">
               <div
                 className={`chat-name ${
-                  Utils.checkIfUserIsOnline(receiver?.username, onlineUsers) ? '' : 'user-not-online'
+                  Utils.checkIfUserIsOnline(receiver?.username, onlineUsers)
+                    ? ''
+                    : 'user-not-online'
                 }`}
               >
                 {receiver?.username}

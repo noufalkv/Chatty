@@ -51,7 +51,10 @@ const CommentArea = ({ post }) => {
 
   const addReactionPost = async (reaction) => {
     try {
-      const reactionResponse = await postService.getSinglePostReactionByUsername(post?._id, profile?.username);
+      const reactionResponse = await postService.getSinglePostReactionByUsername(
+        post?._id,
+        profile?.username
+      );
       post = updatePostReactions(
         reaction,
         Object.keys(reactionResponse.data.reactions).length,
@@ -81,7 +84,7 @@ const CommentArea = ({ post }) => {
         profilePicture: profile?.profilePicture,
         previousReaction: Object.keys(reactionResponse.data.reactions).length
           ? reactionResponse.data.reactions?.type
-          : ''
+          : '',
       };
 
       if (!Object.keys(reactionResponse.data.reactions).length) {
@@ -89,7 +92,11 @@ const CommentArea = ({ post }) => {
       } else {
         reactionsData.previousReaction = reactionResponse.data.reactions?.type;
         if (reaction === reactionsData.previousReaction) {
-          await postService.removeReaction(post?._id, reactionsData.previousReaction, post.reactions);
+          await postService.removeReaction(
+            post?._id,
+            reactionsData.previousReaction,
+            post.reactions
+          );
         } else {
           await postService.addReaction(reactionsData);
         }
@@ -122,7 +129,7 @@ const CommentArea = ({ post }) => {
       postId: post?._id,
       profilePicture: profile?.profilePicture,
       username: profile?.username,
-      type: newReaction
+      type: newReaction,
     };
     if (hasResponse && previousReaction !== newReaction) {
       postReactions.push(newPostReaction);
@@ -141,7 +148,7 @@ const CommentArea = ({ post }) => {
       type: reaction,
       postReactions: post.reactions,
       profilePicture: profile?.profilePicture,
-      previousReaction: hasResponse ? previousReaction : ''
+      previousReaction: hasResponse ? previousReaction : '',
     };
     socketService?.socket?.emit('reaction', socketReactionData);
   };
@@ -155,8 +162,15 @@ const CommentArea = ({ post }) => {
       <div className="like-icon reactions">
         <div className="likes-block" onClick={() => addReactionPost('like')}>
           <div className={`likes-block-icons reaction-icon ${userSelectedReaction.toLowerCase()}`}>
-            <div className={`reaction-display ${userSelectedReaction.toLowerCase()} `} data-testid="selected-reaction">
-              <img className="reaction-img" src={reactionsMap[userSelectedReaction.toLowerCase()]} alt="" />
+            <div
+              className={`reaction-display ${userSelectedReaction.toLowerCase()} `}
+              data-testid="selected-reaction"
+            >
+              <img
+                className="reaction-img"
+                src={reactionsMap[userSelectedReaction.toLowerCase()]}
+                alt=""
+              />
               <span>{userSelectedReaction}</span>
             </div>
           </div>
@@ -175,7 +189,7 @@ const CommentArea = ({ post }) => {
 };
 
 CommentArea.propTypes = {
-  post: PropTypes.object
+  post: PropTypes.object,
 };
 
 export default CommentArea;

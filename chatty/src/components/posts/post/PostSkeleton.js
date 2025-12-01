@@ -10,7 +10,12 @@ const PostSkeleton = () => {
           <div className="user-post-info">
             <div className="inline-title-display">
               <h5>
-                <Skeleton baseColor="#EFF1F6" width={120} height={20} style={{ marginBottom: '5px' }} />
+                <Skeleton
+                  baseColor="#EFF1F6"
+                  width={120}
+                  height={20}
+                  style={{ marginBottom: '5px' }}
+                />
               </h5>
             </div>
 
@@ -21,7 +26,8 @@ const PostSkeleton = () => {
           <div className="user-post" style={{ marginTop: '1rem', borderBottom: '' }}>
             <div className="user-post-with-bg" style={{ backgroundColor: '#EFF1F6' }}>
               <p className="time-text-display">
-                <Skeleton baseColor="#EFF1F6" width={70} /> &middot; <Skeleton baseColor="#EFF1F6" width={70} />
+                <Skeleton baseColor="#EFF1F6" width={70} /> &middot;{' '}
+                <Skeleton baseColor="#EFF1F6" width={70} />
               </p>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0px' }}>

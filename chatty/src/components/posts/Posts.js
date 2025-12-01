@@ -25,7 +25,8 @@ const Posts = ({ allPosts, userFollowing, postsLoading }) => {
         posts.length > 0 &&
         posts.map((post) => (
           <div key={post?._id} data-testid="posts-item">
-            {(!Utils.checkIfUserIsBlocked(profile?.blockedBy, post?.userId) || post?.userId === profile?._id) && (
+            {(!Utils.checkIfUserIsBlocked(profile?.blockedBy, post?.userId) ||
+              post?.userId === profile?._id) && (
               <>
                 {PostUtils.checkPrivacy(post, profile, following) && (
                   <>
@@ -50,6 +51,6 @@ const Posts = ({ allPosts, userFollowing, postsLoading }) => {
 Posts.propTypes = {
   allPosts: PropTypes.array.isRequired,
   userFollowing: PropTypes.array.isRequired,
-  postsLoading: PropTypes.bool
+  postsLoading: PropTypes.bool,
 };
 export default Posts;

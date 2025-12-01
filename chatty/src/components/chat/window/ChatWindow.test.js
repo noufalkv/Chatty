@@ -19,7 +19,7 @@ describe('ChatWindow', () => {
     });
     const url = `/app/social/profile/${existingUser?.username}?${createSearchParams({
       id: existingUser._id,
-      uId: existingUser.uId
+      uId: existingUser.uId,
     })}`;
     const history = createBrowserHistory();
     history.push(url);

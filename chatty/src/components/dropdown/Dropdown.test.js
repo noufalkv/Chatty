@@ -20,7 +20,7 @@ describe('Dropdown', () => {
       comment: '',
       reaction: '',
       senderName: '',
-      notificationType: ''
+      notificationType: '',
     };
     const props = {
       data: [item, item, item],
@@ -31,7 +31,7 @@ describe('Dropdown', () => {
       onMarkAsRead,
       onDeleteNotification,
       onLogout: null,
-      onNavigate: null
+      onNavigate: null,
     };
     const { baseElement } = render(<Dropdown {...props} />);
     const smallElement = screen.getByText(1);
@@ -56,7 +56,7 @@ describe('Dropdown', () => {
       createdAt: '2022-06-14',
       username: 'Danny',
       avatarColor: 'red',
-      profilePicture: 'https://place-hold.it'
+      profilePicture: 'https://place-hold.it',
     };
     const props = {
       data: [item],
@@ -67,7 +67,7 @@ describe('Dropdown', () => {
       onMarkAsRead: null,
       onDeleteNotification: null,
       onLogout,
-      onNavigate
+      onNavigate,
     };
     const { baseElement } = render(<Dropdown {...props} />);
     const buttonElement = baseElement.querySelector('.signOut');

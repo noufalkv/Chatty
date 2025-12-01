@@ -4,5 +4,5 @@ export const imageMock = {
   bgImageId: 'sample.jpg',
   imgId: 'sample.jpg',
   imgVersion: '1652904922',
-  createdAt: '2022-06-20'
+  createdAt: '2022-06-20',
 };

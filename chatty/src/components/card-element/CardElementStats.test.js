@@ -6,7 +6,7 @@ describe('CardElementStats', () => {
     const props = {
       postsCount: undefined,
       followersCount: undefined,
-      followingCount: undefined
+      followingCount: undefined,
     };
     render(<CardElementStats {...props} />);
     const h5Elements = screen.queryAllByTestId('info');
@@ -19,7 +19,7 @@ describe('CardElementStats', () => {
     const props = {
       postsCount: 23464657,
       followersCount: 537377372,
-      followingCount: 36362636
+      followingCount: 36362636,
     };
     render(<CardElementStats {...props} />);
     const h5Elements = screen.queryAllByTestId('info');

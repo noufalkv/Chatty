@@ -22,7 +22,7 @@ const RightMessageDisplay = ({
   setSelectedReaction,
   setShowImageModal,
   setImageUrl,
-  showImageModal
+  showImageModal,
 }) => {
   return (
     <div className="message right-message" data-testid="right-message">
@@ -36,7 +36,7 @@ const RightMessageDisplay = ({
                   conversationId: chat?.conversationId,
                   messageId: chat?._id,
                   reaction: event,
-                  type: 'add'
+                  type: 'add',
                 };
                 handleReactionClick(body);
                 setToggleReaction(false);
@@ -66,11 +66,13 @@ const RightMessageDisplay = ({
               <span className="message-deleted">message deleted</span>
             </div>
           )}
-          {!chat?.deleteForEveryone && chat?.deleteForMe && chat?.senderUsername === profile?.username && (
-            <div className="message-bubble right-message-bubble">
-              <span className="message-deleted">message deleted</span>
-            </div>
-          )}
+          {!chat?.deleteForEveryone &&
+            chat?.deleteForMe &&
+            chat?.senderUsername === profile?.username && (
+              <div className="message-bubble right-message-bubble">
+                <span className="message-deleted">message deleted</span>
+              </div>
+            )}
           {!chat?.deleteForEveryone && !chat?.deleteForMe && (
             <RightMessageBubble
               chat={chat}
@@ -79,17 +81,22 @@ const RightMessageDisplay = ({
               setShowImageModal={setShowImageModal}
             />
           )}
-          {!chat?.deleteForEveryone && chat?.deleteForMe && chat.senderUsername === profile?.username && (
-            <RightMessageBubble
-              chat={chat}
-              showImageModal={showImageModal}
-              setImageUrl={setImageUrl}
-              setShowImageModal={setShowImageModal}
-            />
-          )}
+          {!chat?.deleteForEveryone &&
+            chat?.deleteForMe &&
+            chat.senderUsername === profile?.username && (
+              <RightMessageBubble
+                chat={chat}
+                showImageModal={showImageModal}
+                setImageUrl={setImageUrl}
+                setShowImageModal={setShowImageModal}
+              />
+            )}
         </div>
         {showReactionIcon && index === activeElementIndex && !chat.deleteForEveryone && (
-          <div className="message-content-emoji-right-container" onClick={() => setToggleReaction(true)}>
+          <div
+            className="message-content-emoji-right-container"
+            onClick={() => setToggleReaction(true)}
+          >
             &#9786;
           </div>
         )}
@@ -109,7 +116,7 @@ const RightMessageDisplay = ({
                       conversationId: chat?.conversationId,
                       messageId: chat?._id,
                       reaction: data?.type,
-                      type: 'remove'
+                      type: 'remove',
                     };
                     setSelectedReaction(body);
                   }
@@ -124,7 +131,11 @@ const RightMessageDisplay = ({
               {lastChatMessage?.isRead ? (
                 <img src={doubleCheckmark} alt="" className="message-read-icon" />
               ) : (
-                <>{chat?.isRead && <img src={doubleCheckmark} alt="" className="message-read-icon" />}</>
+                <>
+                  {chat?.isRead && (
+                    <img src={doubleCheckmark} alt="" className="message-read-icon" />
+                  )}
+                </>
               )}
             </>
           )}
@@ -152,6 +163,6 @@ RightMessageDisplay.propTypes = {
   setSelectedReaction: PropTypes.func,
   setShowImageModal: PropTypes.func,
   showImageModal: PropTypes.bool,
-  setImageUrl: PropTypes.func
+  setImageUrl: PropTypes.func,
 };
 export default RightMessageDisplay;

@@ -17,7 +17,7 @@ const Avatar = ({ avatarSrc, name, bgColor = '#f33e58', textColor, size, round =
             height: `${size}px`,
             borderRadius: `${round ? '50%' : ''}`,
             backgroundColor: `${!avatarSrc ? bgColor : ''}`,
-            display: 'flex'
+            display: 'flex',
           }}
         >
           {name && (
@@ -28,7 +28,7 @@ const Avatar = ({ avatarSrc, name, bgColor = '#f33e58', textColor, size, round =
                 fontSize: `${fontSize}`,
                 margin: 'auto',
                 fontWeight: 'bold',
-                textTransform: 'uppercase'
+                textTransform: 'uppercase',
               }}
             >
               {firstNameCharacter}
@@ -45,7 +45,7 @@ const Avatar = ({ avatarSrc, name, bgColor = '#f33e58', textColor, size, round =
           style={{
             width: `${size}px`,
             height: `${size}px`,
-            borderRadius: `${round ? '50%' : ''}`
+            borderRadius: `${round ? '50%' : ''}`,
           }}
         />
       )}
@@ -59,6 +59,6 @@ Avatar.propTypes = {
   bgColor: PropTypes.string,
   textColor: PropTypes.string,
   size: PropTypes.number,
-  round: PropTypes.bool
+  round: PropTypes.bool,
 };
 export default Avatar;

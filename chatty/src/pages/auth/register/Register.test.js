@@ -9,7 +9,7 @@ import { act } from 'react-dom/test-utils';
 const mockedUseNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockedUseNavigate
+  useNavigate: () => mockedUseNavigate,
 }));
 
 describe('Register', () => {

@@ -13,7 +13,7 @@ import ImagePreview from '@components/chat/image-preview/ImagePreview';
 import { ImageUtils } from '@services/utils/image-utils.service';
 
 const EmojiPickerComponent = loadable(() => import('./EmojiPicker'), {
-  fallback: <p id="loading">Loading...</p>
+  fallback: <p id="loading">Loading...</p>,
 });
 
 const MessageInput = ({ setChatMessage }) => {
@@ -166,7 +166,7 @@ const MessageInput = ({ setChatMessage }) => {
 };
 
 MessageInput.propTypes = {
-  setChatMessage: PropTypes.func
+  setChatMessage: PropTypes.func,
 };
 
 export default MessageInput;

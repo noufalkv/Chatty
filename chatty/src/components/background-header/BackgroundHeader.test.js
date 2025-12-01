@@ -22,7 +22,7 @@ describe('BackgroundHeader', () => {
       saveImage: null,
       cancelFileSelection: null,
       removeBackgroundImage: null,
-      galleryImages: []
+      galleryImages: [],
     };
   });
 

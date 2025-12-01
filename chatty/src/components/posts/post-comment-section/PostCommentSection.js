@@ -12,7 +12,7 @@ const PostCommentSection = ({ post }) => {
 };
 
 PostCommentSection.propTypes = {
-  post: PropTypes.object
+  post: PropTypes.object,
 };
 
 export default PostCommentSection;

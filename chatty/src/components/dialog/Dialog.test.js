@@ -12,7 +12,7 @@ describe('Dialog', () => {
       firstButtonText: 'Button 1',
       secondButtonText: 'Button 2',
       firstBtnHandler: buttonOneClick,
-      secondBtnHandler: buttonTwoClick
+      secondBtnHandler: buttonTwoClick,
     };
   });
 

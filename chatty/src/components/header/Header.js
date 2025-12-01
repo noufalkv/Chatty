@@ -37,7 +37,7 @@ const Header = () => {
     imgUrl: '',
     comment: '',
     reaction: '',
-    senderName: ''
+    senderName: '',
   });
   const [messageCount, setMessageCount] = useState(0);
   const [messageNotifications, setMessageNotifications] = useState([]);
@@ -48,7 +48,10 @@ const Header = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const [isMessageActive, setIsMessageActive] = useDetectOutsideClick(messageRef, false);
-  const [isNotificationActive, setIsNotificationActive] = useDetectOutsideClick(notificationRef, false);
+  const [isNotificationActive, setIsNotificationActive] = useDetectOutsideClick(
+    notificationRef,
+    false
+  );
   const [isSettingsActive, setIsSettingsActive] = useDetectOutsideClick(settingsRef, false);
   const storedUsername = useLocalStorage('username', 'get');
   const [deleteStorageUsername] = useLocalStorage('username', 'delete');
@@ -56,7 +59,11 @@ const Header = () => {
   const [deleteSessionPageReload] = useSessionStorage('pageReload', 'delete');
 
   const backgrounColor = `${
-    environment === 'DEV' || environment === 'LOCAL' ? '#50b5ff' : environment === 'STG' ? '#e9710f' : ''
+    environment === 'DEV' || environment === 'LOCAL'
+      ? '#50b5ff'
+      : environment === 'STG'
+      ? '#e9710f'
+      : ''
   }`;
 
   const getUserNotifications = async () => {
@@ -75,7 +82,11 @@ const Header = () => {
 
   const onMarkAsRead = async (notification) => {
     try {
-      NotificationUtils.markMessageAsRead(notification?._id, notification, setNotificationDialogContent);
+      NotificationUtils.markMessageAsRead(
+        notification?._id,
+        notification,
+        setNotificationDialogContent
+      );
     } catch (error) {
       Utils.dispatchNotification(error.response.data.message, 'error', dispatch);
     }
@@ -96,7 +107,9 @@ const Header = () => {
       ChatUtils.joinRoomEvent(notification, profile);
       ChatUtils.privateChatMessages = [];
       const receiverId =
-        notification?.receiverUsername !== profile?.username ? notification?.receiverId : notification?.senderId;
+        notification?.receiverUsername !== profile?.username
+          ? notification?.receiverId
+          : notification?.senderId;
       if (notification?.receiverUsername === profile?.username && !notification.isRead) {
         await chatService.markMessagesAsRead(profile?._id, receiverId);
       }
@@ -140,7 +153,13 @@ const Header = () => {
   }, [chatList, profile]);
 
   useEffect(() => {
-    NotificationUtils.socketIONotification(profile, notifications, setNotifications, 'header', setNotificationCount);
+    NotificationUtils.socketIONotification(
+      profile,
+      notifications,
+      setNotifications,
+      'header',
+      setNotificationCount
+    );
     NotificationUtils.socketIOMessageNotification(
       profile,
       messageNotifications,
@@ -182,13 +201,17 @@ const Header = () => {
                   imgUrl: '',
                   comment: '',
                   reaction: '',
-                  senderName: ''
+                  senderName: '',
                 });
               }}
             />
           )}
           <div className="header-navbar">
-            <div className="header-image" data-testid="header-image" onClick={() => navigate('/app/social/streams')}>
+            <div
+              className="header-image"
+              data-testid="header-image"
+              onClick={() => navigate('/app/social/streams')}
+            >
               <img src={logo} className="img-fluid" alt="" />
               <div className="app-name">
                 Chatty
@@ -250,7 +273,9 @@ const Header = () => {
               >
                 <span className="header-list-name">
                   <FaRegEnvelope className="header-list-icon" />
-                  {messageCount > 0 && <span className="bg-danger-dots dots" data-testid="messages-dots"></span>}
+                  {messageCount > 0 && (
+                    <span className="bg-danger-dots dots" data-testid="messages-dots"></span>
+                  )}
                 </span>
                 &nbsp;
               </li>

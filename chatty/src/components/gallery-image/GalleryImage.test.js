@@ -9,13 +9,13 @@ describe('GalleryImage', () => {
       post: {
         username: 'Manny',
         avatarColor: 'red',
-        createdAt: '2022-06-14'
+        createdAt: '2022-06-14',
       },
       showCaption: false,
       showDelete: false,
       imgSrc: 'https://place-hold.it',
       onClick: null,
-      onRemoveImage: null
+      onRemoveImage: null,
     };
   });
 

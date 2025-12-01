@@ -24,7 +24,10 @@ const Sidebar = () => {
 
   const navigateToPage = (name, url) => {
     if (name === 'Profile') {
-      url = `${url}/${profile?.username}?${createSearchParams({ id: profile?._id, uId: profile?.uId })}`;
+      url = `${url}/${profile?.username}?${createSearchParams({
+        id: profile?._id,
+        uId: profile?.uId,
+      })}`;
     }
 
     if (name === 'Streams') {
@@ -58,12 +61,15 @@ const Sidebar = () => {
   const markMessagesAsRad = useCallback(
     async (user) => {
       try {
-        const receiverId = user?.receiverUsername !== profile?.username ? user?.receiverId : user?.senderId;
+        const receiverId =
+          user?.receiverUsername !== profile?.username ? user?.receiverId : user?.senderId;
         if (user?.receiverUsername === profile?.username && !user.isRead) {
           await chatService.markMessagesAsRad(profile?._id, receiverId);
         }
         const userTwoName =
-          user?.receiverUsername !== profile?.username ? user?.receiverUsername : user?.senderUsername;
+          user?.receiverUsername !== profile?.username
+            ? user?.receiverUsername
+            : user?.senderUsername;
         await chatService.addChatUsers({ userOne: profile?.username, userTwo: userTwoName });
       } catch (error) {
         Utils.dispatchNotification(error.response.data.message, 'error', dispatch);
@@ -76,7 +82,9 @@ const Sidebar = () => {
     try {
       const chatUser = chatList[0];
       const userTwoName =
-        chatUser?.receiverUsername !== profile?.username ? chatUser?.receiverUsername : chatUser?.senderUsername;
+        chatUser?.receiverUsername !== profile?.username
+          ? chatUser?.receiverUsername
+          : chatUser?.senderUsername;
       ChatUtils.privateChatMessages = [];
       await chatService.removeChatUsers({ userOne: profile?.username, userTwo: userTwoName });
     } catch (error) {
@@ -104,7 +112,10 @@ const Sidebar = () => {
         <ul className="list-unstyled">
           {sidebar.map((data) => (
             <li key={data.index} onClick={() => navigateToPage(data.name, data.url)}>
-              <div data-testid="sidebar-list" className={`sidebar-link ${checkUrl(data.name) ? 'active' : ''}`}>
+              <div
+                data-testid="sidebar-list"
+                className={`sidebar-link ${checkUrl(data.name) ? 'active' : ''}`}
+              >
                 <div className="menu-icon">{fontAwesomeIcons[data.iconName]}</div>
                 <div className="menu-link">
                   <span>{`${data.name}`}</span>

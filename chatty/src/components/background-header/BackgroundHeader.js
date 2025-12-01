@@ -23,7 +23,7 @@ const BackgroundHeader = ({
   saveImage,
   cancelFileSelection,
   removeBackgroundImage,
-  galleryImages
+  galleryImages,
 }) => {
   const [selectedBackground, setSelectedBackground] = useState('');
   const [selectedProfileImage, setSelectedProfileImage] = useState('');
@@ -102,7 +102,9 @@ const BackgroundHeader = ({
           {hasImage && (
             <div className="save-changes-container" data-testid="save-changes-container">
               <div className="save-changes-box">
-                <div className="spinner-container">{showSpinner && !hasError && <Spinner bgColor="white" />}</div>
+                <div className="spinner-container">
+                  {showSpinner && !hasError && <Spinner bgColor="white" />}
+                </div>
                 <div className="save-changes-buttons">
                   <div className="save-changes-buttons-bg">
                     <Button
@@ -148,14 +150,18 @@ const BackgroundHeader = ({
               </div>
             )}
             {!selectedBackground && !url && <h3>Add a background image</h3>}
-            {selectedBackground ? <img src={`${selectedBackground}`} alt="" /> : <img src={`${url}`} alt="" />}
+            {selectedBackground ? (
+              <img src={`${selectedBackground}`} alt="" />
+            ) : (
+              <img src={`${url}`} alt="" />
+            )}
           </div>
           <div className="profile-banner-data">
             <div
               data-testid="profile-pic"
               className="profile-pic"
               style={{
-                width: `${user?.profilePicture ? '180px' : ''}`
+                width: `${user?.profilePicture ? '180px' : ''}`,
               }}
             >
               <Avatar
@@ -220,7 +226,9 @@ const BackgroundHeader = ({
                   {data.show && (
                     <li className="banner-nav-item" key={data.key}>
                       <div
-                        className={`banner-nav-item-name ${tab === data.key.toLowerCase() ? 'active' : ''}`}
+                        className={`banner-nav-item-name ${
+                          tab === data.key.toLowerCase() ? 'active' : ''
+                        }`}
                         onClick={() => onClick(data.key.toLowerCase())}
                       >
                         {data.icon}
@@ -252,7 +260,7 @@ BackgroundHeader.propTypes = {
   saveImage: PropTypes.func,
   cancelFileSelection: PropTypes.func,
   removeBackgroundImage: PropTypes.func,
-  galleryImages: PropTypes.array
+  galleryImages: PropTypes.array,
 };
 
 export default BackgroundHeader;

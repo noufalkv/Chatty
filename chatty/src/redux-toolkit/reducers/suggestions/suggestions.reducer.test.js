@@ -2,7 +2,7 @@ import reducer, { addToSuggestions } from '@redux/reducers/suggestions/suggestio
 
 const initialState = {
   users: [],
-  isLoading: false
+  isLoading: false,
 };
 
 describe('suggestions reducer', () => {
@@ -14,14 +14,16 @@ describe('suggestions reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual({
       users: [],
-      isLoading: false
+      isLoading: false,
     });
   });
 
   it('should add users to suggestions', () => {
-    expect(reducer(initialState, addToSuggestions({ users: [1, 2, 3, 4, 5], isLoading: true }))).toEqual({
+    expect(
+      reducer(initialState, addToSuggestions({ users: [1, 2, 3, 4, 5], isLoading: true }))
+    ).toEqual({
       users: [1, 2, 3, 4, 5],
-      isLoading: true
+      isLoading: true,
     });
   });
 });

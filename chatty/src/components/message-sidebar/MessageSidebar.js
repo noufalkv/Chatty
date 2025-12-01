@@ -53,7 +53,9 @@ const MessageSidebar = ({ profile, messageCount, messageNotifications, openChatP
                         ? notification.receiverUsername
                         : notification.senderUsername}
                     </h6>
-                    <p className="subtext">{notification?.body ? notification?.body : notification?.message}</p>
+                    <p className="subtext">
+                      {notification?.body ? notification?.body : notification?.message}
+                    </p>
                   </div>
                   <div className="content-icons">
                     {!notification?.isRead ? (
@@ -86,6 +88,6 @@ MessageSidebar.propTypes = {
   profile: PropTypes.object.isRequired,
   messageCount: PropTypes.number.isRequired,
   messageNotifications: PropTypes.array.isRequired,
-  openChatPage: PropTypes.func.isRequired
+  openChatPage: PropTypes.func.isRequired,
 };
 export default MessageSidebar;

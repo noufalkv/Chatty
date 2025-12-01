@@ -14,8 +14,8 @@ const postSlice = createSlice({
     },
     clearPost: () => {
       return emptyPostData;
-    }
-  }
+    },
+  },
 });
 
 export const { updatePostItem, clearPost } = postSlice.actions;

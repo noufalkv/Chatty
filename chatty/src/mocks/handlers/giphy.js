@@ -17,21 +17,21 @@ export const getTrendingGiphyMock = rest.get(`${GIPHY_URL}/trending`, (req, res,
             webp_size: '748192',
             webp: 'https://media1.giphy.com/media/qg5pk8s2h5kJy/giphy.webp?cid=b6f691b6xs6w6z065eld5ihx7moh2xlo0fyofdhij5zp9xn4&rid=giphy.webp&ct=g',
             frames: '87',
-            hash: '6e1124b7ba366541452f9cee813995b2'
-          }
-        }
-      }
+            hash: '6e1124b7ba366541452f9cee813995b2',
+          },
+        },
+      },
     ],
     pagination: {
       total_count: 555,
       count: 1,
-      offset: 0
+      offset: 0,
     },
     meta: {
       status: 200,
       msg: 'OK',
-      response_id: 'xs6w6z065eld5ihx7moh2xlo0fyofdhij5zp9xn4'
-    }
+      response_id: 'xs6w6z065eld5ihx7moh2xlo0fyofdhij5zp9xn4',
+    },
   };
   return res(ctx.status(200), ctx.json(result));
 });
@@ -51,21 +51,21 @@ export const searchGiphyMock = rest.get(`${GIPHY_URL}/search`, (req, res, ctx) =
             webp_size: '748192',
             webp: 'https://media1.giphy.com/media/qg5pk8s2h5kJy/giphy.webp?cid=b6f691b6xs6w6z065eld5ihx7moh2xlo0fyofdhij5zp9xn4&rid=giphy.webp&ct=g',
             frames: '87',
-            hash: '6e1124b7ba366541452f9cee813995b2'
-          }
-        }
-      }
+            hash: '6e1124b7ba366541452f9cee813995b2',
+          },
+        },
+      },
     ],
     pagination: {
       total_count: 555,
       count: 1,
-      offset: 0
+      offset: 0,
     },
     meta: {
       status: 200,
       msg: 'OK',
-      response_id: 'xs6w6z065eld5ihx7moh2xlo0fyofdhij5zp9xn4'
-    }
+      response_id: 'xs6w6z065eld5ihx7moh2xlo0fyofdhij5zp9xn4',
+    },
   };
   return res(ctx.status(200), ctx.json(result));
 });
@@ -77,8 +77,8 @@ export const emptySearchGiphyMock = rest.get(`${GIPHY_URL}/search`, (req, res, c
     meta: {
       status: 200,
       msg: 'OK',
-      response_id: 'xs6w6z065eld5ihx7moh2xlo0fyofdhij5zp9xn3'
-    }
+      response_id: 'xs6w6z065eld5ihx7moh2xlo0fyofdhij5zp9xn3',
+    },
   };
   return res(ctx.status(200), ctx.json(result));
 });

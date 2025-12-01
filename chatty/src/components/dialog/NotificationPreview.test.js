@@ -14,7 +14,7 @@ describe('NotificationPreview', () => {
       reaction: '',
       senderName: '',
       secondButtonText: 'Button 1',
-      secondBtnHandler: jest.fn()
+      secondBtnHandler: jest.fn(),
     };
     render(<NotificationPreview {...props} />);
     const buttonOne = screen.getByText('Button 1');
@@ -30,7 +30,7 @@ describe('NotificationPreview', () => {
       reaction: 'love',
       senderName: 'Danny',
       secondButtonText: 'Button 1',
-      secondBtnHandler: null
+      secondBtnHandler: null,
     };
     render(<NotificationPreview {...props} />);
     const title = screen.getByText('Title');

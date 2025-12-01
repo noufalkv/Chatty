@@ -44,7 +44,10 @@ const Followers = () => {
 
   const unblockUser = async (user) => {
     try {
-      socketService?.socket?.emit('unblock user', { blockedUser: user._id, blockedBy: profile?._id });
+      socketService?.socket?.emit('unblock user', {
+        blockedUser: user._id,
+        blockedBy: profile?._id,
+      });
       FollowersUtils.unblockUser(user, dispatch);
     } catch (error) {
       Utils.dispatchNotification(error.response.data.message, 'error', dispatch);
@@ -98,7 +101,9 @@ const Followers = () => {
         </div>
       )}
 
-      {loading && !followers.length && <div className="card-element" style={{ height: '350px' }}></div>}
+      {loading && !followers.length && (
+        <div className="card-element" style={{ height: '350px' }}></div>
+      )}
 
       {!loading && !followers.length && (
         <div className="empty-page" data-testid="empty-page">

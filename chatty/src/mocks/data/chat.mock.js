@@ -14,7 +14,7 @@ export const messageData = {
   gifUrl: '',
   selectedImage: '',
   reaction: [{ type: 'love', senderName: 'Manny' }],
-  createdAt: '2022-05-15T12:38:46.867+00:00'
+  createdAt: '2022-05-15T12:38:46.867+00:00',
 };
 
 export const messageDataTwo = {
@@ -33,5 +33,5 @@ export const messageDataTwo = {
   gifUrl: '',
   selectedImage: '',
   reaction: [],
-  createdAt: '2022-06-15T12:38:46.867+00:00'
+  createdAt: '2022-06-15T12:38:46.867+00:00',
 };

@@ -17,7 +17,11 @@ const NotificationSkeleton = () => {
                   <div className="notification-box-sub-card-media-body">
                     <h6
                       className="title"
-                      style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        marginBottom: '5px',
+                      }}
                     >
                       <Skeleton baseColor="#EFF1F6" width={500} height={20} />
                       <small className="subtitle">

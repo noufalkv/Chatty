@@ -12,7 +12,7 @@ const NotificationPreview = ({
   reaction,
   senderName,
   secondButtonText,
-  secondBtnHandler
+  secondBtnHandler,
 }) => {
   return (
     <>
@@ -25,13 +25,19 @@ const NotificationPreview = ({
             {comment && <span className="dialog-body-comment">{comment}</span>}
             {reaction && (
               <div className="dialog-body-reaction" data-testid="reaction">
-                <span className="dialog-body-reaction-text">{senderName} reacted on your post with</span>{' '}
+                <span className="dialog-body-reaction-text">
+                  {senderName} reacted on your post with
+                </span>{' '}
                 <img className="reaction-img" src={`${reactionsMap[`${reaction}`]}`} alt="" />
               </div>
             )}
           </div>
           <div className="btn-container">
-            <Button className="button cancel-btn" label={secondButtonText} handleClick={secondBtnHandler} />
+            <Button
+              className="button cancel-btn"
+              label={secondButtonText}
+              handleClick={secondBtnHandler}
+            />
           </div>
         </div>
       </div>
@@ -47,7 +53,7 @@ NotificationPreview.propTypes = {
   reaction: PropTypes.string,
   senderName: PropTypes.string,
   secondButtonText: PropTypes.string,
-  secondBtnHandler: PropTypes.func
+  secondBtnHandler: PropTypes.func,
 };
 
 export default NotificationPreview;

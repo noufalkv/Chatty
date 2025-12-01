@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   users: [],
-  isLoading: false
+  isLoading: false,
 };
 
 const suggestionsSlice = createSlice({
@@ -14,7 +14,7 @@ const suggestionsSlice = createSlice({
       const { isLoading, users } = action.payload;
       state.users = [...users];
       state.isLoading = isLoading;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getUserSuggestions.pending, (state) => {
@@ -28,7 +28,7 @@ const suggestionsSlice = createSlice({
     builder.addCase(getUserSuggestions.rejected, (state) => {
       state.isLoading = false;
     });
-  }
+  },
 });
 
 export const { addToSuggestions } = suggestionsSlice.actions;

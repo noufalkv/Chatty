@@ -19,14 +19,17 @@ export const markNotificationMock = rest.put(`${BASE_URL}/notification/12345`, (
   return res(ctx.status(200), ctx.json(result));
 });
 
-export const deleteNotificationMock = rest.delete(`${BASE_URL}/notification/12345`, (req, res, ctx) => {
-  const result = { message: 'Notification deleted successfully' };
-  return res(ctx.status(200), ctx.json(result));
-});
+export const deleteNotificationMock = rest.delete(
+  `${BASE_URL}/notification/12345`,
+  (req, res, ctx) => {
+    const result = { message: 'Notification deleted successfully' };
+    return res(ctx.status(200), ctx.json(result));
+  }
+);
 
 export const notificationHandlers = [
   getUserNotificationsMock,
   emptyNotificationsMock,
   markNotificationMock,
-  deleteNotificationMock
+  deleteNotificationMock,
 ];

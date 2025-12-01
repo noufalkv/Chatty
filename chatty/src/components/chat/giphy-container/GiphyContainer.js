@@ -47,7 +47,7 @@ const GiphyContainer = ({ handleGiphyClick }) => {
 };
 
 GiphyContainer.propTypes = {
-  handleGiphyClick: PropTypes.func
+  handleGiphyClick: PropTypes.func,
 };
 
 export default GiphyContainer;

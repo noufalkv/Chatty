@@ -24,7 +24,7 @@ export class ChatUtils {
       receiverId: user.receiverId,
       receiverName: user.receiverUsername,
       senderId: profile?._id,
-      senderName: profile?.username
+      senderName: profile?.username,
     };
     socketService?.socket?.emit('join room', users);
   }
@@ -53,7 +53,7 @@ export class ChatUtils {
     chatMessages,
     isRead,
     gifUrl,
-    selectedImage
+    selectedImage,
   }) {
     const chatConversationId = find(
       chatMessages,
@@ -69,7 +69,7 @@ export class ChatUtils {
       body: message.trim(),
       isRead,
       gifUrl,
-      selectedImage
+      selectedImage,
     };
     return messageData;
   }
@@ -82,7 +82,7 @@ export class ChatUtils {
     params,
     pathname,
     navigate,
-    dispatch
+    dispatch,
   }) {
     if (chatMessageList.length) {
       dispatch(setSelectedChatUser({ isLoading: false, user: chatMessageList[0] }));
@@ -101,7 +101,10 @@ export class ChatUtils {
 
   static socketIOChatList(profile, chatMessageList, setChatMessageList) {
     socketService?.socket?.on('chat list', (data) => {
-      if (data.senderUsername === profile?.username || data.receiverUsername === profile?.username) {
+      if (
+        data.senderUsername === profile?.username ||
+        data.receiverUsername === profile?.username
+      ) {
         const messageIndex = findIndex(chatMessageList, ['conversationId', data.conversationId]);
         chatMessageList = cloneDeep(chatMessageList);
         if (messageIndex > -1) {
@@ -119,7 +122,10 @@ export class ChatUtils {
   static socketIOMessageReceived(chatMessages, username, setConversationId, setChatMessages) {
     chatMessages = cloneDeep(chatMessages);
     socketService?.socket?.on('message received', (data) => {
-      if (data.senderUsername.toLowerCase() === username || data.receiverUsername.toLowerCase() === username) {
+      if (
+        data.senderUsername.toLowerCase() === username ||
+        data.receiverUsername.toLowerCase() === username
+      ) {
         setConversationId(data.conversationId);
         ChatUtils.privateChatMessages.push(data);
         chatMessages = [...ChatUtils.privateChatMessages];
@@ -128,7 +134,10 @@ export class ChatUtils {
     });
 
     socketService?.socket?.on('message read', (data) => {
-      if (data.senderUsername.toLowerCase() === username || data.receiverUsername.toLowerCase() === username) {
+      if (
+        data.senderUsername.toLowerCase() === username ||
+        data.receiverUsername.toLowerCase() === username
+      ) {
         const findMessageIndex = findIndex(ChatUtils.privateChatMessages, ['_id', data._id]);
         if (findMessageIndex > -1) {
           ChatUtils.privateChatMessages.splice(findMessageIndex, 1, data);
@@ -141,7 +150,10 @@ export class ChatUtils {
 
   static socketIOMessageReaction(chatMessages, username, setConversationId, setChatMessages) {
     socketService?.socket?.on('message reaction', (data) => {
-      if (data.senderUsername.toLowerCase() === username || data.receiverUsername.toLowerCase() === username) {
+      if (
+        data.senderUsername.toLowerCase() === username ||
+        data.receiverUsername.toLowerCase() === username
+      ) {
         chatMessages = cloneDeep(chatMessages);
         setConversationId(data.conversationId);
         const messageIndex = findIndex(chatMessages, (message) => message?._id === data._id);

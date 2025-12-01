@@ -14,7 +14,7 @@ const EmojiPicker = ({ onEmojiClick, pickerStyle }) => (
 
 EmojiPicker.propTypes = {
   onEmojiClick: PropTypes.func,
-  pickerStyle: PropTypes.object
+  pickerStyle: PropTypes.object,
 };
 
 export default EmojiPicker;

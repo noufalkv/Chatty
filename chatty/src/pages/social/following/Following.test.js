@@ -81,7 +81,11 @@ describe('Following', () => {
     userEvent.click(cardElementButtons[0].children[0]);
     expect(cardElementButtons[0].children[0].textContent).toEqual('Unfollow');
     expect(socketService.socket.emit).toHaveBeenCalledWith('unfollow user', existingUserTwo);
-    expect(FollowersUtils.unFollowUser).toHaveBeenCalledWith(existingUserTwo, existingUser, expect.any(Function));
+    expect(FollowersUtils.unFollowUser).toHaveBeenCalledWith(
+      existingUserTwo,
+      existingUser,
+      expect.any(Function)
+    );
     expect(FollowersUtils.socketIORemoveFollowing).toHaveBeenCalledWith([], expect.any(Function));
   });
 

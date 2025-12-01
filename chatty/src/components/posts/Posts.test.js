@@ -10,7 +10,7 @@ describe('Posts', () => {
     props = {
       allPosts: [],
       userFollowing: [],
-      postsLoading: false
+      postsLoading: false,
     };
   });
 

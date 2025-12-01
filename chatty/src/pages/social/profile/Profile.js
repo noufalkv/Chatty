@@ -148,7 +148,11 @@ const Profile = () => {
   return (
     <>
       {showImageModal && (
-        <ImageModal image={`${imageUrl}`} onCancel={() => setShowImageModal(!showImageModal)} showArrow={false} />
+        <ImageModal
+          image={`${imageUrl}`}
+          onCancel={() => setShowImageModal(!showImageModal)}
+          showArrow={false}
+        />
       )}
       {deleteDialogIsOpen && (
         <Dialog
@@ -181,7 +185,9 @@ const Profile = () => {
             />
           </div>
           <div className="profile-content">
-            {displayContent === 'timeline' && <Timeline userProfileData={userProfileData} loading={loading} />}
+            {displayContent === 'timeline' && (
+              <Timeline userProfileData={userProfileData} loading={loading} />
+            )}
             {displayContent === 'followers' && <FollowerCard userData={user} />}
             {displayContent === 'gallery' && (
               <>
@@ -200,7 +206,12 @@ const Profile = () => {
                             }}
                             onRemoveImage={(event) => {
                               event.stopPropagation();
-                              dispatch(toggleDeleteDialog({ toggle: !deleteDialogIsOpen, data: image?._id }));
+                              dispatch(
+                                toggleDeleteDialog({
+                                  toggle: !deleteDialogIsOpen,
+                                  data: image?._id,
+                                })
+                              );
                             }}
                           />
                         </div>

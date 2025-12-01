@@ -1,7 +1,7 @@
 import reducer, { addReactions } from '@redux/reducers/post/user-post-reaction.reducer';
 
 const initialState = {
-  reactions: []
+  reactions: [],
 };
 
 describe('user posts reaction reducer', () => {
@@ -15,7 +15,7 @@ describe('user posts reaction reducer', () => {
 
   it('should reactions to list', () => {
     expect(reducer(initialState, addReactions([{ type: 'love', value: 10 }]))).toEqual({
-      reactions: [{ type: 'love', value: 10 }]
+      reactions: [{ type: 'love', value: 10 }],
     });
   });
 });

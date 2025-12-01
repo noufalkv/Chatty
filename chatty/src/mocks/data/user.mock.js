@@ -3,13 +3,13 @@ export const existingUser = {
     messages: true,
     reactions: true,
     comments: true,
-    follows: true
+    follows: true,
   },
   social: {
     facebook: '',
     instagram: '',
     twitter: '',
-    youtube: ''
+    youtube: '',
   },
   postCount: 7,
   gender: '',
@@ -33,7 +33,7 @@ export const existingUser = {
   school: 'University of Benin',
   location: 'Dusseldorf, Germany',
   quote: 'Sky is my limit',
-  createdAt: '2022-06-15'
+  createdAt: '2022-06-15',
 };
 
 export const existingUserTwo = {
@@ -41,13 +41,13 @@ export const existingUserTwo = {
     messages: false,
     reactions: true,
     comments: true,
-    follows: false
+    follows: false,
   },
   social: {
     facebook: '',
     instagram: '',
     twitter: '',
-    youtube: ''
+    youtube: '',
   },
   postCount: 7,
   gender: '',
@@ -71,7 +71,7 @@ export const existingUserTwo = {
   school: 'University of Benin',
   location: 'Dusseldorf, Germany',
   quote: 'Sky is my limit',
-  createdAt: '2022-06-15'
+  createdAt: '2022-06-15',
 };
 
 export const existingUserThree = {
@@ -79,13 +79,13 @@ export const existingUserThree = {
     messages: false,
     reactions: true,
     comments: true,
-    follows: false
+    follows: false,
   },
   social: {
     facebook: '',
     instagram: '',
     twitter: '',
-    youtube: ''
+    youtube: '',
   },
   postCount: 7,
   gender: '',
@@ -109,7 +109,7 @@ export const existingUserThree = {
   school: 'University of Benin',
   location: 'Dusseldorf, Germany',
   quote: 'Sky is my limit',
-  createdAt: '2022-06-15'
+  createdAt: '2022-06-15',
 };
 
 export const existingUserFour = {
@@ -117,13 +117,13 @@ export const existingUserFour = {
     messages: false,
     reactions: true,
     comments: true,
-    follows: false
+    follows: false,
   },
   social: {
     facebook: '',
     instagram: '',
     twitter: '',
-    youtube: ''
+    youtube: '',
   },
   postCount: 7,
   gender: '',
@@ -147,7 +147,7 @@ export const existingUserFour = {
   school: 'University of Benin',
   location: 'Dusseldorf, Germany',
   quote: 'Sky is my limit',
-  createdAt: '2022-06-15'
+  createdAt: '2022-06-15',
 };
 
 export const userJwt =

@@ -5,43 +5,49 @@ import { Utils } from '@services/utils/utils.service';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
-const SocialLinks = ({ editableSocialInputs, username, profile, loading, setEditableSocialInputs }) => {
+const SocialLinks = ({
+  editableSocialInputs,
+  username,
+  profile,
+  loading,
+  setEditableSocialInputs,
+}) => {
   const dispatch = useDispatch();
   const noBasicInfo = {
     quoteMsg: '',
     workMsg: '',
     schoolMsg: '',
-    locationMsg: ''
+    locationMsg: '',
   };
   const noSocialInfo = {
     instagramMsg: 'No link available',
     twitterMsg: 'No link available',
     facebookMsg: 'No link available',
-    youtubeMsg: 'No link available'
+    youtubeMsg: 'No link available',
   };
   const editableInputs = {
     quote: '',
     work: '',
     school: '',
-    location: ''
+    location: '',
   };
   const editableSocialLinks = editableSocialInputs ?? {
     instagram: '',
     twitter: '',
     facebook: '',
-    youtube: ''
+    youtube: '',
   };
   const basicInfoPlaceholder = {
     quotePlacehoder: '',
     workPlacehoder: '',
     schoolPlacehoder: '',
-    locationPlacehoder: ''
+    locationPlacehoder: '',
   };
   const socialLinksPlaceholder = {
     instagramPlacehoder: 'Add your Instagram account link',
     twitterPlacehoder: 'Add your Twitter account link',
     facebookPlacehoder: 'Add your Facebook account link',
-    youtubePlacehoder: 'Add your YouTube account link'
+    youtubePlacehoder: 'Add your YouTube account link',
   };
 
   const updateSocialLinks = async () => {
@@ -83,7 +89,7 @@ SocialLinks.propTypes = {
   profile: PropTypes.object,
   loading: PropTypes.bool,
   editableSocialInputs: PropTypes.object,
-  setEditableSocialInputs: PropTypes.func
+  setEditableSocialInputs: PropTypes.func,
 };
 
 export default SocialLinks;

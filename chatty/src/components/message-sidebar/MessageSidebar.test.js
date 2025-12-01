@@ -18,7 +18,7 @@ const messageData = {
   gifUrl: '',
   selectedImage: '',
   reaction: [],
-  createdAt: new Date()
+  createdAt: new Date(),
 };
 
 describe('MessageSidebar', () => {
@@ -27,7 +27,7 @@ describe('MessageSidebar', () => {
       profile: { username: 'Danny' },
       messageCount: 1,
       messageNotifications: [messageData, messageData],
-      openChatPage: jest.fn()
+      openChatPage: jest.fn(),
     };
     render(<MessageSidebar {...props} />);
     const smallElement = screen.getByText(1);
@@ -41,7 +41,7 @@ describe('MessageSidebar', () => {
       profile: { username: 'Danny' },
       messageCount: 1,
       messageNotifications: [messageData, messageData],
-      openChatPage: jest.fn()
+      openChatPage: jest.fn(),
     };
     const { baseElement } = render(<MessageSidebar {...props} />);
     const contentAvatar = baseElement.querySelector('.content-avatar');
@@ -62,7 +62,7 @@ describe('MessageSidebar', () => {
       profile: { username: 'Danny' },
       messageCount: 1,
       messageNotifications: [messageData, messageData],
-      openChatPage
+      openChatPage,
     };
     const { baseElement } = render(<MessageSidebar {...props} />);
     const messageCard = baseElement.querySelectorAll('.message-sub-card');

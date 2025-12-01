@@ -22,7 +22,9 @@ import { ImageUtils } from '@services/utils/image-utils.service';
 
 const Post = ({ post, showIcons }) => {
   const { _id } = useSelector((state) => state.post);
-  const { reactionsModalIsOpen, commentsModalIsOpen, deleteDialogIsOpen } = useSelector((state) => state.modal);
+  const { reactionsModalIsOpen, commentsModalIsOpen, deleteDialogIsOpen } = useSelector(
+    (state) => state.modal
+  );
   const [showImageModal, setShowImageModal] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
   const [backgroundImageColor, setBackgroundImageColor] = useState('');
@@ -82,7 +84,11 @@ const Post = ({ post, showIcons }) => {
       {reactionsModalIsOpen && <ReactionsModal />}
       {commentsModalIsOpen && <CommentsModal />}
       {showImageModal && (
-        <ImageModal image={`${imageUrl}`} onCancel={() => setShowImageModal(!showImageModal)} showArrow={false} />
+        <ImageModal
+          image={`${imageUrl}`}
+          onCancel={() => setShowImageModal(!showImageModal)}
+          showArrow={false}
+        />
       )}
       {deleteDialogIsOpen && (
         <Dialog
@@ -114,7 +120,8 @@ const Post = ({ post, showIcons }) => {
                   {post?.username}
                   {post?.feelings && (
                     <div className="inline-display" data-testid="inline-display">
-                      is feeling <img className="feeling-icon" src={`${getFeeling(post?.feelings)}`} alt="" />{' '}
+                      is feeling{' '}
+                      <img className="feeling-icon" src={`${getFeeling(post?.feelings)}`} alt="" />{' '}
                       <div>{post?.feelings}</div>
                     </div>
                   )}
@@ -194,7 +201,12 @@ const Post = ({ post, showIcons }) => {
                     setShowImageModal(!showImageModal);
                   }}
                 >
-                  <img className="post-image" style={{ objectFit: 'contain' }} src={`${post?.gifUrl}`} alt="" />
+                  <img
+                    className="post-image"
+                    style={{ objectFit: 'contain' }}
+                    src={`${post?.gifUrl}`}
+                    alt=""
+                  />
                 </div>
               )}
               {(post?.reactions.length > 0 || post?.commentsCount > 0) && <hr />}
@@ -209,6 +221,6 @@ const Post = ({ post, showIcons }) => {
 };
 Post.propTypes = {
   post: PropTypes.object.isRequired,
-  showIcons: PropTypes.bool
+  showIcons: PropTypes.bool,
 };
 export default Post;

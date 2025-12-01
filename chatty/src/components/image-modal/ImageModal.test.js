@@ -11,7 +11,7 @@ describe('ImageModal', () => {
       onClickRight: jest.fn(),
       showArrow: false,
       lastItemRight: false,
-      lastItemLeft: false
+      lastItemLeft: false,
     };
   });
   it('should display image', () => {

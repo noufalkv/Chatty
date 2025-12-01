@@ -15,40 +15,40 @@ describe('InfoDisplay', () => {
         quoteMsg: 'No information',
         workMsg: 'No information',
         schoolMsg: 'No information',
-        locationMsg: 'No information'
+        locationMsg: 'No information',
       },
       editableInputs: {
         quote: '',
         work: '',
         school: '',
-        location: ''
+        location: '',
       },
       noSocialInfo: {
         instagramMsg: 'No link available ',
         twitterMsg: 'No link available ',
         facebookMsg: 'No link available ',
-        youtubeMsg: 'No link available '
+        youtubeMsg: 'No link available ',
       },
       basicInfoPlaceholder: {
         quotePlacehoder: 'Add your quote',
         workPlacehoder: 'Add company name',
         schoolPlacehoder: 'Add school name',
-        locationPlacehoder: 'Add city and country names'
+        locationPlacehoder: 'Add city and country names',
       },
       socialLinksPlaceholder: {
         instagramPlacehoder: 'Add your Instagram account link',
         twitterPlacehoder: 'Add your Twitter account link',
         facebookPlacehoder: 'Add your Facebook account link',
-        youtubePlacehoder: 'Add your YouTube account link'
+        youtubePlacehoder: 'Add your YouTube account link',
       },
       editableSocialInputs: {
         instagram: '',
         twitter: '',
         facebook: '',
-        youtube: ''
+        youtube: '',
       },
       setEditableSocialInputs: null,
-      updateInfo: null
+      updateInfo: null,
     };
   });
   it('should display skeleton', () => {
@@ -83,7 +83,7 @@ describe('InfoDisplay', () => {
       quote: 'This is my quote',
       work: 'KickChat Inc.',
       school: 'Taltech',
-      location: 'Tallinn, Estonia'
+      location: 'Tallinn, Estonia',
     };
     render(<InfoDisplay {...props} />);
     const quote = screen.queryByTestId('quote');
@@ -104,7 +104,7 @@ describe('InfoDisplay', () => {
       instagram: 'https://www.instagram.com/devonrodriguezart',
       twitter: 'https://twitter.com/FCBayern',
       facebook: 'https://www.facebook.com/mandy',
-      youtube: 'https://www.youtube.com/watch?v=1_2uhaug3BQ'
+      youtube: 'https://www.youtube.com/watch?v=1_2uhaug3BQ',
     };
     render(<InfoDisplay {...props} />);
     const instagram = screen.queryByTestId('content-1');
@@ -123,7 +123,7 @@ describe('InfoDisplay', () => {
       quote: 'This is my quote',
       work: 'KickChat Inc.',
       school: 'Taltech',
-      location: 'Tallinn, Estonia'
+      location: 'Tallinn, Estonia',
     };
     render(<InfoDisplay {...props} />);
     const editButton = screen.queryByTestId('editBtn');

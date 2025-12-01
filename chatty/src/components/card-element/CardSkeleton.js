@@ -7,7 +7,13 @@ const CardSkeleton = () => {
         <div className="card-element-item" key={index}>
           <div className="card-element-header">
             <div className="card-element-header-bg"></div>
-            <Skeleton baseColor="#EFF1F6" circle height={120} width={120} containerClassName="avatar-container" />
+            <Skeleton
+              baseColor="#EFF1F6"
+              circle
+              height={120}
+              width={120}
+              containerClassName="avatar-container"
+            />
             <div className="card-element-header-text">
               <span className="card-element-header-name">
                 <Skeleton baseColor="#EFF1F6" width={100} />
@@ -35,7 +41,10 @@ const CardSkeleton = () => {
             </div>
           </div>
 
-          <div className="card-element-buttons" style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+          <div
+            className="card-element-buttons"
+            style={{ display: 'flex', justifyContent: 'space-evenly' }}
+          >
             <Skeleton baseColor="#EFF1F6" width={70} height={40} />
             <Skeleton baseColor="#EFF1F6" width={70} height={40} />
           </div>

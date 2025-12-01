@@ -3,7 +3,15 @@ import { FaArrowLeft, FaArrowRight, FaTimes } from 'react-icons/fa';
 
 import '@components/image-modal/ImageModal.scss';
 
-const ImageModal = ({ image, onCancel, onClickLeft, onClickRight, showArrow, lastItemRight, lastItemLeft }) => {
+const ImageModal = ({
+  image,
+  onCancel,
+  onClickLeft,
+  onClickRight,
+  showArrow,
+  lastItemRight,
+  lastItemLeft,
+}) => {
   return (
     <div className="image-modal-container" data-testid="image-modal">
       <div className="image-modal-icon" onClick={onCancel}>
@@ -13,7 +21,10 @@ const ImageModal = ({ image, onCancel, onClickLeft, onClickRight, showArrow, las
         <div
           className={'image-modal-icon-left'}
           onClick={onClickLeft}
-          style={{ pointerEvents: `${lastItemLeft ? 'none' : 'all'}`, color: `${lastItemLeft ? '#bdbdbd' : ''}` }}
+          style={{
+            pointerEvents: `${lastItemLeft ? 'none' : 'all'}`,
+            color: `${lastItemLeft ? '#bdbdbd' : ''}`,
+          }}
         >
           <FaArrowLeft />
         </div>
@@ -27,7 +38,10 @@ const ImageModal = ({ image, onCancel, onClickLeft, onClickRight, showArrow, las
         <div
           className={'image-modal-icon-right'}
           onClick={onClickRight}
-          style={{ pointerEvents: `${lastItemRight ? 'none' : 'all'}`, color: `${lastItemRight ? '#bdbdbd' : ''}` }}
+          style={{
+            pointerEvents: `${lastItemRight ? 'none' : 'all'}`,
+            color: `${lastItemRight ? '#bdbdbd' : ''}`,
+          }}
         >
           <FaArrowRight />
         </div>
@@ -43,7 +57,7 @@ ImageModal.propTypes = {
   onClickLeft: PropTypes.func,
   showArrow: PropTypes.bool,
   lastItemRight: PropTypes.bool,
-  lastItemLeft: PropTypes.bool
+  lastItemLeft: PropTypes.bool,
 };
 
 export default ImageModal;

@@ -19,10 +19,13 @@ export const forgotPasswordMock = rest.post(`${BASE_URL}/forgot-password`, (req,
   return res(ctx.json(result));
 });
 
-export const resetPasswordMock = rest.post(`${BASE_URL}/reset-password/1234567890`, (req, res, ctx) => {
-  const result = { message: 'Password successfully updated.' };
-  return res(ctx.json(result));
-});
+export const resetPasswordMock = rest.post(
+  `${BASE_URL}/reset-password/1234567890`,
+  (req, res, ctx) => {
+    const result = { message: 'Password successfully updated.' };
+    return res(ctx.json(result));
+  }
+);
 
 export const signInMockError = rest.post(`${BASE_URL}/signin`, (req, res, ctx) => {
   const result = { message: 'Invalid credentials' };
@@ -39,10 +42,13 @@ export const forgotPasswordMockError = rest.post(`${BASE_URL}/forgot-password`, 
   return res(ctx.status(400), ctx.json(result));
 });
 
-export const resetPasswordMockError = rest.post(`${BASE_URL}/reset-password/1234567890`, (req, res, ctx) => {
-  const result = { message: 'Passwords do not match' };
-  return res(ctx.status(400), ctx.json(result));
-});
+export const resetPasswordMockError = rest.post(
+  `${BASE_URL}/reset-password/1234567890`,
+  (req, res, ctx) => {
+    const result = { message: 'Passwords do not match' };
+    return res(ctx.status(400), ctx.json(result));
+  }
+);
 
 export const authHandlers = [
   signInMock,
@@ -52,5 +58,5 @@ export const authHandlers = [
   forgotPasswordMock,
   forgotPasswordMockError,
   resetPasswordMock,
-  resetPasswordMockError
+  resetPasswordMockError,
 ];

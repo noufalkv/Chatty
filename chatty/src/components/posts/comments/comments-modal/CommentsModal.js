@@ -41,7 +41,11 @@ const CommentsModal = () => {
         <div className="modal-comments-container">
           <ul className="modal-comments-container-list">
             {postComments.map((data) => (
-              <li className="modal-comments-container-list-item" key={data?._id} data-testid="modal-list-item">
+              <li
+                className="modal-comments-container-list-item"
+                key={data?._id}
+                data-testid="modal-list-item"
+              >
                 <div className="modal-comments-container-list-item-display">
                   <div className="user-img">
                     <Avatar

@@ -24,8 +24,14 @@ describe('PostForm', () => {
     render(<PostForm />);
     const inputBodyElement = await screen.findByTestId('input-body');
     expect(inputBodyElement).toBeInTheDocument();
-    expect(inputBodyElement.childNodes.item(0)).toHaveAttribute('src', 'http://place-hold.it/500x500');
-    expect(inputBodyElement.childNodes.item(1)).toHaveAttribute('data-placeholder', 'Write something here...');
+    expect(inputBodyElement.childNodes.item(0)).toHaveAttribute(
+      'src',
+      'http://place-hold.it/500x500'
+    );
+    expect(inputBodyElement.childNodes.item(1)).toHaveAttribute(
+      'data-placeholder',
+      'Write something here...'
+    );
   });
 
   it('should open post modal', async () => {

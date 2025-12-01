@@ -31,7 +31,7 @@ const NotificationSettings = () => {
       if (index === itemIndex) {
         return {
           ...item,
-          toggle: !item.toggle
+          toggle: !item.toggle,
         };
       }
       return item;
@@ -86,7 +86,12 @@ const NotificationSettings = () => {
           </div>
         ))}
         <div className="btn-group">
-          <Button label="Update" className="update" disabled={false} handleClick={sendNotificationSettings} />
+          <Button
+            label="Update"
+            className="update"
+            disabled={false}
+            handleClick={sendNotificationSettings}
+          />
         </div>
       </div>
       <div style={{ height: '1px' }}></div>

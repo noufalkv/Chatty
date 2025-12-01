@@ -47,7 +47,10 @@ const FollowerCard = ({ userData }) => {
 
   const blockUser = (userInfo) => {
     try {
-      socketService?.socket?.emit('block user', { blockedUser: userInfo._id, blockedBy: user?._id });
+      socketService?.socket?.emit('block user', {
+        blockedUser: userInfo._id,
+        blockedBy: user?._id,
+      });
       FollowersUtils.blockUser(userInfo, dispatch);
     } catch (error) {
       Utils.dispatchNotification(error.response.data.message, 'error', dispatch);
@@ -56,7 +59,10 @@ const FollowerCard = ({ userData }) => {
 
   const unblockUser = (userInfo) => {
     try {
-      socketService?.socket?.emit('unblock user', { blockedUser: userInfo._id, blockedBy: user?._id });
+      socketService?.socket?.emit('unblock user', {
+        blockedUser: userInfo._id,
+        blockedBy: user?._id,
+      });
       FollowersUtils.unblockUser(userInfo, dispatch);
     } catch (error) {
       Utils.dispatchNotification(error.response.data.message, 'error', dispatch);
@@ -77,7 +83,11 @@ const FollowerCard = ({ userData }) => {
       {followers.length > 0 && (
         <div className="follower-card-container">
           {followers.map((data) => (
-            <div className="follower-card-container-elements" key={data?._id} data-testid="card-element-item">
+            <div
+              className="follower-card-container-elements"
+              key={data?._id}
+              data-testid="card-element-item"
+            >
               <div className="follower-card-container-elements-content">
                 <div className="card-avatar">
                   <Avatar
@@ -92,7 +102,9 @@ const FollowerCard = ({ userData }) => {
                   <span className="name">{data?.username}</span>
                   <p className="count">
                     <FaUserPlus className="heart" />{' '}
-                    <span data-testid="count">{Utils.shortenLargeNumbers(data?.followingCount)}</span>
+                    <span data-testid="count">
+                      {Utils.shortenLargeNumbers(data?.followingCount)}
+                    </span>
                   </p>
                 </div>
                 {username === profile?.username && (
@@ -120,12 +132,14 @@ const FollowerCard = ({ userData }) => {
           ))}
         </div>
       )}
-      {!loading && !followers.length && <div className="empty-page">There are no followers to display</div>}
+      {!loading && !followers.length && (
+        <div className="empty-page">There are no followers to display</div>
+      )}
     </div>
   );
 };
 
 FollowerCard.propTypes = {
-  userData: PropTypes.object
+  userData: PropTypes.object,
 };
 export default FollowerCard;

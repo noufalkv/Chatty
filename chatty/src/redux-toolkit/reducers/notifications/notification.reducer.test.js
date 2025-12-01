@@ -1,4 +1,7 @@
-import reducer, { addNotification, clearNotification } from '@redux/reducers/notifications/notification.reducer';
+import reducer, {
+  addNotification,
+  clearNotification,
+} from '@redux/reducers/notifications/notification.reducer';
 
 let initialState = [];
 
@@ -12,14 +15,19 @@ describe('notification reducer', () => {
   });
 
   it('should add notification', () => {
-    expect(reducer(initialState, addNotification({ type: 'success', message: 'This is a success message' }))).toEqual([
+    expect(
+      reducer(
+        initialState,
+        addNotification({ type: 'success', message: 'This is a success message' })
+      )
+    ).toEqual([
       {
         id: 0,
         description: 'This is a success message',
         type: 'success',
         icon: 'check.svg',
-        backgroundColor: '#5cb85c'
-      }
+        backgroundColor: '#5cb85c',
+      },
     ]);
   });
 
@@ -30,8 +38,8 @@ describe('notification reducer', () => {
         description: 'This is a success message',
         type: 'success',
         icon: 'check.svg',
-        backgroundColor: '#5cb85c'
-      }
+        backgroundColor: '#5cb85c',
+      },
     ];
     expect(reducer(initialState, clearNotification())).toEqual([]);
   });

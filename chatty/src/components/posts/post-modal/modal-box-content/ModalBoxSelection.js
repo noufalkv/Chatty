@@ -60,7 +60,10 @@ const ModalBoxSelection = ({ setSelectedPostImage, setSelectedVideo }) => {
             />
             <img src={photo} alt="" /> Photo
           </li>
-          <li className="post-form-list-item" onClick={() => dispatch(toggleGifModal(!gifModalIsOpen))}>
+          <li
+            className="post-form-list-item"
+            onClick={() => dispatch(toggleGifModal(!gifModalIsOpen))}
+          >
             <img src={gif} alt="" /> Gif
           </li>
           <li className="post-form-list-item" onClick={() => setToggleFeelings(!toggleFeelings)}>
@@ -88,6 +91,6 @@ const ModalBoxSelection = ({ setSelectedPostImage, setSelectedVideo }) => {
 };
 ModalBoxSelection.propTypes = {
   setSelectedPostImage: PropTypes.func,
-  setSelectedVideo: PropTypes.func
+  setSelectedVideo: PropTypes.func,
 };
 export default ModalBoxSelection;

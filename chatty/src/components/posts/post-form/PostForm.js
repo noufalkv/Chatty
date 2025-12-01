@@ -11,7 +11,7 @@ import {
   toggleFeelingModal,
   toggleGifModal,
   toggleImageModal,
-  toggleVideoModal
+  toggleVideoModal,
 } from '@redux/reducers/modal/modal.reducer';
 import AddPost from '@components/posts/post-modal/post-add/AddPost';
 import { useRef, useState } from 'react';
@@ -20,9 +20,8 @@ import EditPost from '@components/posts/post-modal/post-edit/EditPost';
 
 const PostForm = () => {
   const { profile } = useSelector((state) => state.user);
-  const { type, isOpen, openFileDialog, gifModalIsOpen, feelingsIsOpen, openVideoDialog } = useSelector(
-    (state) => state.modal
-  );
+  const { type, isOpen, openFileDialog, gifModalIsOpen, feelingsIsOpen, openVideoDialog } =
+    useSelector((state) => state.modal);
   const [selectedPostImage, setSelectedPostImage] = useState();
   const [selectedPostVideo, setSelectedPostVideo] = useState();
   const fileInputRef = useRef();
@@ -71,7 +70,11 @@ const PostForm = () => {
             <h4 className="post-form-title">Create Post</h4>
           </div>
           <div className="post-form-body">
-            <div className="post-form-input-body" data-testid="input-body" onClick={() => openPostModal()}>
+            <div
+              className="post-form-input-body"
+              data-testid="input-body"
+              onClick={() => openPostModal()}
+            >
               <Avatar
                 name={profile?.username}
                 bgColor={profile?.avatarColor}
@@ -123,7 +126,9 @@ const PostForm = () => {
           </div>
         </div>
       </div>
-      {isOpen && type === 'add' && <AddPost selectedImage={selectedPostImage} selectedPostVideo={selectedPostVideo} />}
+      {isOpen && type === 'add' && (
+        <AddPost selectedImage={selectedPostImage} selectedPostVideo={selectedPostVideo} />
+      )}
       {isOpen && type === 'edit' && <EditPost />}
     </>
   );

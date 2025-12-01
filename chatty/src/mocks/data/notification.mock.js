@@ -13,5 +13,5 @@ export const notificationData = {
   imgVersion: '',
   gifUrl: '',
   read: false,
-  createdAt: '2022-06-20'
+  createdAt: '2022-06-20',
 };

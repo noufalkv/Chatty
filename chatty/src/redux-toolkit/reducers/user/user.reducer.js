@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   token: '',
-  profile: null
+  profile: null,
 };
 
 const userSlice = createSlice({
@@ -20,8 +20,8 @@ const userSlice = createSlice({
     },
     updateUserProfile: (state, action) => {
       state.profile = action.payload;
-    }
-  }
+    },
+  },
 });
 
 export const { addUser, clearUser, updateUserProfile } = userSlice.actions;

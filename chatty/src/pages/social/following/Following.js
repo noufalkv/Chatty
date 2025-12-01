@@ -62,7 +62,11 @@ const Following = () => {
       {following.length > 0 && (
         <div className="card-element">
           {following.map((data) => (
-            <div className="card-element-item" key={Utils.generateString(10)} data-testid="card-element-item">
+            <div
+              className="card-element-item"
+              key={Utils.generateString(10)}
+              data-testid="card-element-item"
+            >
               <div className="card-element-header">
                 <div className="card-element-header-bg"></div>
                 <Avatar
@@ -94,7 +98,9 @@ const Following = () => {
         </div>
       )}
 
-      {loading && !following.length && <div className="card-element" style={{ height: '350px' }}></div>}
+      {loading && !following.length && (
+        <div className="card-element" style={{ height: '350px' }}></div>
+      )}
 
       {!loading && !following.length && (
         <div className="empty-page" data-testid="empty-page">

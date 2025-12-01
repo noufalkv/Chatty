@@ -1,4 +1,7 @@
-import { addNotification, clearNotification } from '@redux/reducers/notifications/notification.reducer';
+import {
+  addNotification,
+  clearNotification,
+} from '@redux/reducers/notifications/notification.reducer';
 import { addUser, clearUser } from '@redux/reducers/user/user.reducer';
 import { APP_ENVIRONMENT } from '@services/axios';
 import { avatarColors } from '@services/utils/static.data';
@@ -66,7 +69,7 @@ export class Utils {
     const items = [];
     const item = {
       topText: 'My Profile',
-      subText: 'View personal profile.'
+      subText: 'View personal profile.',
     };
     items.push(item);
     setSettings(items);
@@ -114,7 +117,7 @@ export class Utils {
       if (value > 0) {
         const reactionObject = {
           type: key,
-          value
+          value,
         };
         postReactions.push(reactionObject);
       }

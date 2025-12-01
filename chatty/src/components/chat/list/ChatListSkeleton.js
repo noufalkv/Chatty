@@ -27,7 +27,10 @@ const ChatListSkeleton = () => {
                 <div className="title-text" style={{ marginBottom: '7px' }}>
                   <Skeleton baseColor="#EFF1F6" height={20} width={120} />
                 </div>
-                <div className="conversation-message" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div
+                  className="conversation-message"
+                  style={{ display: 'flex', justifyContent: 'space-between' }}
+                >
                   <span>
                     <Skeleton baseColor="#EFF1F6" height={20} width={70} />
                   </span>

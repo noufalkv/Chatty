@@ -70,7 +70,10 @@ const ReactionsAndCommentsDisplay = ({ post }) => {
                     alt=""
                     onMouseEnter={getPostReactions}
                   />
-                  <div className="tooltip-container-text tooltip-container-bottom" data-testid="reaction-tooltip">
+                  <div
+                    className="tooltip-container-text tooltip-container-bottom"
+                    data-testid="reaction-tooltip"
+                  >
                     <p className="title">
                       <img className="title-img" src={`${reactionsMap[reaction?.type]}`} alt="" />
                       {reaction?.type.toUpperCase()}
@@ -86,7 +89,9 @@ const ReactionsAndCommentsDisplay = ({ post }) => {
                               )}
                             </div>
                           ))}
-                          {postReactions.length > 20 && <span>and {postReactions.length - 20} others...</span>}
+                          {postReactions.length > 20 && (
+                            <span>and {postReactions.length - 20} others...</span>
+                          )}
                         </>
                       )}
                     </div>
@@ -101,7 +106,10 @@ const ReactionsAndCommentsDisplay = ({ post }) => {
             onClick={() => openReactionsComponent()}
           >
             {sumAllReactions(reactions)}
-            <div className="tooltip-container-text tooltip-container-likes-bottom" data-testid="tooltip-container">
+            <div
+              className="tooltip-container-text tooltip-container-likes-bottom"
+              data-testid="tooltip-container"
+            >
               <div className="likes-block-icons-list">
                 {postReactions.length === 0 && <FaSpinner className="circle-notch" />}
                 {postReactions.length && (
@@ -109,7 +117,9 @@ const ReactionsAndCommentsDisplay = ({ post }) => {
                     {postReactions.slice(0, 19).map((reaction) => (
                       <span key={Utils.generateString(10)}>{reaction?.username}</span>
                     ))}
-                    {postReactions.length > 20 && <span>and {postReactions.length - 20} others...</span>}
+                    {postReactions.length > 20 && (
+                      <span>and {postReactions.length - 20} others...</span>
+                    )}
                   </>
                 )}
               </div>
@@ -124,10 +134,14 @@ const ReactionsAndCommentsDisplay = ({ post }) => {
       >
         {post?.commentsCount > 0 && (
           <span onMouseEnter={getPostCommentsNames} data-testid="comment-count">
-            {Utils.shortenLargeNumbers(post?.commentsCount)} {`${post?.commentsCount === 1 ? 'Comment' : 'Comments'}`}
+            {Utils.shortenLargeNumbers(post?.commentsCount)}{' '}
+            {`${post?.commentsCount === 1 ? 'Comment' : 'Comments'}`}
           </span>
         )}
-        <div className="tooltip-container-text tooltip-container-comments-bottom" data-testid="comment-tooltip">
+        <div
+          className="tooltip-container-text tooltip-container-comments-bottom"
+          data-testid="comment-tooltip"
+        >
           <div className="likes-block-icons-list">
             {postCommentNames.length === 0 && <FaSpinner className="circle-notch" />}
             {postCommentNames.length && (
@@ -135,7 +149,9 @@ const ReactionsAndCommentsDisplay = ({ post }) => {
                 {postCommentNames.slice(0, 19).map((names) => (
                   <span key={Utils.generateString(10)}>{names}</span>
                 ))}
-                {postCommentNames.length > 20 && <span>and {postCommentNames.length - 20} others...</span>}
+                {postCommentNames.length > 20 && (
+                  <span>and {postCommentNames.length - 20} others...</span>
+                )}
               </>
             )}
           </div>
@@ -146,7 +162,7 @@ const ReactionsAndCommentsDisplay = ({ post }) => {
 };
 
 ReactionsAndCommentsDisplay.propTypes = {
-  post: PropTypes.object
+  post: PropTypes.object,
 };
 
 export default ReactionsAndCommentsDisplay;

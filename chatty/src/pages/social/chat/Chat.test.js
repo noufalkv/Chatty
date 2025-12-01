@@ -36,7 +36,10 @@ describe('Chat', () => {
   it('should display chat window component', async () => {
     server.use(chatListMock);
     server.use(chatMessagesMock);
-    const url = `/app/social/chat/messages?${createSearchParams({ username: 'danny', id: '123456' })}`;
+    const url = `/app/social/chat/messages?${createSearchParams({
+      username: 'danny',
+      id: '123456',
+    })}`;
     const history = createBrowserHistory();
     history.push(url);
     render(<Chat />);

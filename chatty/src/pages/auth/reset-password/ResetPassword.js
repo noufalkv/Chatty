@@ -40,7 +40,10 @@ const ResetPassword = () => {
     <div className="container-wrapper" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <div className="environment">DEV</div>
       <div className="container-wrapper-auth">
-        <div className="tabs reset-password-tabs" style={{ height: `${responseMessage ? '400px' : ''}` }}>
+        <div
+          className="tabs reset-password-tabs"
+          style={{ height: `${responseMessage ? '400px' : ''}` }}
+        >
           <div className="tabs-auth">
             <ul className="tab-group">
               <li className="tab">

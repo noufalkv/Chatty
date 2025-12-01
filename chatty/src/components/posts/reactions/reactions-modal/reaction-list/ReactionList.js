@@ -9,7 +9,11 @@ const ReactionList = ({ postReactions }) => {
   return (
     <div className="modal-reactions-container" data-testid="modal-reactions-container">
       {postReactions.map((reaction) => (
-        <div className="modal-reactions-container-list" key={Utils.generateString(10)} data-testid="reaction-list">
+        <div
+          className="modal-reactions-container-list"
+          key={Utils.generateString(10)}
+          data-testid="reaction-list"
+        >
           <div className="img">
             <Avatar
               name={reaction?.username}
@@ -28,7 +32,7 @@ const ReactionList = ({ postReactions }) => {
 };
 
 ReactionList.propTypes = {
-  postReactions: PropTypes.array
+  postReactions: PropTypes.array,
 };
 
 export default ReactionList;

@@ -61,13 +61,14 @@ const ChatList = () => {
         senderId: profile?._id,
         senderAvatarColor: profile?.avatarColor,
         senderProfilePicture: profile?.profilePicture,
-        body: ''
+        body: '',
       };
       ChatUtils.joinRoomEvent(user, profile);
       ChatUtils.privateChatMessages = [];
       const findUser = find(
         chatMessageList,
-        (chat) => chat.receiverId === searchParams.get('id') || chat.senderId === searchParams.get('id')
+        (chat) =>
+          chat.receiverId === searchParams.get('id') || chat.senderId === searchParams.get('id')
       );
       if (!findUser) {
         const newChatList = [newUser, ...chatMessageList];
@@ -75,7 +76,9 @@ const ChatList = () => {
         if (!chatList.length) {
           dispatch(setSelectedChatUser({ isLoading: false, user: newUser }));
           const userTwoName =
-            newUser?.receiverUsername !== profile?.username ? newUser?.receiverUsername : newUser?.senderUsername;
+            newUser?.receiverUsername !== profile?.username
+              ? newUser?.receiverUsername
+              : newUser?.senderUsername;
           chatService.addChatUsers({ userOne: profile?.username, userTwo: userTwoName });
         }
       }
@@ -99,7 +102,7 @@ const ChatList = () => {
         params: chatMessageList.length ? updateQueryParams(chatMessageList[0]) : null,
         pathname: location.pathname,
         navigate,
-        dispatch
+        dispatch,
       });
     }
   };
@@ -118,11 +121,16 @@ const ChatList = () => {
       const sender = find(
         ChatUtils.chatUsers,
         (userData) =>
-          userData.userOne === profile?.username && userData.userTwo.toLowerCase() === searchParams.get('username')
+          userData.userOne === profile?.username &&
+          userData.userTwo.toLowerCase() === searchParams.get('username')
       );
       const params = updateQueryParams(user);
-      const userTwoName = user?.receiverUsername !== profile?.username ? user?.receiverUsername : user?.senderUsername;
-      const receiverId = user?.receiverUsername !== profile?.username ? user?.receiverId : user?.senderId;
+      const userTwoName =
+        user?.receiverUsername !== profile?.username
+          ? user?.receiverUsername
+          : user?.senderUsername;
+      const receiverId =
+        user?.receiverUsername !== profile?.username ? user?.receiverId : user?.senderId;
       navigate(`${location.pathname}?${createSearchParams(params)}`);
       if (sender) {
         chatService.removeChatUsers(sender);
@@ -219,9 +227,15 @@ const ChatList = () => {
                 >
                   <div className="avatar">
                     <Avatar
-                      name={data.receiverUsername === profile?.username ? profile?.username : data?.senderUsername}
+                      name={
+                        data.receiverUsername === profile?.username
+                          ? profile?.username
+                          : data?.senderUsername
+                      }
                       bgColor={
-                        data.receiverUsername === profile?.username ? data.receiverAvatarColor : data?.senderAvatarColor
+                        data.receiverUsername === profile?.username
+                          ? data.receiverAvatarColor
+                          : data?.senderAvatarColor
                       }
                       textColor="#ffffff"
                       size={40}
@@ -232,10 +246,18 @@ const ChatList = () => {
                       }
                     />
                   </div>
-                  <div className={`title-text ${selectedUser && !data.body ? 'selected-user-text' : ''}`}>
-                    {data.receiverUsername !== profile?.username ? data.receiverUsername : data?.senderUsername}
+                  <div
+                    className={`title-text ${
+                      selectedUser && !data.body ? 'selected-user-text' : ''
+                    }`}
+                  >
+                    {data.receiverUsername !== profile?.username
+                      ? data.receiverUsername
+                      : data?.senderUsername}
                   </div>
-                  {data?.createdAt && <div className="created-date">{timeAgo.transform(data?.createdAt)}</div>}
+                  {data?.createdAt && (
+                    <div className="created-date">{timeAgo.transform(data?.createdAt)}</div>
+                  )}
                   {!data?.body && (
                     <div className="created-date" onClick={removeSelectedUserFromList}>
                       <FaTimes />
@@ -249,14 +271,18 @@ const ChatList = () => {
                       <span className="message-deleted">message deleted</span>
                     </div>
                   )}
-                  {data?.deleteForMe && !data.deleteForEveryone && data.senderUsername !== profile?.username && (
-                    <div className="conversation-message">
-                      <span className="message-deleted">message deleted</span>
-                    </div>
-                  )}
-                  {data?.deleteForMe && !data.deleteForEveryone && data.receiverUsername !== profile?.username && (
-                    <ChatListBody data={data} profile={profile} />
-                  )}
+                  {data?.deleteForMe &&
+                    !data.deleteForEveryone &&
+                    data.senderUsername !== profile?.username && (
+                      <div className="conversation-message">
+                        <span className="message-deleted">message deleted</span>
+                      </div>
+                    )}
+                  {data?.deleteForMe &&
+                    !data.deleteForEveryone &&
+                    data.receiverUsername !== profile?.username && (
+                      <ChatListBody data={data} profile={profile} />
+                    )}
                 </div>
               ))}
             </div>

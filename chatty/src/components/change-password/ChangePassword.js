@@ -34,7 +34,7 @@ const ChangePassword = () => {
       const response = await userService.changePassword({
         currentPassword,
         newPassword,
-        confirmPassword
+        confirmPassword,
       });
       setCurrentPassword('');
       setNewPassword('');
@@ -46,7 +46,7 @@ const ChangePassword = () => {
             dispatch,
             deleteStorageUsername,
             deleteSessionPageReload,
-            setLoggedIn
+            setLoggedIn,
           });
           await userService.logoutUser();
           navigate('/');
@@ -96,7 +96,11 @@ const ChangePassword = () => {
 
         <div className="form-group form-btn-group">
           <div className="btn-group">
-            <Button label="Update" className="update" disabled={!currentPassword || !newPassword || !confirmPassword} />
+            <Button
+              label="Update"
+              className="update"
+              disabled={!currentPassword || !newPassword || !confirmPassword}
+            />
             <span className="eye-icon" data-testid="eye-icon" onClick={togglePasswordDisplay}>
               {!togglePassword ? <FaRegEyeSlash /> : <FaRegEye />}
             </span>

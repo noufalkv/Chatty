@@ -14,7 +14,7 @@ describe('MessageDisplay', () => {
     props = {
       chatMessages: [],
       profile: existingUser,
-      updateMessageReaction: null
+      updateMessageReaction: null,
     };
     useOnClickOutside.mockReturnValue([false, null]);
   });

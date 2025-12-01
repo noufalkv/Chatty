@@ -59,7 +59,9 @@ describe('ReactionsModal', () => {
 
     await waitFor(() => {
       const reactionListElement = screen.queryAllByTestId('reaction-list');
-      expect(reactionListElement.length).toEqual(Utils.formattedReactions(postMockData.reactions).length);
+      expect(reactionListElement.length).toEqual(
+        Utils.formattedReactions(postMockData.reactions).length
+      );
     });
   });
 });

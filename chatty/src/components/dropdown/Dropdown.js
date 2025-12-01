@@ -15,7 +15,7 @@ const Dropdown = ({
   onMarkAsRead,
   onDeleteNotification,
   onLogout,
-  onNavigate
+  onNavigate,
 }) => {
   return (
     <div className="social-dropdown" style={style} data-testid="dropdown">
@@ -66,8 +66,15 @@ const Dropdown = ({
                   </div>
                   {title === 'Notifications' && (
                     <div className="content-icons">
-                      <FaTrashAlt className="trash" onClick={() => onDeleteNotification(item?._id)} />
-                      {item?.read ? <FaRegCircle className="circle" /> : <FaCircle className="circle" />}
+                      <FaTrashAlt
+                        className="trash"
+                        onClick={() => onDeleteNotification(item?._id)}
+                      />
+                      {item?.read ? (
+                        <FaRegCircle className="circle" />
+                      ) : (
+                        <FaCircle className="circle" />
+                      )}
                     </div>
                   )}
                 </div>
@@ -95,7 +102,7 @@ Dropdown.propTypes = {
   onMarkAsRead: PropTypes.func,
   onDeleteNotification: PropTypes.func,
   onLogout: PropTypes.func,
-  onNavigate: PropTypes.func
+  onNavigate: PropTypes.func,
 };
 
 export default Dropdown;

@@ -36,7 +36,7 @@ const EditPost = () => {
     imgVersion: '',
     videoId: '',
     videoVersion: '',
-    video: ''
+    video: '',
   });
   const [disable, setDisable] = useState(true);
   const [apiResponse, setApiResponse] = useState('');
@@ -75,7 +75,15 @@ const EditPost = () => {
   const clearImage = () => {
     setSelectedVideo(null);
     setHasVideo(false);
-    PostUtils.clearImage(postData, post?.post, inputRef, dispatch, setSelectedPostImage, setPostImage, setPostData);
+    PostUtils.clearImage(
+      postData,
+      post?.post,
+      inputRef,
+      dispatch,
+      setSelectedPostImage,
+      setPostImage,
+      setPostData
+    );
   };
 
   const getFeeling = useCallback(
@@ -185,14 +193,33 @@ const EditPost = () => {
         postData.imgVersion = '';
         postData.videoId = '';
         postData.videoVersion = '';
-        await PostUtils.sendUpdatePostWithFileRequest(type, post?._id, postData, setApiResponse, setLoading, dispatch);
+        await PostUtils.sendUpdatePostWithFileRequest(
+          type,
+          post?._id,
+          postData,
+          setApiResponse,
+          setLoading,
+          dispatch
+        );
       } else {
         setHasVideo(false);
-        await PostUtils.sendUpdatePostRequest(post?._id, postData, setApiResponse, setLoading, dispatch);
+        await PostUtils.sendUpdatePostRequest(
+          post?._id,
+          postData,
+          setApiResponse,
+          setLoading,
+          dispatch
+        );
       }
     } catch (error) {
       setHasVideo(false);
-      PostUtils.dispatchNotification(error.response.data.message, 'error', setApiResponse, setLoading, dispatch);
+      PostUtils.dispatchNotification(
+        error.response.data.message,
+        'error',
+        setApiResponse,
+        setLoading,
+        dispatch
+      );
     }
   };
 
@@ -203,9 +230,13 @@ const EditPost = () => {
   useEffect(() => {
     setTimeout(() => {
       if (imageInputRef?.current && imageInputRef?.current.textContent.length) {
-        counterRef.current.textContent = `${maxNumberOfCharacters - imageInputRef?.current.textContent.length}/100`;
+        counterRef.current.textContent = `${
+          maxNumberOfCharacters - imageInputRef?.current.textContent.length
+        }/100`;
       } else if (inputRef?.current && inputRef?.current.textContent.length) {
-        counterRef.current.textContent = `${maxNumberOfCharacters - inputRef?.current.textContent.length}/100`;
+        counterRef.current.textContent = `${
+          maxNumberOfCharacters - inputRef?.current.textContent.length
+        }/100`;
       }
     });
   }, []);
@@ -246,7 +277,8 @@ const EditPost = () => {
           <div
             className="modal-box"
             style={{
-              height: selectedPostImage || hasVideo || post?.gifUrl || post?.imgId ? '700px' : 'auto'
+              height:
+                selectedPostImage || hasVideo || post?.gifUrl || post?.imgId ? '700px' : 'auto',
             }}
           >
             {loading && (
@@ -271,7 +303,10 @@ const EditPost = () => {
                   data-testid="modal-box-form"
                   style={{ background: `${textAreaBackground}` }}
                 >
-                  <div className="main" style={{ margin: textAreaBackground !== '#ffffff' ? '0 auto' : '' }}>
+                  <div
+                    className="main"
+                    style={{ margin: textAreaBackground !== '#ffffff' ? '0 auto' : '' }}
+                  >
                     <div className="flex-row">
                       <div
                         data-testid="editable"
@@ -281,8 +316,12 @@ const EditPost = () => {
                           inputRef.current = el;
                           inputRef?.current?.focus();
                         }}
-                        className={`editable flex-item ${textAreaBackground !== '#ffffff' ? 'textInputColor' : ''} ${
-                          postData.post.length === 0 && textAreaBackground !== '#ffffff' ? 'defaultInputTextColor' : ''
+                        className={`editable flex-item ${
+                          textAreaBackground !== '#ffffff' ? 'textInputColor' : ''
+                        } ${
+                          postData.post.length === 0 && textAreaBackground !== '#ffffff'
+                            ? 'defaultInputTextColor'
+                            : ''
                         }`}
                         contentEditable={true}
                         onInput={(e) => postInputEditable(e, e.currentTarget.textContent)}
@@ -321,7 +360,14 @@ const EditPost = () => {
                     >
                       <FaTimes />
                     </div>
-                    {!hasVideo && <img data-testid="post-image" className="post-image" src={`${postImage}`} alt="" />}
+                    {!hasVideo && (
+                      <img
+                        data-testid="post-image"
+                        className="post-image"
+                        src={`${postImage}`}
+                        alt=""
+                      />
+                    )}
                     {hasVideo && (
                       <div style={{ marginTop: '-40px' }}>
                         <video width="100%" controls src={`${postImage}`} />
@@ -352,10 +398,18 @@ const EditPost = () => {
               {allowedNumberOfCharacters}
             </span>
 
-            <ModalBoxSelection setSelectedPostImage={setSelectedPostImage} setSelectedVideo={setSelectedVideo} />
+            <ModalBoxSelection
+              setSelectedPostImage={setSelectedPostImage}
+              setSelectedVideo={setSelectedVideo}
+            />
 
             <div className="modal-box-button" data-testid="edit-button">
-              <Button label="Update" className="post-button" disabled={disable} handleClick={updatePost} />
+              <Button
+                label="Update"
+                className="post-button"
+                disabled={disable}
+                handleClick={updatePost}
+              />
             </div>
           </div>
         )}

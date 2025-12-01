@@ -51,7 +51,10 @@ describe('ChatList', () => {
   });
 
   it('should have active class on selected item', async () => {
-    const url = `/app/social/chat/messages?${createSearchParams({ username: 'danny', id: '123456' })}`;
+    const url = `/app/social/chat/messages?${createSearchParams({
+      username: 'danny',
+      id: '123456',
+    })}`;
     const history = createBrowserHistory();
     history.push(url);
     render(<ChatList />);
@@ -63,7 +66,10 @@ describe('ChatList', () => {
   });
 
   it('should chat chat url when an item is clicked', async () => {
-    const url = `/app/social/chat/messages?${createSearchParams({ username: 'danny', id: '123456' })}`;
+    const url = `/app/social/chat/messages?${createSearchParams({
+      username: 'danny',
+      id: '123456',
+    })}`;
     const history = createBrowserHistory();
     history.push(url);
     render(<ChatList />);
@@ -76,13 +82,16 @@ describe('ChatList', () => {
     const newUrl = `${window.location.pathname}${window.location.search}`;
     const chatUrl = `/app/social/chat/messages?${createSearchParams({
       username: messageDataTwo.receiverUsername.toLowerCase(),
-      id: messageDataTwo.receiverId
+      id: messageDataTwo.receiverId,
     })}`;
     expect(newUrl).toEqual(chatUrl);
   });
 
   it('should display new search item at the top of list', async () => {
-    const url = `/app/social/chat/messages?${createSearchParams({ username: 'danny', id: '123456' })}`;
+    const url = `/app/social/chat/messages?${createSearchParams({
+      username: 'danny',
+      id: '123456',
+    })}`;
     const history = createBrowserHistory();
     history.push(url);
     render(<ChatList />);

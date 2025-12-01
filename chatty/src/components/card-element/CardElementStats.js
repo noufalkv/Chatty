@@ -28,6 +28,6 @@ const CardElementStats = ({ postsCount, followersCount, followingCount }) => {
 CardElementStats.propTypes = {
   postsCount: PropTypes.number,
   followersCount: PropTypes.number,
-  followingCount: PropTypes.number
+  followingCount: PropTypes.number,
 };
 export default CardElementStats;

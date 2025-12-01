@@ -12,7 +12,7 @@ const DemoContainer = forwardRef((props, ref) => (
 ));
 
 DemoContainer.propTypes = {
-  dataList: PropTypes.array
+  dataList: PropTypes.array,
 };
 
 let dataList = Array(50)
@@ -29,7 +29,7 @@ describe('useChatScrollToBottom', () => {
 
     beforeEach(() => {
       hook = renderHook((value) => useChatScrollToBottom(value), {
-        initialProps: []
+        initialProps: [],
       });
       hook.rerender(dataList);
     });

@@ -36,7 +36,8 @@ const Videos = () => {
 
   const emptyPost = (post) => {
     return (
-      Utils.checkIfUserIsBlocked(profile?.blockedBy, post?.userId) || PostUtils.checkPrivacy(post, profile, following)
+      Utils.checkIfUserIsBlocked(profile?.blockedBy, post?.userId) ||
+      PostUtils.checkPrivacy(post, profile, following)
     );
   };
 
@@ -57,7 +58,8 @@ const Videos = () => {
                 className={`${!emptyPost(post) ? 'empty-post-div' : ''}`}
                 data-testid="gallery-videos"
               >
-                {(!Utils.checkIfUserIsBlocked(profile?.blockedBy, post?.userId) || post?.userId === profile?._id) && (
+                {(!Utils.checkIfUserIsBlocked(profile?.blockedBy, post?.userId) ||
+                  post?.userId === profile?._id) && (
                   <>
                     {PostUtils.checkPrivacy(post, profile, following) && (
                       <figure data-testid="video">
@@ -79,7 +81,9 @@ const Videos = () => {
           </div>
         )}
 
-        {loading && !posts.length && <div className="card-element" style={{ height: '350px' }}></div>}
+        {loading && !posts.length && (
+          <div className="card-element" style={{ height: '350px' }}></div>
+        )}
 
         {!loading && !posts.length && (
           <div className="empty-page" data-testid="empty-page">

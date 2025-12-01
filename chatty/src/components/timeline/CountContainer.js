@@ -32,7 +32,7 @@ const CountContainer = ({ followingCount, followersCount, loading }) => {
 CountContainer.propTypes = {
   followingCount: PropTypes.number,
   followersCount: PropTypes.number,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
 };
 
 export default CountContainer;

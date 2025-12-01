@@ -13,7 +13,7 @@ describe('SearchList', () => {
       setIsSearching: null,
       setSearch: null,
       setSelectedUser: null,
-      setComponentType: null
+      setComponentType: null,
     };
   });
 
@@ -23,7 +23,9 @@ describe('SearchList', () => {
     const nothingFoundElement = await screen.findByTestId('nothing-found');
     expect(nothingFoundElement).toBeInTheDocument();
     expect(nothingFoundElement.childNodes.item(0).textContent).toEqual('Nothing found');
-    expect(nothingFoundElement.childNodes.item(1).textContent).toEqual("We couldn't find any match for qqqqqq");
+    expect(nothingFoundElement.childNodes.item(1).textContent).toEqual(
+      "We couldn't find any match for qqqqqq"
+    );
   });
 
   it('should display searching text', async () => {
@@ -41,7 +43,10 @@ describe('SearchList', () => {
     render(<SearchList {...props} />);
     const searchResultElement = await screen.findByTestId('search-result-item');
     expect(searchResultElement).toBeInTheDocument();
-    expect(searchResultElement.childNodes.item(0)).toHaveAttribute('src', 'http://place-hold.it/500x500');
+    expect(searchResultElement.childNodes.item(0)).toHaveAttribute(
+      'src',
+      'http://place-hold.it/500x500'
+    );
     expect(searchResultElement.childNodes.item(1).textContent).toEqual('Danny');
   });
 });

@@ -35,7 +35,7 @@ const Register = () => {
         email,
         password,
         avatarColor,
-        avatarImage
+        avatarImage,
       });
       setLoggedIn(true);
       setStoredUsername(username);

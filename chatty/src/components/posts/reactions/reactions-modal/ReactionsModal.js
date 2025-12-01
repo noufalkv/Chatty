@@ -47,7 +47,9 @@ const ReactionsModal = () => {
     setActiveViewAllTab(false);
     setReactionType(type);
     const exist = some(reactionsOfPost, (reaction) => reaction.type === type);
-    const filteredReactions = exist ? filter(reactionsOfPost, (reaction) => reaction.type === type) : [];
+    const filteredReactions = exist
+      ? filter(reactionsOfPost, (reaction) => reaction.type === type)
+      : [];
     setPostReactions(filteredReactions);
     setReactionColor(reactionsColor[type]);
   };

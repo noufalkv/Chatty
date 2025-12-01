@@ -22,7 +22,15 @@ export class PostUtils {
     dispatch(clearPost());
   }
 
-  static clearImage(postData, post, inputRef, dispatch, setSelectedPostImage, setPostImage, setPostData) {
+  static clearImage(
+    postData,
+    post,
+    inputRef,
+    dispatch,
+    setSelectedPostImage,
+    setPostImage,
+    setPostData
+  ) {
     postData.gifUrl = '';
     postData.image = '';
     postData.video = '';
@@ -39,7 +47,15 @@ export class PostUtils {
       PostUtils.positionCursor('editable');
     });
     dispatch(
-      updatePostItem({ gifUrl: '', image: '', imgId: '', imgVersion: '', video: '', videoId: '', videoVersion: '' })
+      updatePostItem({
+        gifUrl: '',
+        image: '',
+        imgId: '',
+        imgVersion: '',
+        video: '',
+        videoId: '',
+        videoVersion: '',
+      })
     );
   }
 
@@ -62,7 +78,14 @@ export class PostUtils {
     Utils.dispatchNotification(message, type, dispatch);
   }
 
-  static async sendPostWithFileRequest(type, postData, imageInputRef, setApiResponse, setLoading, dispatch) {
+  static async sendPostWithFileRequest(
+    type,
+    postData,
+    imageInputRef,
+    setApiResponse,
+    setLoading,
+    dispatch
+  ) {
     try {
       if (imageInputRef?.current) {
         imageInputRef.current.textContent = postData.post;
@@ -76,18 +99,37 @@ export class PostUtils {
         setLoading(false);
       }
     } catch (error) {
-      PostUtils.dispatchNotification(error.response.data.message, 'error', setApiResponse, setLoading, dispatch);
+      PostUtils.dispatchNotification(
+        error.response.data.message,
+        'error',
+        setApiResponse,
+        setLoading,
+        dispatch
+      );
     }
   }
 
-  static async sendUpdatePostWithFileRequest(type, postId, postData, setApiResponse, setLoading, dispatch) {
+  static async sendUpdatePostWithFileRequest(
+    type,
+    postId,
+    postData,
+    setApiResponse,
+    setLoading,
+    dispatch
+  ) {
     try {
       const response =
         type === 'image'
           ? await postService.updatePostWithImage(postId, postData)
           : await postService.updatePostWithVideo(postId, postData);
       if (response) {
-        PostUtils.dispatchNotification(response.data.message, 'success', setApiResponse, setLoading, dispatch);
+        PostUtils.dispatchNotification(
+          response.data.message,
+          'success',
+          setApiResponse,
+          setLoading,
+          dispatch
+        );
         setTimeout(() => {
           setApiResponse('success');
           setLoading(false);
@@ -95,14 +137,26 @@ export class PostUtils {
         PostUtils.closePostModal(dispatch);
       }
     } catch (error) {
-      PostUtils.dispatchNotification(error.response.data.message, 'error', setApiResponse, setLoading, dispatch);
+      PostUtils.dispatchNotification(
+        error.response.data.message,
+        'error',
+        setApiResponse,
+        setLoading,
+        dispatch
+      );
     }
   }
 
   static async sendUpdatePostRequest(postId, postData, setApiResponse, setLoading, dispatch) {
     const response = await postService.updatePost(postId, postData);
     if (response) {
-      PostUtils.dispatchNotification(response.data.message, 'success', setApiResponse, setLoading, dispatch);
+      PostUtils.dispatchNotification(
+        response.data.message,
+        'success',
+        setApiResponse,
+        setLoading,
+        dispatch
+      );
       setTimeout(() => {
         setApiResponse('success');
         setLoading(false);
@@ -115,7 +169,8 @@ export class PostUtils {
     const isPrivate = post?.privacy === 'Private' && post?.userId === profile?._id;
     const isPublic = post?.privacy === 'Public';
     const isFollower =
-      post?.privacy === 'Followers' && Utils.checkIfUserIsFollowed(following, post?.userId, profile?._id);
+      post?.privacy === 'Followers' &&
+      Utils.checkIfUserIsFollowed(following, post?.userId, profile?._id);
     return isPrivate || isPublic || isFollower;
   }
 

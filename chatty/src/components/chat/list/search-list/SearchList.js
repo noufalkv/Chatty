@@ -11,7 +11,7 @@ const SearchList = ({
   setSearch,
   setIsSearching,
   setSearchResult,
-  setComponentType
+  setComponentType,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -19,7 +19,10 @@ const SearchList = ({
   const addUsernameToUrlQuery = (user) => {
     setComponentType('searchList');
     setSelectedUser(user);
-    const url = `${location.pathname}?${createSearchParams({ username: user.username.toLowerCase(), id: user._id })}`;
+    const url = `${location.pathname}?${createSearchParams({
+      username: user.username.toLowerCase(),
+      id: user._id,
+    })}`;
     navigate(url);
     setSearch('');
     setIsSearching(false);
@@ -60,7 +63,9 @@ const SearchList = ({
         {searchTerm && !isSearching && result.length === 0 && (
           <div className="search-result-container-empty" data-testid="nothing-found">
             <span>Nothing found</span>
-            <p className="search-result-container-empty-msg">We couldn&apos;t find any match for {searchTerm}</p>
+            <p className="search-result-container-empty-msg">
+              We couldn&apos;t find any match for {searchTerm}
+            </p>
           </div>
         )}
       </div>
@@ -76,7 +81,7 @@ SearchList.propTypes = {
   setSearch: PropTypes.func,
   setIsSearching: PropTypes.func,
   setSearchResult: PropTypes.func,
-  setComponentType: PropTypes.func
+  setComponentType: PropTypes.func,
 };
 
 export default SearchList;

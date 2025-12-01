@@ -17,7 +17,7 @@ const MessageDisplay = ({ chatMessages, profile, updateMessageReaction, deleteCh
   const [deleteDialog, setDeleteDialog] = useState({
     open: false,
     message: null,
-    type: ''
+    type: '',
   });
   const [activeElementIndex, setActiveElementIndex] = useState(null);
   const [selectedReaction, setSelectedReaction] = useState(null);
@@ -40,14 +40,18 @@ const MessageDisplay = ({ chatMessages, profile, updateMessageReaction, deleteCh
     setDeleteDialog({
       open: true,
       message,
-      type
+      type,
     });
   };
 
   return (
     <>
       {showImageModal && (
-        <ImageModal image={`${imageUrl}`} onCancel={() => setShowImageModal(!showImageModal)} showArrow={false} />
+        <ImageModal
+          image={`${imageUrl}`}
+          onCancel={() => setShowImageModal(!showImageModal)}
+          showArrow={false}
+        />
       )}
       {selectedReaction && (
         <Dialog
@@ -63,7 +67,9 @@ const MessageDisplay = ({ chatMessages, profile, updateMessageReaction, deleteCh
         <Dialog
           title="Delete message?"
           showButtons={true}
-          firstButtonText={`${deleteDialog.type === 'deleteForMe' ? 'DELETE FOR ME' : 'DELETE FOR EVERYONE'}`}
+          firstButtonText={`${
+            deleteDialog.type === 'deleteForMe' ? 'DELETE FOR ME' : 'DELETE FOR EVERYONE'
+          }`}
           secondButtonText="CANCEL"
           firstBtnHandler={() => {
             const { message, type } = deleteDialog;
@@ -71,14 +77,14 @@ const MessageDisplay = ({ chatMessages, profile, updateMessageReaction, deleteCh
             setDeleteDialog({
               open: false,
               message: null,
-              type: ''
+              type: '',
             });
           }}
           secondBtnHandler={() => {
             setDeleteDialog({
               open: false,
               message: null,
-              type: ''
+              type: '',
             });
           }}
         />
@@ -87,14 +93,16 @@ const MessageDisplay = ({ chatMessages, profile, updateMessageReaction, deleteCh
         {chatMessages.map((chat, index) => (
           <div key={Utils.generateString(10)} className="message-chat" data-testid="message-chat">
             {(index === 0 ||
-              timeAgo.dayMonthYear(chat.createdAt) !== timeAgo.dayMonthYear(chatMessages[index - 1].createdAt)) && (
+              timeAgo.dayMonthYear(chat.createdAt) !==
+                timeAgo.dayMonthYear(chatMessages[index - 1].createdAt)) && (
               <div className="message-date-group">
                 <div className="message-chat-date" data-testid="message-chat-date">
                   {timeAgo.chatMessageTransform(chat.createdAt)}
                 </div>
               </div>
             )}
-            {(chat.receiverUsername === profile?.username || chat.senderUsername === profile?.username) && (
+            {(chat.receiverUsername === profile?.username ||
+              chat.senderUsername === profile?.username) && (
               <>
                 {chat.senderUsername === profile?.username && (
                   <RightMessageDisplay
@@ -151,7 +159,7 @@ MessageDisplay.propTypes = {
   chatMessages: PropTypes.array,
   profile: PropTypes.object,
   updateMessageReaction: PropTypes.func,
-  deleteChatMessage: PropTypes.func
+  deleteChatMessage: PropTypes.func,
 };
 
 export default MessageDisplay;

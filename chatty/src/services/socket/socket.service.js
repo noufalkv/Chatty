@@ -7,7 +7,7 @@ class SocketService {
   setupSocketConnection() {
     this.socket = io(BASE_ENDPOINT, {
       transports: ['websocket'],
-      secure: true
+      secure: true,
     });
     this.socketConnectionEvents();
   }

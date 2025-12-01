@@ -30,7 +30,7 @@ const ImageGridModal = ({ images, closeModal, selectedImage }) => {
 ImageGridModal.propTypes = {
   images: PropTypes.array,
   closeModal: PropTypes.func,
-  selectedImage: PropTypes.func
+  selectedImage: PropTypes.func,
 };
 
 export default ImageGridModal;

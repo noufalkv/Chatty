@@ -13,7 +13,10 @@ class TimeAgo {
       return 'Today';
     } else if (isSameDay(date, yesterday)) {
       return 'Yesterday';
-    } else if (getISOWeek(new Date()) === getISOWeek(date) || getISOWeek(new Date()) - getISOWeek(date) === 1) {
+    } else if (
+      getISOWeek(new Date()) === getISOWeek(date) ||
+      getISOWeek(new Date()) - getISOWeek(date) === 1
+    ) {
       return format(date, 'EEEE');
     } else {
       return format(date, 'd MMMM yyyy');

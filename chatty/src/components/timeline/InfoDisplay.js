@@ -10,7 +10,7 @@ import {
   FaInstagram,
   FaMapMarkerAlt,
   FaTwitter,
-  FaYoutube
+  FaYoutube,
 } from 'react-icons/fa';
 
 const InfoDisplay = ({
@@ -26,15 +26,17 @@ const InfoDisplay = ({
   loading,
   setEditableInputs,
   setEditableSocialInputs,
-  updateInfo
+  updateInfo,
 }) => {
   const [editIntroBtn, setEditIntroBtn] = useState(true);
   const { quote, work, school, location } = editableInputs;
   const { quoteMsg, workMsg, schoolMsg, locationMsg } = noBasicInfo;
   const { instagramMsg, twitterMsg, facebookMsg, youtubeMsg } = noSocialInfo;
   const { instagram, twitter, facebook, youtube } = editableSocialInputs;
-  const { quotePlacehoder, workPlacehoder, schoolPlacehoder, locationPlacehoder } = basicInfoPlaceholder;
-  const { instagramPlacehoder, twitterPlacehoder, facebookPlacehoder, youtubePlacehoder } = socialLinksPlaceholder;
+  const { quotePlacehoder, workPlacehoder, schoolPlacehoder, locationPlacehoder } =
+    basicInfoPlaceholder;
+  const { instagramPlacehoder, twitterPlacehoder, facebookPlacehoder, youtubePlacehoder } =
+    socialLinksPlaceholder;
 
   return (
     <>
@@ -45,7 +47,11 @@ const InfoDisplay = ({
           <div className="side-container-header">
             <p>{title}</p>
             {isCurrentUser && (
-              <p className="editBtn" data-testid="editBtn" onClick={() => setEditIntroBtn(!editIntroBtn)}>
+              <p
+                className="editBtn"
+                data-testid="editBtn"
+                onClick={() => setEditIntroBtn(!editIntroBtn)}
+              >
                 Edit
               </p>
             )}
@@ -71,17 +77,25 @@ const InfoDisplay = ({
           )}
           <div className="side-container-body">
             <div className="side-container-body-icon">
-              {type === 'basic' ? <FaBriefcase className="icon" /> : <FaInstagram className="icon instagram" />}
+              {type === 'basic' ? (
+                <FaBriefcase className="icon" />
+              ) : (
+                <FaInstagram className="icon instagram" />
+              )}
             </div>
             <div className="side-container-body-content" data-testid="content-1">
               {type === 'basic' && editIntroBtn && work && <>Works at </>}
-              {type === 'basic' && editIntroBtn && !work && <div className="no-information">{workMsg}</div>}
+              {type === 'basic' && editIntroBtn && !work && (
+                <div className="no-information">{workMsg}</div>
+              )}
               {type !== 'basic' && editIntroBtn && instagram && (
                 <a className="link" href={instagram} target="_blank" rel="noreferrer noopener">
                   {instagram}
                 </a>
               )}
-              {type !== 'basic' && editIntroBtn && !instagram && <div className="no-information">{instagramMsg}</div>}
+              {type !== 'basic' && editIntroBtn && !instagram && (
+                <div className="no-information">{instagramMsg}</div>
+              )}
               <ContentEditable
                 data-testid="content-1-editable"
                 data-placeholder={type === 'basic' ? workPlacehoder : instagramPlacehoder}
@@ -93,7 +107,10 @@ const InfoDisplay = ({
                   if (type === 'basic') {
                     setEditableInputs({ ...editableInputs, work: event.target.value });
                   } else {
-                    setEditableSocialInputs({ ...editableSocialInputs, instagram: event.target.value });
+                    setEditableSocialInputs({
+                      ...editableSocialInputs,
+                      instagram: event.target.value,
+                    });
                   }
                 }}
               />
@@ -102,17 +119,25 @@ const InfoDisplay = ({
 
           <div className="side-container-body">
             <div className="side-container-body-icon">
-              {type === 'basic' ? <FaGraduationCap className="icon" /> : <FaTwitter className="icon twitter" />}
+              {type === 'basic' ? (
+                <FaGraduationCap className="icon" />
+              ) : (
+                <FaTwitter className="icon twitter" />
+              )}
             </div>
             <div className="side-container-body-content" data-testid="content-2">
               {type === 'basic' && editIntroBtn && school && <>Went to </>}
-              {type === 'basic' && editIntroBtn && !school && <div className="no-information">{schoolMsg}</div>}
+              {type === 'basic' && editIntroBtn && !school && (
+                <div className="no-information">{schoolMsg}</div>
+              )}
               {type !== 'basic' && editIntroBtn && twitter && (
                 <a className="link" href={twitter} target="_blank" rel="noreferrer noopener">
                   {twitter}
                 </a>
               )}
-              {type !== 'basic' && editIntroBtn && !twitter && <div className="no-information">{twitterMsg}</div>}
+              {type !== 'basic' && editIntroBtn && !twitter && (
+                <div className="no-information">{twitterMsg}</div>
+              )}
               <ContentEditable
                 data-testid="content-2-editable"
                 data-placeholder={type === 'basic' ? schoolPlacehoder : twitterPlacehoder}
@@ -124,7 +149,10 @@ const InfoDisplay = ({
                   if (type === 'basic') {
                     setEditableInputs({ ...editableInputs, school: event.target.value });
                   } else {
-                    setEditableSocialInputs({ ...editableSocialInputs, twitter: event.target.value });
+                    setEditableSocialInputs({
+                      ...editableSocialInputs,
+                      twitter: event.target.value,
+                    });
                   }
                 }}
               />
@@ -133,17 +161,25 @@ const InfoDisplay = ({
 
           <div className="side-container-body">
             <div className="side-container-body-icon">
-              {type === 'basic' ? <FaMapMarkerAlt className="icon" /> : <FaFacebook className="icon facebook" />}
+              {type === 'basic' ? (
+                <FaMapMarkerAlt className="icon" />
+              ) : (
+                <FaFacebook className="icon facebook" />
+              )}
             </div>
             <div className="side-container-body-content" data-testid="content-3">
               {type === 'basic' && editIntroBtn && location && <>Lives in </>}
-              {type === 'basic' && editIntroBtn && !location && <div className="no-information">{locationMsg}</div>}
+              {type === 'basic' && editIntroBtn && !location && (
+                <div className="no-information">{locationMsg}</div>
+              )}
               {type !== 'basic' && editIntroBtn && facebook && (
                 <a className="link" href={facebook} target="_blank" rel="noreferrer noopener">
                   {facebook}
                 </a>
               )}
-              {type !== 'basic' && editIntroBtn && !facebook && <div className="no-information">{facebookMsg}</div>}
+              {type !== 'basic' && editIntroBtn && !facebook && (
+                <div className="no-information">{facebookMsg}</div>
+              )}
               <ContentEditable
                 data-testid="content-3-editable"
                 data-placeholder={type === 'basic' ? locationPlacehoder : facebookPlacehoder}
@@ -223,7 +259,7 @@ InfoDisplay.propTypes = {
   loading: PropTypes.bool,
   setEditableInputs: PropTypes.func,
   setEditableSocialInputs: PropTypes.func,
-  updateInfo: PropTypes.func
+  updateInfo: PropTypes.func,
 };
 
 export default InfoDisplay;

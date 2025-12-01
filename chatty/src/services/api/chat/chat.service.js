@@ -37,7 +37,9 @@ class ChatService {
   }
 
   async markMessageAsDelete(messageId, senderId, receiverId, type) {
-    const response = await axios.delete(`/chat/message/mark-as-deleted/${messageId}/${senderId}/${receiverId}/${type}`);
+    const response = await axios.delete(
+      `/chat/message/mark-as-deleted/${messageId}/${senderId}/${receiverId}/${type}`
+    );
     return response;
   }
 }

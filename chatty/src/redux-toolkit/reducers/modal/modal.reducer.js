@@ -12,7 +12,7 @@ const initialState = {
   gifModalIsOpen: false,
   reactionsModalIsOpen: false,
   commentsModalIsOpen: false,
-  deleteDialogIsOpen: false
+  deleteDialogIsOpen: false,
 };
 
 const modalSlice = createSlice({
@@ -65,8 +65,8 @@ const modalSlice = createSlice({
       const { data, toggle } = action.payload;
       state.deleteDialogIsOpen = toggle;
       state.data = data;
-    }
-  }
+    },
+  },
 });
 
 export const {
@@ -79,6 +79,6 @@ export const {
   toggleGifModal,
   toggleReactionsModal,
   toggleCommentsModal,
-  toggleDeleteDialog
+  toggleDeleteDialog,
 } = modalSlice.actions;
 export default modalSlice.reducer;

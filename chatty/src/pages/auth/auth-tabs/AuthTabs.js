@@ -31,10 +31,16 @@ const AuthTabs = () => {
             <div className="tabs">
               <div className="tabs-auth">
                 <ul className="tab-group">
-                  <li className={`tab ${type === 'Sign In' ? 'active' : ''}`} onClick={() => setType('Sign In')}>
+                  <li
+                    className={`tab ${type === 'Sign In' ? 'active' : ''}`}
+                    onClick={() => setType('Sign In')}
+                  >
                     <button className="login">Sign In</button>
                   </li>
-                  <li className={`tab ${type === 'Sign Up' ? 'active' : ''}`} onClick={() => setType('Sign Up')}>
+                  <li
+                    className={`tab ${type === 'Sign Up' ? 'active' : ''}`}
+                    onClick={() => setType('Sign Up')}
+                  >
                     <button className="signup">Sign Up</button>
                   </li>
                 </ul>

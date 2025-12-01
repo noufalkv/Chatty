@@ -21,7 +21,7 @@ const postData = {
   imgVersion: '1233445',
   imgId: '123445',
   createdAt: '2022-06-15',
-  video: ''
+  video: '',
 };
 
 describe('post reducer', () => {
@@ -43,7 +43,10 @@ describe('post reducer', () => {
     data.username = 'Danny';
     data.post = 'This is a good day for us all.';
     expect(
-      reducer(initialState, updatePostItem({ username: 'Danny', post: 'This is a good day for us all.' }))
+      reducer(
+        initialState,
+        updatePostItem({ username: 'Danny', post: 'This is a good day for us all.' })
+      )
     ).toEqual(data);
   });
 

@@ -32,7 +32,7 @@ const AddPost = ({ selectedImage, selectedPostVideo }) => {
     gifUrl: '',
     profilePicture: '',
     image: '',
-    video: ''
+    video: '',
   });
   const [disable, setDisable] = useState(true);
   const [apiResponse, setApiResponse] = useState('');
@@ -70,7 +70,15 @@ const AddPost = ({ selectedImage, selectedPostVideo }) => {
 
   const clearImage = () => {
     setSelectedVideo(null);
-    PostUtils.clearImage(postData, '', inputRef, dispatch, setSelectedPostImage, setPostImage, setPostData);
+    PostUtils.clearImage(
+      postData,
+      '',
+      inputRef,
+      dispatch,
+      setSelectedPostImage,
+      setPostImage,
+      setPostData
+    );
   };
 
   const createPost = async () => {
@@ -132,7 +140,13 @@ const AddPost = ({ selectedImage, selectedPostVideo }) => {
       }
     } catch (error) {
       setHasVideo(false);
-      PostUtils.dispatchNotification(error.response.data.message, 'error', setApiResponse, setLoading, dispatch);
+      PostUtils.dispatchNotification(
+        error.response.data.message,
+        'error',
+        setApiResponse,
+        setLoading,
+        dispatch
+      );
     }
   };
 
@@ -172,9 +186,14 @@ const AddPost = ({ selectedImage, selectedPostVideo }) => {
             className="modal-box"
             style={{
               height:
-                selectedPostImage || hasVideo || gifUrl || image || postData?.gifUrl || postData?.image
+                selectedPostImage ||
+                hasVideo ||
+                gifUrl ||
+                image ||
+                postData?.gifUrl ||
+                postData?.image
                   ? '700px'
-                  : 'auto'
+                  : 'auto',
             }}
           >
             {loading && (
@@ -199,7 +218,10 @@ const AddPost = ({ selectedImage, selectedPostVideo }) => {
                   data-testid="modal-box-form"
                   style={{ background: `${textAreaBackground}` }}
                 >
-                  <div className="main" style={{ margin: textAreaBackground !== '#ffffff' ? '0 auto' : '' }}>
+                  <div
+                    className="main"
+                    style={{ margin: textAreaBackground !== '#ffffff' ? '0 auto' : '' }}
+                  >
                     <div className="flex-row">
                       <div
                         data-testid="editable"
@@ -209,8 +231,12 @@ const AddPost = ({ selectedImage, selectedPostVideo }) => {
                           inputRef.current = el;
                           inputRef?.current?.focus();
                         }}
-                        className={`editable flex-item ${textAreaBackground !== '#ffffff' ? 'textInputColor' : ''} ${
-                          postData.post.length === 0 && textAreaBackground !== '#ffffff' ? 'defaultInputTextColor' : ''
+                        className={`editable flex-item ${
+                          textAreaBackground !== '#ffffff' ? 'textInputColor' : ''
+                        } ${
+                          postData.post.length === 0 && textAreaBackground !== '#ffffff'
+                            ? 'defaultInputTextColor'
+                            : ''
                         }`}
                         contentEditable={true}
                         onInput={(e) => postInputEditable(e, e.currentTarget.textContent)}
@@ -249,7 +275,14 @@ const AddPost = ({ selectedImage, selectedPostVideo }) => {
                     >
                       <FaTimes />
                     </div>
-                    {!hasVideo && <img data-testid="post-image" className="post-image" src={`${postImage}`} alt="" />}
+                    {!hasVideo && (
+                      <img
+                        data-testid="post-image"
+                        className="post-image"
+                        src={`${postImage}`}
+                        alt=""
+                      />
+                    )}
                     {hasVideo && (
                       <div style={{ marginTop: '-40px' }}>
                         <video width="100%" controls src={`${video}`} />
@@ -280,10 +313,18 @@ const AddPost = ({ selectedImage, selectedPostVideo }) => {
               {allowedNumberOfCharacters}
             </span>
 
-            <ModalBoxSelection setSelectedPostImage={setSelectedPostImage} setSelectedVideo={setSelectedVideo} />
+            <ModalBoxSelection
+              setSelectedPostImage={setSelectedPostImage}
+              setSelectedVideo={setSelectedVideo}
+            />
 
             <div className="modal-box-button" data-testid="post-button">
-              <Button label="Create Post" className="post-button" disabled={disable} handleClick={createPost} />
+              <Button
+                label="Create Post"
+                className="post-button"
+                disabled={disable}
+                handleClick={createPost}
+              />
             </div>
           </div>
         )}
@@ -308,6 +349,6 @@ const AddPost = ({ selectedImage, selectedPostVideo }) => {
 };
 AddPost.propTypes = {
   selectedImage: PropTypes.any,
-  selectedPostVideo: PropTypes.any
+  selectedPostVideo: PropTypes.any,
 };
 export default AddPost;

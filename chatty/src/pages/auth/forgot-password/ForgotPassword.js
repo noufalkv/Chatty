@@ -36,7 +36,10 @@ const ForgotPassword = () => {
     <div className="container-wrapper" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <div className="environment">DEV</div>
       <div className="container-wrapper-auth">
-        <div className="tabs forgot-password-tabs" style={{ height: `${responseMessage ? '300px' : ''}` }}>
+        <div
+          className="tabs forgot-password-tabs"
+          style={{ height: `${responseMessage ? '300px' : ''}` }}
+        >
           <div className="tabs-auth">
             <ul className="tab-group">
               <li className="tab">

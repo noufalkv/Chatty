@@ -15,7 +15,11 @@ const ChatListBody = ({ data, profile }) => {
           )}
         </>
       ) : (
-        <>{data.senderUsername === profile?.username && <img src={doubleCheckmark} alt="" className="icon read" />}</>
+        <>
+          {data.senderUsername === profile?.username && (
+            <img src={doubleCheckmark} alt="" className="icon read" />
+          )}
+        </>
       )}
     </div>
   );
@@ -23,7 +27,7 @@ const ChatListBody = ({ data, profile }) => {
 
 ChatListBody.propTypes = {
   data: PropTypes.object,
-  profile: PropTypes.object
+  profile: PropTypes.object,
 };
 
 export default ChatListBody;

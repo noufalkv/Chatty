@@ -72,7 +72,7 @@ describe('Followers', () => {
     expect(cardElementButtons[0].children[0].textContent).toEqual('Block');
     expect(socketService.socket.emit).toHaveBeenCalledWith('block user', {
       blockedUser: existingUserTwo._id,
-      blockedBy: existingUser._id
+      blockedBy: existingUser._id,
     });
     expect(FollowersUtils.blockUser).toHaveBeenCalledWith(existingUserTwo, expect.any(Function));
     expect(FollowersUtils.socketIOBlockAndUnblock).toHaveBeenCalledWith(
@@ -94,7 +94,7 @@ describe('Followers', () => {
     expect(cardElementButtons[0].children[0].textContent).toEqual('Unblock');
     expect(socketService.socket.emit).toHaveBeenCalledWith('unblock user', {
       blockedUser: existingUserTwo._id,
-      blockedBy: existingUser._id
+      blockedBy: existingUser._id,
     });
     expect(FollowersUtils.unblockUser).toHaveBeenCalledWith(existingUserTwo, expect.any(Function));
     expect(FollowersUtils.socketIOBlockAndUnblock).toHaveBeenCalledWith(

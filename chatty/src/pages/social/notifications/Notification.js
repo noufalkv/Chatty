@@ -19,7 +19,7 @@ const Notification = () => {
     imgUrl: '',
     comment: '',
     reaction: '',
-    senderName: ''
+    senderName: '',
   });
   const dispatch = useDispatch();
 
@@ -36,7 +36,11 @@ const Notification = () => {
 
   const markAsRead = async (notification) => {
     try {
-      NotificationUtils.markMessageAsRead(notification?._id, notification, setNotificationDialogContent);
+      NotificationUtils.markMessageAsRead(
+        notification?._id,
+        notification,
+        setNotificationDialogContent
+      );
     } catch (error) {
       Utils.dispatchNotification(error.response.data.message, 'error', dispatch);
     }
@@ -57,7 +61,12 @@ const Notification = () => {
   });
 
   useEffect(() => {
-    NotificationUtils.socketIONotification(profile, notifications, setNotifications, 'notificationPage');
+    NotificationUtils.socketIONotification(
+      profile,
+      notifications,
+      setNotifications,
+      'notificationPage'
+    );
   }, [profile, notifications]);
 
   return (
@@ -77,7 +86,7 @@ const Notification = () => {
               imgUrl: '',
               comment: '',
               reaction: '',
-              senderName: ''
+              senderName: '',
             });
           }}
         />
@@ -117,7 +126,11 @@ const Notification = () => {
                       </h6>
                       <div className="subtitle-body">
                         <small className="subtitle">
-                          {!notification?.read ? <FaCircle className="icon" /> : <FaRegCircle className="icon" />}
+                          {!notification?.read ? (
+                            <FaCircle className="icon" />
+                          ) : (
+                            <FaRegCircle className="icon" />
+                          )}
                         </small>
                         <p className="subtext">{timeAgo.transform(notification?.createdAt)}</p>
                       </div>

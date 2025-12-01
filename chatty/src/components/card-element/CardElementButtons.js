@@ -7,13 +7,17 @@ const CardElementButtons = ({
   btnTextTwo,
   onClickBtnOne,
   onClickBtnTwo,
-  onNavigateToProfile
+  onNavigateToProfile,
 }) => {
   return (
     <div className="card-element-buttons" data-testid="card-element-buttons">
       <Fragment>
         {!isChecked && (
-          <Button label={btnTextOne} className="card-element-buttons-btn button" handleClick={onClickBtnOne} />
+          <Button
+            label={btnTextOne}
+            className="card-element-buttons-btn button"
+            handleClick={onClickBtnOne}
+          />
         )}
         {isChecked && (
           <Button
@@ -23,7 +27,11 @@ const CardElementButtons = ({
           />
         )}
       </Fragment>
-      <Button label="Profile" className="card-element-buttons-btn button" handleClick={onNavigateToProfile} />
+      <Button
+        label="Profile"
+        className="card-element-buttons-btn button"
+        handleClick={onNavigateToProfile}
+      />
     </div>
   );
 };
@@ -33,6 +41,6 @@ CardElementButtons.propTypes = {
   btnTextTwo: PropTypes.string,
   onClickBtnOne: PropTypes.func,
   onClickBtnTwo: PropTypes.func,
-  onNavigateToProfile: PropTypes.func
+  onNavigateToProfile: PropTypes.func,
 };
 export default CardElementButtons;

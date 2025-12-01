@@ -57,7 +57,9 @@ describe('Post', () => {
     const { baseElement } = render(<Post post={postMockData} showIcons={false} />);
     const timeDisplayElement = await screen.findByTestId('time-display');
     expect(timeDisplayElement).toBeInTheDocument();
-    expect(timeDisplayElement.childNodes.item(0).textContent).toEqual(timeAgo.transform(postMockData.createdAt));
+    expect(timeDisplayElement.childNodes.item(0).textContent).toEqual(
+      timeAgo.transform(postMockData.createdAt)
+    );
     expect(baseElement.querySelector('.globe')).toBeInTheDocument();
   });
 
@@ -81,7 +83,10 @@ describe('Post', () => {
     render(<Post post={postMockData} showIcons={false} />);
     const postImage = await screen.findByTestId('post-image');
     expect(postImage).toBeInTheDocument();
-    expect(postImage.childNodes.item(0)).toHaveAttribute('src', expect.stringContaining('image/upload/v2/1'));
+    expect(postImage.childNodes.item(0)).toHaveAttribute(
+      'src',
+      expect.stringContaining('image/upload/v2/1')
+    );
   });
 
   it('should display image modal on image click', async () => {

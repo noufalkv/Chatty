@@ -13,6 +13,6 @@ const Spinner = ({ bgColor }) => {
   );
 };
 Spinner.propTypes = {
-  bgColor: PropTypes.string
+  bgColor: PropTypes.string,
 };
 export default Spinner;

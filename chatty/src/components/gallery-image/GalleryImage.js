@@ -46,7 +46,7 @@ GalleryImage.propTypes = {
   showDelete: PropTypes.bool,
   imgSrc: PropTypes.string,
   onClick: PropTypes.func,
-  onRemoveImage: PropTypes.func
+  onRemoveImage: PropTypes.func,
 };
 
 export default GalleryImage;
