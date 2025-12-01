@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatty MongoDB Services Summary</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 2rem; }
+    h2 { color: #2c3e50; margin-top: 2rem; }
+    pre { background: #f4f4f4; padding: 1rem; border-radius: 6px; overflow-x: auto; }
+    .service-section { box-shadow: 0 2px 8px rgba(0,0,0,0.05); padding: 1rem; border-radius: 8px; margin-bottom: 2rem; background: #fff; }
+    .usage { color: #34495e; font-weight: bold; margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+
+  <h1>Chatty MongoDB Services Query & Usage</h1>
+
+  <div class="service-section">
+    <h2>Auth Service</h2>
+    <p><strong>Description:</strong> Manages authentication logic, including user creation, password reset, and user lookup by username, email, or token. Ensures secure handling of credentials and password reset flows.</p>
+    <div class="usage">Main Queries:</div>
+    <div><strong>Aggregate Functionality:</strong> <br>
+      <ul>
+        <li><strong>Auth Service:</strong> No aggregate queries used.</li>
+      </ul>
+    </div>
+    <pre>
+AuthModel.create(data)
+AuthModel.updateOne({ _id: authId }, { passwordResetToken, passwordResetExpires })
+AuthModel.findOne({ username })
+AuthModel.findOne({ email })
+AuthModel.findOne({ passwordResetToken, passwordResetExpires: { $gt: Date.now() } })
+    </pre>
+    <div>Usage: Handles user creation, password reset token management, and user lookup by username/email/token.</div>
+  </div>
+
+  <div class="service-section">
+    <h2>Block User Service</h2>
+    <p><strong>Description:</strong> Handles blocking and unblocking of users. Updates the user's blocked and blockedBy lists to restrict or restore interactions between users.</p>
+    <div class="usage">Main Queries:</div>
+    <div><strong>Aggregate Functionality:</strong> <br>
+      <ul>
+        <li><strong>Block User Service:</strong> No aggregate queries used.</li>
+      </ul>
+    </div>
+    <pre>
+UserModel.bulkWrite([
+  { updateOne: { filter, update: { $push: { blocked } } } },
+  { updateOne: { filter, update: { $push: { blockedBy } } } }
+])
+UserModel.bulkWrite([
+  { updateOne: { filter, update: { $pull: { blocked } } } },
+  { updateOne: { filter, update: { $pull: { blockedBy } } } }
+])
+    </pre>
+    <div>Usage: Blocks or unblocks users by updating blocked/blockedBy arrays in user documents.</div>
+  </div>
+
+  <div class="service-section">
+    <h2>Chat Service</h2>
+    <p><strong>Description:</strong> Manages chat messages and conversations. Adds new messages, creates conversations if needed, and retrieves conversation lists for users.</p>
+    <div class="usage">Main Queries:</div>
+    <div><strong>Aggregate Functionality:</strong> <br>
+      <ul>
+        <li><strong>Chat Service:</strong> Uses <code>MessageModel.aggregate</code> to group messages by conversation, filter by sender/receiver, and project the latest message in each conversation. This enables efficient retrieval of conversation lists and message summaries.</li>
+      </ul>
+    </div>
+    <pre>
+ConversationModel.find({ _id: conversationId })
+ConversationModel.create({ ... })
+MessageModel.create({ ... })
+MessageModel.aggregate([
+  { $match: { $or: [{ senderId }, { receiverId }] } },
+  { $group: { _id: '$conversationId', result: { $last: '$$ROOT' } } },
+  { $project: { ... } }
+])
+    </pre>
+    <div>Usage: Adds messages, creates conversations, and fetches user conversation lists.</div>
+  </div>
+
+  <div class="service-section">
+    <h2>Comment Service</h2>
+    <p><strong>Description:</strong> Handles creation and retrieval of comments for posts. Also updates the comment count on posts and triggers notifications for new comments.</p>
+    <div class="usage">Main Queries:</div>
+    <div><strong>Aggregate Functionality:</strong> <br>
+      <ul>
+        <li><strong>Comment Service:</strong> Uses <code>CommentsModel.aggregate</code> to filter and sort comments for a post, enabling efficient retrieval and ordering of comments.</li>
+      </ul>
+    </div>
+    <pre>
+CommentsModel.create(comment)
+PostModel.findOneAndUpdate({ _id: postId }, { $inc: { commentsCount: 1 } })
+CommentsModel.aggregate([{ $match: query }, { $sort: sort }])
+    </pre>
+    <div>Usage: Adds comments, updates post comment count, and fetches comments for a post.</div>
+  </div>
+
+  <div class="service-section">
+    <h2>Follower Service</h2>
+    <p><strong>Description:</strong> Manages user following relationships. Adds new followers, updates follower/following counts, and sends notifications for new follows.</p>
+    <div class="usage">Main Queries:</div>
+    <div><strong>Aggregate Functionality:</strong> <br>
+      <ul>
+        <li><strong>Follower Service:</strong> No aggregate queries used.</li>
+      </ul>
+    </div>
+    <pre>
+FollowerModel.create({ ... })
+UserModel.bulkWrite([
+  { updateOne: { filter, update: { $inc: { followingCount } } } },
+  { updateOne: { filter, update: { $inc: { followersCount } } } }
+])
+    </pre>
+    <div>Usage: Adds followers, updates following/follower counts, and triggers notifications.</div>
+  </div>
+
+  <div class="service-section">
+    <h2>Image Service</h2>
+    <p><strong>Description:</strong> Handles user images, including profile and background images. Adds, updates, deletes, and retrieves image records for users.</p>
+    <div class="usage">Main Queries:</div>
+    <div><strong>Aggregate Functionality:</strong> <br>
+      <ul>
+        <li><strong>Image Service:</strong> Uses <code>ImageModel.aggregate</code> to filter images by user, allowing efficient retrieval of all images for a specific user.</li>
+      </ul>
+    </div>
+    <pre>
+UserModel.updateOne({ _id: userId }, { $set: { profilePicture: url } })
+UserModel.updateOne({ _id: userId }, { $set: { bgImageId, bgImageVersion } })
+ImageModel.create({ ... })
+ImageModel.deleteOne({ _id: imageId })
+ImageModel.findOne({ bgImageId })
+ImageModel.aggregate([{ $match: { userId } }])
+    </pre>
+    <div>Usage: Manages user profile/background images and image records.</div>
+  </div>
+
+  <div class="service-section">
+    <h2>Notification Service</h2>
+    <p><strong>Description:</strong> Manages notifications for users. Fetches notifications, marks them as read, and deletes them as needed. Integrates with user and auth data for richer notification details.</p>
+    <div class="usage">Main Queries:</div>
+    <div><strong>Aggregate Functionality:</strong> <br>
+      <ul>
+        <li><strong>Notification Service:</strong> Uses <code>NotificationModel.aggregate</code> to join notification data with user and auth collections, unwind arrays, and project enriched notification details for the user.</li>
+      </ul>
+    </div>
+    <pre>
+NotificationModel.aggregate([
+  { $match: { userTo } },
+  { $lookup: { from: 'User', localField: 'userFrom', foreignField: '_id', as: 'userFrom' } },
+  { $unwind: '$userFrom' },
+  { $lookup: { from: 'Auth', localField: 'userFrom.authId', foreignField: '_id', as: 'authId' } },
+  { $unwind: '$authId' },
+  { $project: { ... } }
+])
+NotificationModel.updateOne({ _id: notificationId }, { $set: { read: true } })
+NotificationModel.deleteOne({ _id: notificationId })
+    </pre>
+    <div>Usage: Fetches, updates, and deletes notifications for users.</div>
+  </div>
+
+  <div class="service-section">
+    <h2>Post Service</h2>
+    <p><strong>Description:</strong> Handles post creation, retrieval, updating, and deletion. Also manages post counts for users and supports filtering by images, videos, and other criteria.</p>
+    <div class="usage">Main Queries:</div>
+    <div><strong>Aggregate Functionality:</strong> <br>
+      <ul>
+        <li><strong>Post Service:</strong> Uses <code>PostModel.aggregate</code> to filter, sort, skip, and limit posts for pagination and advanced querying (e.g., by image, video, or other criteria).</li>
+      </ul>
+    </div>
+    <pre>
+PostModel.create(createdPost)
+UserModel.updateOne({ _id: userId }, { $inc: { postsCount: 1 } })
+PostModel.aggregate([{ $match: postQuery }, { $sort: sort }, { $skip: skip }, { $limit: limit }])
+PostModel.find({}).countDocuments()
+PostModel.deleteOne({ _id: postId })
+UserModel.updateOne({ _id: userId }, { $inc: { postsCount: -1 } })
+PostModel.updateOne({ _id: postId }, { $set: updatedPost })
+    </pre>
+    <div>Usage: Adds, fetches, updates, and deletes posts, and manages post counts.</div>
+  </div>
+
+  <div class="service-section">
+    <h2>Reaction Service</h2>
+    <p><strong>Description:</strong> Manages reactions to posts. Adds or updates reaction records and updates reaction counts on posts. Also triggers notifications for new reactions.</p>
+    <div class="usage">Main Queries:</div>
+    <div><strong>Aggregate Functionality:</strong> <br>
+      <ul>
+        <li><strong>Reaction Service:</strong> No aggregate queries used.</li>
+      </ul>
+    </div>
+    <pre>
+ReactionModel.replaceOne({ postId, type, username }, reactionObject, { upsert: true })
+PostModel.findOneAndUpdate({ _id: postId }, { $inc: { [`reactions.${previousReaction}`]: -1, [`reactions.${type}`]: 1 } })
+    </pre>
+    <div>Usage: Adds or updates reactions, and updates reaction counts on posts.</div>
+  </div>
+
+  <div class="service-section">
+    <h2>User Service</h2>
+    <p><strong>Description:</strong> Manages user data, including creation, password updates, profile info, social links, notification settings, and user lookups. Supports aggregation with auth data for richer user profiles.</p>
+    <div class="usage">Main Queries:</div>
+    <div><strong>Aggregate Functionality:</strong> <br>
+      <ul>
+        <li><strong>User Service:</strong> Uses <code>UserModel.aggregate</code> to join user data with auth data, unwind arrays, and project enriched user profiles for lookups by userId or authId.</li>
+      </ul>
+    </div>
+    <pre>
+UserModel.create(data)
+AuthModel.updateOne({ username }, { $set: { password: hashedPassword } })
+UserModel.updateOne({ _id: userId }, { $set: { work, school, quote, location } })
+UserModel.updateOne({ _id: userId }, { $set: { social: links } })
+UserModel.updateOne({ _id: userId }, { $set: { notifications: settings } })
+UserModel.aggregate([
+  { $match: { _id: userId } },
+  { $lookup: { from: 'Auth', localField: 'authId', foreignField: '_id', as: 'authId' } },
+  { $unwind: '$authId' },
+  { $project: ... }
+])
+UserModel.aggregate([
+  { $match: { authId } },
+  { $lookup: { from: 'Auth', localField: 'authId', foreignField: '_id', as: 'authId' } },
+  { $unwind: '$authId' },
+  { $project: ... }
+])
+    </pre>
+    <div>Usage: Manages user creation, password, info, social links, notification settings, and user lookups.</div>
+  </div>
+
+</body>
+</html>

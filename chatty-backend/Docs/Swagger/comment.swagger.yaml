@@ -1,0 +1,120 @@
+openapi: 3.0.3
+info:
+  title: Chatty Comment API
+  description: API endpoints for post comments
+  version: 1.0.0
+servers:
+  - url: /api/v1/comments
+paths:
+  /post/comments/{postId}:
+    get:
+      summary: Get all comments for a post
+      parameters:
+        - in: path
+          name: postId
+          schema:
+            type: string
+          required: true
+          description: ID of the post
+      responses:
+        '200':
+          description: List of comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+        '401':
+          description: Unauthorized
+  /post/commentsnames/{postId}:
+    get:
+      summary: Get all comment names for a post (from cache)
+      parameters:
+        - in: path
+          name: postId
+          schema:
+            type: string
+          required: true
+          description: ID of the post
+      responses:
+        '200':
+          description: List of comment names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '401':
+          description: Unauthorized
+  /post/single/comment/{postId}/{commentId}:
+    get:
+      summary: Get a single comment for a post
+      parameters:
+        - in: path
+          name: postId
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: commentId
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Single comment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '401':
+          description: Unauthorized
+  /post/comment:
+    post:
+      summary: Add a comment to a post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddCommentRequest'
+      responses:
+        '201':
+          description: Comment added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '400':
+          description: Invalid input
+components:
+  schemas:
+    Comment:
+      type: object
+      properties:
+        id:
+          type: string
+        postId:
+          type: string
+        userId:
+          type: string
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    AddCommentRequest:
+      type: object
+      properties:
+        postId:
+          type: string
+        userId:
+          type: string
+        content:
+          type: string
+      required:
+        - postId
+        - userId
+        - content

@@ -1,0 +1,17 @@
+# Development Dockerfile for React with hot reload
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install dependencies for hot reload
+COPY package*.json ./
+RUN npm install
+
+# Copy source code
+COPY . .
+
+# Expose port
+EXPOSE 3000
+
+# Start development server with hot reload
+CMD ["npm", "start"]

@@ -1,0 +1,299 @@
+openapi: 3.0.3
+info:
+  title: Chatty Post API
+  description: API endpoints for posts (text, image, video)
+  version: 1.0.0
+servers:
+  - url: /api/v1/posts
+paths:
+  /post/all/{page}:
+    get:
+      summary: Get all posts (paginated)
+      parameters:
+        - in: path
+          name: page
+          schema:
+            type: integer
+          required: true
+          description: Page number
+      responses:
+        '200':
+          description: List of posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+        '401':
+          description: Unauthorized
+  /post/images/{page}:
+    get:
+      summary: Get posts with images (paginated)
+      parameters:
+        - in: path
+          name: page
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: List of image posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+        '401':
+          description: Unauthorized
+  /post/videos/{page}:
+    get:
+      summary: Get posts with videos (paginated)
+      parameters:
+        - in: path
+          name: page
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: List of video posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+        '401':
+          description: Unauthorized
+  /post:
+    post:
+      summary: Create a new text post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePostRequest'
+      responses:
+        '201':
+          description: Post created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '400':
+          description: Invalid input
+  /post/image/post:
+    post:
+      summary: Create a new post with image
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateImagePostRequest'
+      responses:
+        '201':
+          description: Image post created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '400':
+          description: Invalid input
+  /post/video/post:
+    post:
+      summary: Create a new post with video
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateVideoPostRequest'
+      responses:
+        '201':
+          description: Video post created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '400':
+          description: Invalid input
+  /post/{postId}:
+    put:
+      summary: Update a text post
+      parameters:
+        - in: path
+          name: postId
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePostRequest'
+      responses:
+        '200':
+          description: Post updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '400':
+          description: Invalid input
+        '404':
+          description: Post not found
+    delete:
+      summary: Delete a post
+      parameters:
+        - in: path
+          name: postId
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Post deleted
+        '404':
+          description: Post not found
+  /post/image/{postId}:
+    put:
+      summary: Update a post with image
+      parameters:
+        - in: path
+          name: postId
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UpdateImagePostRequest'
+      responses:
+        '200':
+          description: Image post updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '400':
+          description: Invalid input
+        '404':
+          description: Post not found
+  /post/video/{postId}:
+    put:
+      summary: Update a post with video
+      parameters:
+        - in: path
+          name: postId
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UpdateVideoPostRequest'
+      responses:
+        '200':
+          description: Video post updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '400':
+          description: Invalid input
+        '404':
+          description: Post not found
+components:
+  schemas:
+    Post:
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        content:
+          type: string
+        imageUrl:
+          type: string
+        videoUrl:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    CreatePostRequest:
+      type: object
+      properties:
+        userId:
+          type: string
+        content:
+          type: string
+      required:
+        - userId
+        - content
+    CreateImagePostRequest:
+      type: object
+      properties:
+        userId:
+          type: string
+        content:
+          type: string
+        image:
+          type: string
+          format: binary
+      required:
+        - userId
+        - content
+        - image
+    CreateVideoPostRequest:
+      type: object
+      properties:
+        userId:
+          type: string
+        content:
+          type: string
+        video:
+          type: string
+          format: binary
+      required:
+        - userId
+        - content
+        - video
+    UpdatePostRequest:
+      type: object
+      properties:
+        content:
+          type: string
+      required:
+        - content
+    UpdateImagePostRequest:
+      type: object
+      properties:
+        content:
+          type: string
+        image:
+          type: string
+          format: binary
+      required:
+        - content
+        - image
+    UpdateVideoPostRequest:
+      type: object
+      properties:
+        content:
+          type: string
+        video:
+          type: string
+          format: binary
+      required:
+        - content
+        - video

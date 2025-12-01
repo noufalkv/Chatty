@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chatty Backend Deployment Documentation</title>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f9f9f9; margin: 0; }
+    header { background: #34495e; color: #fff; padding: 2rem 1rem 1rem 1rem; text-align: center; }
+    nav { background: #2c3e50; color: #fff; padding: 1rem; text-align: center; }
+    nav a { color: #fff; margin: 0 1rem; text-decoration: none; font-weight: bold; }
+    main { max-width: 700px; margin: 2rem auto; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-radius: 8px; padding: 2rem; }
+    h2 { color: #2c3e50; margin-top: 2rem; }
+    ul { margin-left: 2rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chatty Backend Deployment Documentation</h1>
+    <p>Navigate through each deployment step using the links below.</p>
+  </header>
+  <nav>
+    <a href="deployment-aws.html">AWS Setup</a>
+    <a href="deployment-terraform.html">Terraform</a>
+    <a href="deployment-scripts.html">Scripts</a>
+    <a href="deployment-cicd.html">CI/CD</a>
+    <a href="deployment-codedeploy.html">CodeDeploy</a>
+    <a href="deployment-files.html">Infrastructure Files</a>
+  </nav>
+  <main>
+    <h2>Welcome</h2>
+    <p>
+      This deployment documentation is designed to guide you through every step required to launch, manage, and maintain the Chatty backend on AWS. Each section provides practical instructions, explanations, and best practices for a smooth and reliable deployment experience.<br><br>
+      <b>How to use:</b> Start with AWS Setup to prepare your cloud environment, then follow each section in order. Each page contains detailed breakdowns, code samples, troubleshooting tips, and real-world advice.
+    </p>
+    <ul>
+      <li><b>AWS Setup:</b> Learn how to create your AWS account, configure IAM users, set up Route53 for DNS, create S3 buckets for environment files and Terraform state, and prepare your environment variables. <br><i>Why?</i> These steps ensure your cloud foundation is secure, organized, and ready for automation.</li>
+      <li><b>Terraform:</b> Discover how to use infrastructure as code to provision all AWS resources. Includes workflow, file map, and troubleshooting. <br><i>Why?</i> Terraform automates resource creation, making deployments repeatable and scalable.</li>
+      <li><b>Scripts:</b> Understand the deployment lifecycle scripts (before_install, after_install, application_start), their roles, and how they interact with CodeDeploy. <br><i>Why?</i> Scripts automate setup, installation, and app startup for every deployment.</li>
+      <li><b>CI/CD:</b> Set up CircleCI for automated build, test, and deployment. Learn about configuration, environment variables, and workflow. <br><i>Why?</i> CI/CD ensures code quality and fast, reliable releases.</li>
+      <li><b>CodeDeploy:</b> Explore AppSpec configuration, deployment hooks, logs, and troubleshooting. <br><i>Why?</i> CodeDeploy manages the deployment process and rollback for reliability.</li>
+      <li><b>Infrastructure Files:</b> Reference all key files, their purposes, and find answers to common deployment questions. <br><i>Why?</i> Knowing your file map helps with debugging and team collaboration.</li>
+    </ul>
+  </main>
+</body>
+</html>

@@ -1,0 +1,133 @@
+openapi: 3.0.3
+info:
+  title: Chatty Image API
+  description: API endpoints for user images (profile, background, and general images)
+  version: 1.0.0
+servers:
+  - url: /api/v1/images
+paths:
+  /images/{userId}:
+    get:
+      summary: Get all images for a user
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+          description: User ID
+      responses:
+        '200':
+          description: List of images
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Image'
+        '401':
+          description: Unauthorized
+  /images/profile:
+    post:
+      summary: Add or update profile image
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProfileImageRequest'
+      responses:
+        '201':
+          description: Profile image uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Image'
+        '400':
+          description: Invalid input
+  /images/background:
+    post:
+      summary: Add or update background image
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BackgroundImageRequest'
+      responses:
+        '201':
+          description: Background image uploaded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Image'
+        '400':
+          description: Invalid input
+  /images/{imageId}:
+    delete:
+      summary: Delete an image
+      parameters:
+        - in: path
+          name: imageId
+          schema:
+            type: string
+          required: true
+          description: Image ID
+      responses:
+        '200':
+          description: Image deleted
+        '404':
+          description: Image not found
+  /images/background/{bgImageId}:
+    delete:
+      summary: Delete a background image
+      parameters:
+        - in: path
+          name: bgImageId
+          schema:
+            type: string
+          required: true
+          description: Background image ID
+      responses:
+        '200':
+          description: Background image deleted
+        '404':
+          description: Background image not found
+components:
+  schemas:
+    Image:
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        url:
+          type: string
+        type:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    ProfileImageRequest:
+      type: object
+      properties:
+        image:
+          type: string
+          format: binary
+        userId:
+          type: string
+      required:
+        - image
+        - userId
+    BackgroundImageRequest:
+      type: object
+      properties:
+        image:
+          type: string
+          format: binary
+        userId:
+          type: string
+      required:
+        - image
+        - userId

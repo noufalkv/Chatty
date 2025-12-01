@@ -1,0 +1,78 @@
+// Prisma schema examples for one-to-one, one-to-many, and many-to-many relationships
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+}
+
+// One-to-One: User <-> Profile
+model User {
+    id       Int      @id @default(autoincrement())
+    username String
+    email    String   @unique
+    profile  Profile?
+}
+
+model Profile {
+    id     Int     @id @default(autoincrement())
+    bio    String?
+    user   User    @relation(fields: [userId], references: [id])
+    userId Int     @unique
+}
+
+// One-to-Many: User -> Post
+model Post {
+    id      Int    @id @default(autoincrement())
+    title   String
+    content String
+    user    User   @relation(fields: [userId], references: [id])
+    userId  Int
+}
+
+// Many-to-Many: Student <-> Course
+model Student {
+    id      Int      @id @default(autoincrement())
+    name    String
+    courses Course[]
+}
+
+model Course {
+    id       Int       @id @default(autoincrement())
+    name     String
+    students Student[]
+}
+
+// --- SQL equivalents for the above relations ---
+
+-- One-to-One: User <-> Profile
+-- User table
+--   id SERIAL PRIMARY KEY
+--   username VARCHAR(255)
+--   email VARCHAR(255) UNIQUE
+--   profile_id INTEGER UNIQUE REFERENCES profile(id)
+-- Profile table
+--   id SERIAL PRIMARY KEY
+--   bio TEXT
+--   user_id INTEGER UNIQUE REFERENCES users(id)
+
+-- One-to-Many: User -> Post
+-- Post table
+--   id SERIAL PRIMARY KEY
+--   title VARCHAR(255)
+--   content TEXT
+--   user_id INTEGER REFERENCES users(id)
+
+-- Many-to-Many: Student <-> Course
+-- Student table
+--   id SERIAL PRIMARY KEY
+--   name VARCHAR(255)
+-- Course table
+--   id SERIAL PRIMARY KEY
+--   name VARCHAR(255)
+-- StudentCourse join table
+--   student_id INTEGER REFERENCES student(id)
+--   course_id INTEGER REFERENCES course(id)
+}

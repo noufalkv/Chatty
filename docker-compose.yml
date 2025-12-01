@@ -1,0 +1,93 @@
+services:
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: chatty-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-redis123}
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - chatty-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
+  # Backend API
+  backend:
+    build:
+      context: ./chatty-backend
+      dockerfile: Dockerfile
+    container_name: chatty-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 5000
+      DATABASE_URL: ${DATABASE_URL}
+      REDIS_HOST: redis
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-redis123}
+      JWT_TOKEN: ${JWT_TOKEN:-your-jwt-secret-token}
+      SECRET_KEY_ONE: ${SECRET_KEY_ONE:-your-secret-key-one}
+      SECRET_KEY_TWO: ${SECRET_KEY_TWO:-your-secret-key-two}
+      CLIENT_URL: http://localhost:3000
+      API_URL: http://localhost:5000
+      CLOUD_NAME: ${CLOUD_NAME}
+      CLOUD_API_KEY: ${CLOUD_API_KEY}
+      CLOUD_API_SECRET: ${CLOUD_API_SECRET}
+      SENDER_EMAIL: ${SENDER_EMAIL}
+      SENDER_EMAIL_PASSWORD: ${SENDER_EMAIL_PASSWORD}
+      SENDGRID_API_KEY: ${SENDGRID_API_KEY}
+      SENDGRID_SENDER: ${SENDGRID_SENDER}
+    ports:
+      - "5000:5000"
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - chatty-network
+    volumes:
+      - /app/node_modules
+    healthcheck:
+      test: ["CMD", "node", "healthcheck.js"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 40s
+
+  # Frontend React App
+  frontend:
+    build:
+      context: ./chatty
+      dockerfile: Dockerfile
+    container_name: chatty-frontend
+    restart: unless-stopped
+    environment:
+      REACT_APP_API_URL: http://localhost:5000
+      REACT_APP_ENVIRONMENT: production
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - chatty-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+
+networks:
+  chatty-network:
+    driver: bridge
+    name: chatty-network
+
+volumes:
+  redis_data:
+    name: chatty_redis_data

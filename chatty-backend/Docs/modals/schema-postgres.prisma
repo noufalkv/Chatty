@@ -1,0 +1,179 @@
+// Prisma schema for PostgreSQL based on all current schemas
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Auth {
+  id                  Int      @id @default(autoincrement())
+  username            String?
+  uId                 String?
+  email               String?
+  password            String?
+  avatarColor         String?
+  createdAt           DateTime @default(now())
+  passwordResetToken  String?  @default("")
+  passwordResetExpires BigInt?
+  users               User[]
+}
+
+model User {
+  id                  Int      @id @default(autoincrement())
+  authId              Int?
+  auth                Auth?    @relation(fields: [authId], references: [id])
+  profilePicture      String?  @default("")
+  postsCount          Int      @default(0)
+  followersCount      Int      @default(0)
+  followingCount      Int      @default(0)
+  passwordResetToken  String?  @default("")
+  passwordResetExpires BigInt?
+  blocked             Int[]
+  blockedBy           Int[]
+  notifications       Json?
+  social              Json?
+  work                String?  @default("")
+  school              String?  @default("")
+  location            String?  @default("")
+  quote               String?  @default("")
+  bgImageVersion      String?  @default("")
+  bgImageId           String?  @default("")
+  posts               Post[]
+  comments            Comment[]
+  reactions           Reaction[]
+  followers           Follower[] @relation("UserFollowers")
+  following           Follower[] @relation("UserFollowing")
+  notificationsTo     Notification[] @relation("UserToNotifications")
+  notificationsFrom   Notification[] @relation("UserFromNotifications")
+  images              Image[]
+  sentMessages        Message[]  @relation("SentMessages")
+  receivedMessages    Message[]  @relation("ReceivedMessages")
+  sentConversations   Conversation[] @relation("SentConversations")
+  receivedConversations Conversation[] @relation("ReceivedConversations")
+}
+
+model Post {
+  id            Int      @id @default(autoincrement())
+  userId        Int?
+  user          User?    @relation(fields: [userId], references: [id])
+  username      String?
+  email         String?
+  avatarColor   String?
+  profilePicture String?
+  post          String?  @default("")
+  bgColor       String?  @default("")
+  imgVersion    String?  @default("")
+  imgId         String?  @default("")
+  videoVersion  String?  @default("")
+  videoId       String?  @default("")
+  feelings      String?  @default("")
+  gifUrl        String?  @default("")
+  privacy       String?  @default("")
+  commentsCount Int      @default(0)
+  reactions     Json?
+  createdAt     DateTime @default(now())
+  comments      Comment[]
+  reactionsList Reaction[]
+}
+
+model Comment {
+  id             Int      @id @default(autoincrement())
+  postId         Int?
+  post           Post?    @relation(fields: [postId], references: [id])
+  userId         Int?
+  user           User?    @relation(fields: [userId], references: [id])
+  comment        String?  @default("")
+  username       String?
+  avataColor     String?
+  profilePicture String?
+  createdAt      DateTime @default(now())
+}
+
+model Reaction {
+  id             Int      @id @default(autoincrement())
+  postId         Int?
+  post           Post?    @relation(fields: [postId], references: [id])
+  userId         Int?
+  user           User?    @relation(fields: [userId], references: [id])
+  type           String?  @default("")
+  username       String?  @default("")
+  avataColor     String?  @default("")
+  profilePicture String?  @default("")
+  createdAt      DateTime @default(now())
+}
+
+model Follower {
+  id         Int      @id @default(autoincrement())
+  followerId Int?
+  follower   User?    @relation("UserFollowing", fields: [followerId], references: [id])
+  followeeId Int?
+  followee   User?    @relation("UserFollowers", fields: [followeeId], references: [id])
+  createdAt  DateTime @default(now())
+}
+
+model Notification {
+  id               Int      @id @default(autoincrement())
+  userToId         Int?
+  userTo           User?    @relation("UserToNotifications", fields: [userToId], references: [id])
+  userFromId       Int?
+  userFrom         User?    @relation("UserFromNotifications", fields: [userFromId], references: [id])
+  read             Boolean  @default(false)
+  message          String?  @default("")
+  notificationType String?
+  entityId         Int?
+  createdItemId    Int?
+  comment          String?  @default("")
+  reaction         String?  @default("")
+  post             String?  @default("")
+  imgId            String?  @default("")
+  imgVersion       String?  @default("")
+  gifUrl           String?  @default("")
+  createdAt        DateTime @default(now())
+}
+
+model Image {
+  id             Int      @id @default(autoincrement())
+  userId         Int?
+  user           User?    @relation(fields: [userId], references: [id])
+  bgImageVersion String?  @default("")
+  bgImageId      String?  @default("")
+  imgVersion     String?  @default("")
+  imgId          String?  @default("")
+  createdAt      DateTime @default(now())
+}
+
+model Message {
+  id                    Int      @id @default(autoincrement())
+  conversationId        Int?
+  conversation          Conversation? @relation(fields: [conversationId], references: [id])
+  senderId              Int?
+  sender                User?    @relation("SentMessages", fields: [senderId], references: [id])
+  receiverId            Int?
+  receiver              User?    @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  senderUsername        String?  @default("")
+  senderAvatarColor     String?  @default("")
+  senderProfilePicture  String?  @default("")
+  receiverUsername      String?  @default("")
+  receiverAvatarColor   String?  @default("")
+  receiverProfilePicture String? @default("")
+  body                  String?  @default("")
+  gifUrl                String?  @default("")
+  isRead                Boolean  @default(false)
+  deleteForMe           Boolean  @default(false)
+  deleteForEveryone     Boolean  @default(false)
+  selectedImage         String?  @default("")
+  reaction              Json?
+  createdAt             DateTime @default(now())
+}
+
+model Conversation {
+  id         Int      @id @default(autoincrement())
+  senderId   Int?
+  sender     User?    @relation("SentConversations", fields: [senderId], references: [id])
+  receiverId Int?
+  receiver   User?    @relation("ReceivedConversations", fields: [receiverId], references: [id])
+  messages   Message[]
+}

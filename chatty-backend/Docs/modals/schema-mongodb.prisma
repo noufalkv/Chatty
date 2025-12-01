@@ -1,0 +1,180 @@
+// Prisma schema for all MongoDB schemas
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+}
+
+model Auth {
+    id                   String   @id @default(auto()) @map("_id")
+    username             String?
+    uId                  String?
+    email                String?
+    password             String?
+    avatarColor          String?
+    createdAt            DateTime @default(now())
+    passwordResetToken   String?  @default("")
+    passwordResetExpires BigInt?
+    users                User[]   @relation(fields: [], references: [])
+}
+
+model User {
+    id                    String         @id @default(auto()) @map("_id")
+    authId                String?
+    auth                  Auth?          @relation(fields: [authId], references: [id])
+    profilePicture        String?        @default("")
+    postsCount            Int            @default(0)
+    followersCount        Int            @default(0)
+    followingCount        Int            @default(0)
+    passwordResetToken    String?        @default("")
+    passwordResetExpires  BigInt?
+    blocked               String[]
+    blockedBy             String[]
+    notifications         Json?
+    social                Json?
+    work                  String?        @default("")
+    school                String?        @default("")
+    location              String?        @default("")
+    quote                 String?        @default("")
+    bgImageVersion        String?        @default("")
+    bgImageId             String?        @default("")
+    posts                 Post[]         @relation(fields: [], references: [])
+    comments              Comment[]      @relation(fields: [], references: [])
+    reactions             Reaction[]     @relation(fields: [], references: [])
+    followers             Follower[]     @relation(fields: [], references: [])
+    following             Follower[]     @relation(fields: [], references: [])
+    notificationsTo       Notification[] @relation(fields: [], references: [])
+    notificationsFrom     Notification[] @relation(fields: [], references: [])
+    images                Image[]        @relation(fields: [], references: [])
+    sentMessages          Message[]      @relation(fields: [], references: [])
+    receivedMessages      Message[]      @relation(fields: [], references: [])
+    sentConversations     Conversation[] @relation(fields: [], references: [])
+    receivedConversations Conversation[] @relation(fields: [], references: [])
+}
+
+model Post {
+    id             String     @id @default(auto()) @map("_id")
+    userId         String?
+    user           User?      @relation(fields: [userId], references: [id])
+    username       String?
+    email          String?
+    avatarColor    String?
+    profilePicture String?
+    post           String?    @default("")
+    bgColor        String?    @default("")
+    imgVersion     String?    @default("")
+    imgId          String?    @default("")
+    videoVersion   String?    @default("")
+    videoId        String?    @default("")
+    feelings       String?    @default("")
+    gifUrl         String?    @default("")
+    privacy        String?    @default("")
+    commentsCount  Int        @default(0)
+    reactions      Json?
+    createdAt      DateTime   @default(now())
+    comments       Comment[]  @relation(fields: [], references: [])
+    reactionsList  Reaction[] @relation(fields: [], references: [])
+}
+
+model Comment {
+    id             String   @id @default(auto()) @map("_id")
+    postId         String?
+    post           Post?    @relation(fields: [postId], references: [id])
+    userId         String?
+    user           User?    @relation(fields: [userId], references: [id])
+    comment        String?  @default("")
+    username       String?
+    avataColor     String?
+    profilePicture String?
+    createdAt      DateTime @default(now())
+}
+
+model Reaction {
+    id             String   @id @default(auto()) @map("_id")
+    postId         String?
+    post           Post?    @relation(fields: [postId], references: [id])
+    userId         String?
+    user           User?    @relation(fields: [userId], references: [id])
+    type           String?  @default("")
+    username       String?  @default("")
+    avataColor     String?  @default("")
+    profilePicture String?  @default("")
+    createdAt      DateTime @default(now())
+}
+
+model Follower {
+    id         String   @id @default(auto()) @map("_id")
+    followerId String?
+    follower   User?    @relation(fields: [followerId], references: [id])
+    followeeId String?
+    followee   User?    @relation(fields: [followeeId], references: [id])
+    createdAt  DateTime @default(now())
+}
+
+model Notification {
+    id               String   @id @default(auto()) @map("_id")
+    userToId         String?
+    userTo           User?    @relation(fields: [userToId], references: [id])
+    userFromId       String?
+    userFrom         User?    @relation(fields: [userFromId], references: [id])
+    read             Boolean  @default(false)
+    message          String?  @default("")
+    notificationType String?
+    entityId         String?
+    createdItemId    String?
+    comment          String?  @default("")
+    reaction         String?  @default("")
+    post             String?  @default("")
+    imgId            String?  @default("")
+    imgVersion       String?  @default("")
+    gifUrl           String?  @default("")
+    createdAt        DateTime @default(now())
+}
+
+model Image {
+    id             String   @id @default(auto()) @map("_id")
+    userId         String?
+    user           User?    @relation(fields: [userId], references: [id])
+    bgImageVersion String?  @default("")
+    bgImageId      String?  @default("")
+    imgVersion     String?  @default("")
+    imgId          String?  @default("")
+    createdAt      DateTime @default(now())
+}
+
+model Message {
+    id                     String        @id @default(auto()) @map("_id")
+    conversationId         String?
+    conversation           Conversation? @relation(fields: [conversationId], references: [id])
+    senderId               String?
+    sender                 User?         @relation(fields: [senderId], references: [id])
+    receiverId             String?
+    receiver               User?         @relation(fields: [receiverId], references: [id])
+    senderUsername         String?       @default("")
+    senderAvatarColor      String?       @default("")
+    senderProfilePicture   String?       @default("")
+    receiverUsername       String?       @default("")
+    receiverAvatarColor    String?       @default("")
+    receiverProfilePicture String?       @default("")
+    body                   String?       @default("")
+    gifUrl                 String?       @default("")
+    isRead                 Boolean       @default(false)
+    deleteForMe            Boolean       @default(false)
+    deleteForEveryone      Boolean       @default(false)
+    selectedImage          String?       @default("")
+    reaction               Json?
+    createdAt              DateTime      @default(now())
+}
+
+model Conversation {
+    id         String    @id @default(auto()) @map("_id")
+    senderId   String?
+    sender     User?     @relation(fields: [senderId], references: [id])
+    receiverId String?
+    receiver   User?     @relation(fields: [receiverId], references: [id])
+    messages   Message[] @relation(fields: [], references: [])
+}

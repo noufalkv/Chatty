@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Infrastructure Files - Chatty Backend Deployment</title>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f9f9f9; margin: 0; }
+    header { background: #34495e; color: #fff; padding: 2rem 1rem 1rem 1rem; text-align: center; }
+    nav { background: #2c3e50; color: #fff; padding: 1rem; text-align: center; }
+    nav a { color: #fff; margin: 0 1rem; text-decoration: none; font-weight: bold; }
+    main { max-width: 700px; margin: 2rem auto; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-radius: 8px; padding: 2rem; }
+    h2 { color: #2c3e50; margin-top: 2rem; }
+    ul { margin-left: 2rem; }
+    .highlight { background: #eafaf1; border-left: 4px solid #27ae60; padding: 1rem; margin: 1rem 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Infrastructure Files Reference</h1>
+    <p>File map and FAQ for deployment resources.</p>
+  </header>
+  <nav>
+    <a href="deployment-index.html">Home</a>
+    <a href="deployment-aws.html">AWS Setup</a>
+    <a href="deployment-terraform.html">Terraform</a>
+    <a href="deployment-scripts.html">Scripts</a>
+    <a href="deployment-cicd.html">CI/CD</a>
+    <a href="deployment-codedeploy.html">CodeDeploy</a>
+  </nav>
+  <main>
+    <h2>File Map</h2>
+    <ul>
+      <li><b>deployment/</b>:
+        <ul>
+          <li><b>1-variables.tf:</b> Project variables</li>
+          <li><b>3-main.tf:</b> Remote state config</li>
+          <li><b>4-vpc.tf ... 26-code_deploy.tf:</b> AWS resources</li>
+          <li><b>userdata/:</b> EC2 initialization scripts</li>
+        </ul>
+      </li>
+      <li><b>scripts/</b>:
+        <ul>
+          <li><b>before_install.sh:</b> Pre-install tasks</li>
+          <li><b>after_install.sh:</b> Post-install tasks</li>
+          <li><b>application_start.sh:</b> Start app</li>
+        </ul>
+      </li>
+      <li><b>appspec.yml:</b> CodeDeploy configuration and hooks</li>
+      <li><b>.circleci/config.yml:</b> CI/CD pipeline jobs and workflows</li>
+      <li><b>README.md:</b> Full documentation, setup, and troubleshooting</li>
+    </ul>
+    <div class="highlight">
+      <strong>Tip:</strong> For troubleshooting, check AWS CodeDeploy logs and CircleCI build logs.<br>
+      <strong>FAQ:</strong>
+      <ul>
+        <li><b>Q:</b> Why is my EC2 instance not starting the app?<br><b>A:</b> Check <code>application_start.sh</code> logs and ensure Node.js is installed.</li>
+        <li><b>Q:</b> Terraform apply fails with permission error.<br><b>A:</b> Verify IAM user policies and S3 bucket access.</li>
+        <li><b>Q:</b> CodeDeploy rollback triggered.<br><b>A:</b> Review script output and make sure all paths and permissions are correct.</li>
+      </ul>
+    </div>
+  </main>
+</body>
+</html>

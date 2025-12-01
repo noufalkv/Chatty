@@ -1,0 +1,148 @@
+openapi: 3.0.3
+info:
+  title: Chatty Reaction API
+  description: API endpoints for post reactions
+  version: 1.0.0
+servers:
+  - url: /api/v1/reactions
+paths:
+  /post/reactions/{postId}:
+    get:
+      summary: Get all reactions for a post
+      parameters:
+        - in: path
+          name: postId
+          schema:
+            type: string
+          required: true
+          description: Post ID
+      responses:
+        '200':
+          description: List of reactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reaction'
+        '401':
+          description: Unauthorized
+  /post/single/reaction/username/{username}/{postId}:
+    get:
+      summary: Get a single reaction by username for a post
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: postId
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Single reaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reaction'
+        '401':
+          description: Unauthorized
+  /post/reactions/username/{username}:
+    get:
+      summary: Get all reactions by username
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: List of reactions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reaction'
+        '401':
+          description: Unauthorized
+  /post/reaction:
+    post:
+      summary: Add a reaction to a post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddReactionRequest'
+      responses:
+        '201':
+          description: Reaction added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reaction'
+        '400':
+          description: Invalid input
+  /post/reaction/{postId}/{previousReaction}/{postReactions}:
+    delete:
+      summary: Remove a reaction from a post
+      parameters:
+        - in: path
+          name: postId
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: previousReaction
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: postReactions
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Reaction removed
+        '404':
+          description: Reaction not found
+components:
+  schemas:
+    Reaction:
+      type: object
+      properties:
+        id:
+          type: string
+        postId:
+          type: string
+        userId:
+          type: string
+        username:
+          type: string
+        type:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    AddReactionRequest:
+      type: object
+      properties:
+        postId:
+          type: string
+        userId:
+          type: string
+        username:
+          type: string
+        type:
+          type: string
+      required:
+        - postId
+        - userId
+        - username
+        - type

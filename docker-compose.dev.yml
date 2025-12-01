@@ -1,0 +1,89 @@
+services:
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: redis-commander-dev
+    restart: unless-stopped
+    environment:
+      REDIS_HOSTS: local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
+    networks:
+      - chatty-network-dev
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: chatty-redis-dev
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data_dev:/data
+    networks:
+      - chatty-network-dev
+
+  # Backend API (Development with hot reload)
+  backend-dev:
+    build:
+      context: ./chatty-backend
+      dockerfile: Dockerfile.dev
+    container_name: chatty-backend-dev
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      PORT: 5000
+      DATABASE_URL: ${DATABASE_URL}
+      REDIS_URL: redis://redis:6379
+      JWT_TOKEN: ${JWT_TOKEN:-dev-jwt-secret-token}
+      SECRET_KEY_ONE: ${SECRET_KEY_ONE:-dev-secret-key-one}
+      SECRET_KEY_TWO: ${SECRET_KEY_TWO:-dev-secret-key-two}
+      CLIENT_URL: http://localhost:3000
+      CLOUD_API_KEY: ${CLOUD_API_KEY}
+      CLOUD_API_SECRET: ${CLOUD_API_SECRET}
+      CLOUD_NAME: ${CLOUD_NAME}
+      SENDER_EMAIL: ${SENDER_EMAIL}
+      SENDER_EMAIL_PASSWORD: ${SENDER_EMAIL_PASSWORD}
+      SENDGRID_API_KEY: ${SENDGRID_API_KEY}
+      SENDGRID_SENDER: ${SENDGRID_SENDER}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - redis
+    networks:
+      - chatty-network-dev
+
+  # Frontend React App (Development with hot reload)
+  frontend-dev:
+    build:
+      context: ./chatty
+      dockerfile: Dockerfile.dev
+    container_name: chatty-frontend-dev
+    restart: unless-stopped
+    environment:
+      REACT_APP_API_URL: http://localhost:5000
+      REACT_APP_ENVIRONMENT: development
+      WATCHPACK_POLLING: true
+      FAST_REFRESH: true
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./chatty/src:/app/src
+      - ./chatty/public:/app/public
+      - /app/node_modules
+    depends_on:
+      - backend-dev
+    networks:
+      - chatty-network-dev
+    stdin_open: true
+    tty: true
+
+networks:
+  chatty-network-dev:
+    driver: bridge
+    name: chatty-network-dev
+
+volumes:
+  redis_data_dev:
+    name: chatty_redis_data_dev

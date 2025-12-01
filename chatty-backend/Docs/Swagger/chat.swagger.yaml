@@ -1,0 +1,254 @@
+
+openapi: 3.0.3
+info:
+  title: Chatty Chat API
+  description: API endpoints for chat messages and conversations
+  version: 1.0.1
+servers:
+  - url: /api/v1/chat
+paths:
+  /message/conversation-list:
+    get:
+      summary: Get list of chat conversations for the authenticated user
+      responses:
+        '200':
+          description: List of conversations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Conversation'
+        '401':
+          description: Unauthorized
+  /message/user/{receiverId}:
+    get:
+      summary: Get chat messages with a specific user
+      parameters:
+        - in: path
+          name: receiverId
+          schema:
+            type: string
+          required: true
+          description: Receiver user ID
+      responses:
+        '200':
+          description: List of messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChatMessageResponse'
+        '401':
+          description: Unauthorized
+  /message:
+    post:
+      summary: Add a new chat message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatMessageRequest'
+      responses:
+        '201':
+          description: Message created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatMessageResponse'
+        '400':
+          description: Invalid input
+  /message/add-chat-users:
+    post:
+      summary: Add users to a chat conversation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddChatUsersRequest'
+      responses:
+        '200':
+          description: Users added
+        '400':
+          description: Invalid input
+  /message/remove-chat-users:
+    post:
+      summary: Remove users from a chat conversation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveChatUsersRequest'
+      responses:
+        '200':
+          description: Users removed
+        '400':
+          description: Invalid input
+  /message/mark-as-read:
+    put:
+      summary: Mark chat messages as read
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MarkAsReadRequest'
+      responses:
+        '200':
+          description: Messages marked as read
+        '400':
+          description: Invalid input
+  /message/reaction:
+    put:
+      summary: Add or update a reaction to a chat message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageReactionRequest'
+      responses:
+        '200':
+          description: Reaction added/updated
+        '400':
+          description: Invalid input
+  /message/mark-as-deleted/{messageId}/{senderId}/{receiverId}/{type}:
+    delete:
+      summary: Mark a chat message as deleted
+      parameters:
+        - in: path
+          name: messageId
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: senderId
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: receiverId
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: type
+          schema:
+            type: string
+          required: true
+          description: Type of deletion (e.g., soft/hard)
+      responses:
+        '200':
+          description: Message marked as deleted
+        '404':
+          description: Message not found
+components:
+  schemas:
+    ChatMessageRequest:
+      type: object
+      properties:
+        conversationId:
+          type: string
+        senderId:
+          type: string
+        content:
+          type: string
+      required:
+        - conversationId
+        - senderId
+        - content
+    ChatMessageResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        conversationId:
+          type: string
+        senderId:
+          type: string
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        reactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageReaction'
+    AddChatUsersRequest:
+      type: object
+      properties:
+        conversationId:
+          type: string
+        userIds:
+          type: array
+          items:
+            type: string
+      required:
+        - conversationId
+        - userIds
+    RemoveChatUsersRequest:
+      type: object
+      properties:
+        conversationId:
+          type: string
+        userIds:
+          type: array
+          items:
+            type: string
+      required:
+        - conversationId
+        - userIds
+    MarkAsReadRequest:
+      type: object
+      properties:
+        conversationId:
+          type: string
+        messageIds:
+          type: array
+          items:
+            type: string
+      required:
+        - conversationId
+        - messageIds
+    MessageReactionRequest:
+      type: object
+      properties:
+        messageId:
+          type: string
+        userId:
+          type: string
+        reaction:
+          type: string
+      required:
+        - messageId
+        - userId
+        - reaction
+    MessageReaction:
+      type: object
+      properties:
+        userId:
+          type: string
+        reaction:
+          type: string
+        reactedAt:
+          type: string
+          format: date-time
+    Conversation:
+      type: object
+      properties:
+        id:
+          type: string
+        users:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+          format: date-time
+        lastMessage:
+          $ref: '#/components/schemas/ChatMessageResponse'

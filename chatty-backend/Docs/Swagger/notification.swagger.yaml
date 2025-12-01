@@ -1,0 +1,88 @@
+openapi: 3.0.3
+info:
+  title: Chatty Notification API
+  description: API endpoints for user notifications
+  version: 1.0.0
+servers:
+  - url: /api/v1/notifications
+paths:
+  /notifications:
+    get:
+      summary: Get all notifications for the authenticated user
+      responses:
+        '200':
+          description: List of notifications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notification'
+        '401':
+          description: Unauthorized
+  /notification/{notificationId}:
+    put:
+      summary: Update a notification (e.g., mark as read)
+      parameters:
+        - in: path
+          name: notificationId
+          schema:
+            type: string
+          required: true
+          description: Notification ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNotificationRequest'
+      responses:
+        '200':
+          description: Notification updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+        '400':
+          description: Invalid input
+        '404':
+          description: Notification not found
+    delete:
+      summary: Delete a notification
+      parameters:
+        - in: path
+          name: notificationId
+          schema:
+            type: string
+          required: true
+          description: Notification ID
+      responses:
+        '200':
+          description: Notification deleted
+        '404':
+          description: Notification not found
+components:
+  schemas:
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        type:
+          type: string
+        message:
+          type: string
+        isRead:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+    UpdateNotificationRequest:
+      type: object
+      properties:
+        isRead:
+          type: boolean
+      required:
+        - isRead

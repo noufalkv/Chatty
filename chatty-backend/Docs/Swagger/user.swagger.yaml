@@ -1,0 +1,240 @@
+openapi: 3.0.3
+info:
+  title: Chatty User API
+  description: API endpoints for user profile, search, and settings
+  version: 1.0.0
+servers:
+  - url: /api/v1/users
+paths:
+  /user/all/{page}:
+    get:
+      summary: Get all users (paginated)
+      parameters:
+        - in: path
+          name: page
+          schema:
+            type: integer
+          required: true
+          description: Page number
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+  /user/profile:
+    get:
+      summary: Get authenticated user's profile
+      responses:
+        '200':
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+  /user/profile/{userId}:
+    get:
+      summary: Get profile by user ID
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+  /user/profile/posts/{username}/{userId}/{uId}:
+    get:
+      summary: Get profile and posts by username and user IDs
+      parameters:
+        - in: path
+          name: username
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: uId
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: User profile and posts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserWithPosts'
+        '401':
+          description: Unauthorized
+  /user/profile/user/suggestions:
+    get:
+      summary: Get random user suggestions
+      responses:
+        '200':
+          description: List of user suggestions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+  /user/profile/search/{query}:
+    get:
+      summary: Search users by query
+      parameters:
+        - in: path
+          name: query
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+  /user/profile/change-password:
+    put:
+      summary: Change user password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+      responses:
+        '200':
+          description: Password changed
+        '400':
+          description: Invalid input
+  /user/profile/basic-info:
+    put:
+      summary: Update basic user info
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBasicInfoRequest'
+      responses:
+        '200':
+          description: Info updated
+        '400':
+          description: Invalid input
+  /user/profile/social-links:
+    put:
+      summary: Update user social links
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSocialLinksRequest'
+      responses:
+        '200':
+          description: Social links updated
+        '400':
+          description: Invalid input
+  /user/profile/settings:
+    put:
+      summary: Update user notification settings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSettingsRequest'
+      responses:
+        '200':
+          description: Settings updated
+        '400':
+          description: Invalid input
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        avatar:
+          type: string
+        bio:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    UserWithPosts:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        posts:
+          type: array
+          items:
+            type: object
+    ChangePasswordRequest:
+      type: object
+      properties:
+        oldPassword:
+          type: string
+        newPassword:
+          type: string
+      required:
+        - oldPassword
+        - newPassword
+    UpdateBasicInfoRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        bio:
+          type: string
+      required:
+        - username
+        - bio
+    UpdateSocialLinksRequest:
+      type: object
+      properties:
+        links:
+          type: array
+          items:
+            type: string
+      required:
+        - links
+    UpdateSettingsRequest:
+      type: object
+      properties:
+        notificationsEnabled:
+          type: boolean
+      required:
+        - notificationsEnabled

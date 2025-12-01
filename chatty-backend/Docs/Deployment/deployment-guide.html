@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatty Backend Deployment Guide</title>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 0; }
+    header { background: #34495e; color: #fff; padding: 2rem 1rem 1rem 1rem; text-align: center; }
+    nav { background: #2c3e50; color: #fff; padding: 1rem; text-align: center; }
+    nav a { color: #fff; margin: 0 1rem; text-decoration: none; font-weight: bold; }
+    section { max-width: 900px; margin: 2rem auto; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-radius: 8px; padding: 2rem; }
+    h2 { color: #2c3e50; margin-top: 2rem; }
+  pre { background: #f4f4f4; padding: 1rem; border-radius: 6px; overflow-x: auto; margin: 1rem 0; }
+  code { background: #eafaf1; padding: 2px 6px; border-radius: 4px; }
+    ul, ol { margin-left: 2rem; }
+    .file-link { color: #2980b9; text-decoration: underline; }
+    .img-section { text-align: center; margin: 2rem 0; }
+    .img-section img { max-width: 200px; margin: 0 1rem; vertical-align: middle; }
+    .highlight { background: #eafaf1; border-left: 4px solid #27ae60; padding: 1rem; margin: 1rem 0; }
+    .infra-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .infra-table th, .infra-table td { border: 1px solid #ddd; padding: 8px; }
+    .infra-table th { background: #34495e; color: #fff; }
+    .infra-table tr:nth-child(even) { background: #f2f2f2; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Chatty Backend Deployment Guide</h1>
+    <p>Step-by-step instructions for deploying the Chatty backend on AWS using Terraform, CI/CD, and custom scripts.</p>
+    <ol>
+      <li><strong>Configure CircleCI:</strong> Edit <span class="file-link">.circleci/config.yml</span> to define jobs for build, test, deploy. Example job:
+        <pre><code>jobs:
+  </nav>
+
+  <section id="aws-setup">
+      </li>
+      <li><strong>Initialize Terraform:</strong> In the <span class="file-link">deployment</span> folder, run:
+        <pre><code>terraform init</code></pre>
+        This sets up providers and remote state.
+      </li>
+      </li>
+      <li><strong>Environment Variables:</strong> Add AWS credentials, CodeDeploy settings, CodeCov token, Slack webhook, etc. in CircleCI project settings.</li>
+      <li><strong>Workflow:</strong> Define workflow to run jobs in sequence (build → test → deploy). Use filters for branches (e.g., only deploy on <code>develop</code>).</li>
+      <li><strong>Notifications:</strong> Integrate Slack for build/deploy notifications. See <span class="file-link">README.md</span> for setup.</li>
+      <li><strong>Variable Prefix:</strong> Replace <code>&lt;variable-prefix&gt;</code> in <span class="file-link">config.yml</span> with your Terraform prefix value.</li>
+    </ol>
+      <li><strong>Plan & Apply:</strong> Preview changes with <code>terraform plan</code>, then apply with:
+        <pre><code>terraform apply -auto-approve</code></pre>
+        Resources will be created in AWS. Monitor progress in the terminal and AWS Console.
+      </li>
+      <li><strong>Destroy:</strong> To remove all resources:
+        <pre><code>terraform destroy</code></pre>
+      <br><strong>Troubleshooting:</strong> If builds fail, check CircleCI job logs, ensure environment variables are set, and verify AWS permissions.
+      </li>
+      <li><strong>Remote State:</strong> <span class="file-link">deployment/3-main.tf</span> configures S3 backend for state sharing. This is essential for team collaboration.
+      </li>
+      <li><strong>File Map:</strong> Each <code>.tf</code> file manages a specific AWS resource. See table below for details.
+      </li>
+    </ol>
+    <h2>AWS Setup</h2>
+    <div class="img-section">
+      <img src="https://res.cloudinary.com/dyamr9ym3/image/upload/v1662482458/github_readme_images/aws_bxdmec.png" alt="AWS Logo">
+      <img src="https://res.cloudinary.com/dyamr9ym3/image/upload/v1662482319/github_readme_images/Terraform_PrimaryLogo_Color_RGB_gcbknj.png" alt="Terraform Logo">
+    <ol>
+      <li><strong>Create an AWS Account:</strong> Sign up at <a href="https://aws.amazon.com/">aws.amazon.com</a> and enable billing.</li>
+      <li><strong>IAM User & CLI:</strong> Create an IAM user with programmatic access. Attach policies for EC2, S3, CodeDeploy, and Route53. Download credentials and run <code>aws configure</code> locally:
+        <pre><code>aws configure
+    </ul>
+      </li>
+      <li><strong>Domain & Route53:</strong> Register a domain (e.g., via Namecheap, GoDaddy). In AWS Route53, create a hosted zone for your domain. Copy the NS records to your domain provider's dashboard.</li>
+      <li><strong>S3 Bucket for Env Files & Terraform State:</strong> Create an S3 bucket (e.g., <code>chatty-deploy-env</code>) for storing environment files and remote Terraform state. Add a subfolder (e.g., <code>develop</code>).</li>
+      <li><strong>Environment Variables:</strong> Prepare a <code>.env</code> file based on <code>.env.development.example</code>. Zip and upload to S3 for use in EC2 user-data scripts.</li>
+    </ol>
+    <div class="highlight">
+      <strong>Reference:</strong> See <span class="file-link">README.md</span> for screenshots and step-by-step instructions.
+      <br><strong>Best Practice:</strong> Use separate IAM users for automation and personal access. Enable MFA for security.
+    </div>
+  </section>
+
+  <section id="terraform">
+    <h2>Terraform Infrastructure</h2>
+    <ul>
+      <li>Install <a href="https://www.terraform.io/downloads">Terraform</a> and initialize your project.</li>
+      <li>Edit <span class="file-link">deployment/variables.tf</span> and <span class="file-link">deployment/main.tf</span> with your AWS region, S3 bucket, and other variables.</li>
+      <li>Run <code>terraform init</code> and <code>terraform apply -auto-approve</code> in the <span class="file-link">deployment</span> folder.</li>
+      <li>To destroy resources, use <code>terraform destroy</code>.</li>
+    </ul>
+    <table class="infra-table">
+  <tr><th>Resource</th><th>File</th><th>Description</th></tr>
+  <tr><td>VPC, Subnets, Route Tables</td><td>4-vpc.tf, 5-subnets.tf, 7-public_route_table.tf</td><td>Networking and routing setup</td></tr>
+  <tr><td>Security Groups</td><td>11-security_groups.tf</td><td>Firewall rules for EC2, ALB, etc.</td></tr>
+  <tr><td>EC2, Autoscaling</td><td>20-ec2_launch_config.tf, 21-asg.tf, 22-asg_policy.tf</td><td>Compute resources and scaling policies</td></tr>
+  <tr><td>Load Balancer</td><td>15-alb.tf, 12-alb_target_group.tf</td><td>Application Load Balancer setup</td></tr>
+  <tr><td>Route53 & Certificates</td><td>13-route53.tf, 14-route53_certificate.tf</td><td>DNS and SSL/TLS certificates</td></tr>
+  <tr><td>S3 Buckets</td><td>24-s3.tf</td><td>Storage for env files, logs, etc.</td></tr>
+  <tr><td>Elasticache</td><td>18-elasticache.tf</td><td>Redis cache cluster</td></tr>
+  <tr><td>IAM Roles</td><td>17-iam_ec2_roles.tf, 25-iam_code_deploy.tf</td><td>Permissions for EC2, CodeDeploy</td></tr>
+  <tr><td>CodeDeploy</td><td>26-code_deploy.tf</td><td>Deployment automation</td></tr>
+    </table>
+    <div class="highlight">
+  <strong>Tip:</strong> Update <span class="file-link">user-data.sh</span> and <span class="file-link">update-env-file.sh</span> in <span class="file-link">deployment/userdata</span> for custom EC2 initialization.
+  <br><strong>Troubleshooting:</strong> If <code>terraform apply</code> fails, check AWS Console for resource limits, IAM permissions, and S3 bucket access.
+    </div>
+  </section>
+
+  <section id="scripts">
+    <h2>Deployment Scripts</h2>
+    <ul>
+      <li><span class="file-link">scripts/before_install.sh</span>: Prepares the environment before installation.</li>
+      <li><span class="file-link">scripts/after_install.sh</span>: Runs post-installation tasks.</li>
+      <li><span class="file-link">scripts/application_start.sh</span>: Starts the application after deployment.</li>
+    </ul>
+    <pre><code>
+  # Example: before_install.sh
+  #!/bin/bash
+  sudo yum update -y
+    </code></pre>
+    <div class="highlight">
+      <strong>Reference:</strong> See <span class="file-link">appspec.yml</span> for how these scripts are triggered by AWS CodeDeploy hooks.
+    </div>
+    <ol>
+      <li><strong>before_install.sh:</strong> Prepares the EC2 instance (updates packages, installs dependencies). Triggered by CodeDeploy <code>BeforeInstall</code> hook.
+        <pre><code># scripts/before_install.sh
+    <div class="img-section">
+      <img src="https://dl.circleci.com/status-badge/img/gh/uzochukwueddie/chatty-backend/tree/develop.svg?style=svg" alt="CircleCI Status">
+      <img src="https://codecov.io/gh/uzochukwueddie/chatty-backend/branch/develop/graph/badge.svg?token=VR3XBTQMCV" alt="CodeCov Status">
+    </div>
+      </li>
+      <li><strong>after_install.sh:</strong> Runs after files are copied. Installs npm packages, sets permissions, etc.
+        <pre><code># scripts/after_install.sh
+    <div class="highlight">
+      <strong>Reference:</strong> See <span class="file-link">README.md</span> for screenshots and environment variable setup.
+    </div>
+  </section>
+      </li>
+      <li><strong>application_start.sh:</strong> Starts the Node.js server (e.g., with PM2 or npm). Triggered by <code>ApplicationStart</code> hook.
+        <pre><code># scripts/application_start.sh
+
+  <section id="appspec">
+    <h2>AppSpec & CodeDeploy</h2>
+    <ul>
+      </li>
+    </ol>
+      <li><span class="file-link">appspec.yml</span> defines deployment hooks for AWS CodeDeploy.</li>
+      <li>Hooks include <strong>BeforeInstall</strong>, <strong>AfterInstall</strong>, and <strong>ApplicationStart</strong> to run custom scripts.</li>
+      <br><strong>Best Practice:</strong> Log output from each script to a file for debugging (e.g., <code>exec &> /tmp/deploy.log</code>).
+      <li>Files are copied from source to destination on the EC2 instance.</li>
+        <li>Set <code>file_exists_behavior: OVERWRITE</code> to replace files on deployment.</li>
+    </ul>
+      <ol>
+        <li><strong>appspec.yml:</strong> Central config for AWS CodeDeploy. Defines which files to copy and which scripts to run at each lifecycle stage.</li>
+        <li><strong>Hooks:</strong>
+          <ul>
+            <li><strong>BeforeInstall:</strong> Prepares the instance (updates, installs).</li>
+            <li><strong>AfterInstall:</strong> Installs dependencies, sets up app.</li>
+            <li><strong>ApplicationStart:</strong> Starts the Node.js server.</li>
+          </ul>
+        </li>
+        <li><strong>File Copy:</strong> <code>files</code> section copies source to EC2 destination. <code>file_exists_behavior: OVERWRITE</code> ensures files are replaced.</li>
+        <li><strong>Logs & Rollback:</strong> CodeDeploy logs are available on EC2 at <code>/var/log/aws/codedeploy-agent/</code>. Failed deployments trigger automatic rollback.</li>
+      </ol>
+      destination: /home/ec2-user/chatty-backend
+  hooks:
+    BeforeInstall:
+      - location: scripts/before_install.sh
+        timeout: 300
+        runas: root
+    AfterInstall:
+      - location: scripts/after_install.sh
+        timeout: 300
+        runas: root
+    ApplicationStart:
+      - location: scripts/application_start.sh
+        timeout: 300
+        runas: root
+  file_exists_behavior: OVERWRITE
+      </code></pre>
+  </section>
+
+  <section id="infra-files">
+    <h2>Infrastructure Files Reference</h2>
+    <ul>
+      <li><span class="file-link">deployment/</span>: All Terraform files for AWS resources.</li>
+      <div class="highlight">
+        <strong>Troubleshooting:</strong> If deployment fails, check CodeDeploy logs and script output. Ensure scripts are executable (<code>chmod +x</code>), and paths are correct.
+      </div>
+      <li><span class="file-link">scripts/</span>: Shell scripts for deployment lifecycle.</li>
+      <li><span class="file-link">appspec.yml</span>: CodeDeploy configuration.</li>
+      <li><span class="file-link">.circleci/config.yml</span>: CI/CD pipeline configuration.</li>
+      <li><span class="file-link">README.md</span>: Full documentation and setup instructions.</li>
+    </ul>
+    <div class="highlight">
+      <strong>Tip:</strong> For troubleshooting, check AWS CodeDeploy logs and CircleCI build logs.
+    </div>
+  </section>
+
+</body>
+</html>

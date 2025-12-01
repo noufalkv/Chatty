@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatty Redis Services Summary</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 2rem; }
+    h2 { color: #2c3e50; margin-top: 2rem; }
+    pre { background: #f4f4f4; padding: 1rem; border-radius: 6px; overflow-x: auto; }
+    .service-section { box-shadow: 0 2px 8px rgba(0,0,0,0.05); padding: 1rem; border-radius: 8px; margin-bottom: 2rem; background: #fff; }
+    .usage { color: #34495e; font-weight: bold; margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+
+  <h1>Chatty Redis Cache Services Summary</h1>
+
+  <div class="service-section">
+    <h2>Redis Commands Overview</h2>
+    <p><strong>Description:</strong> Redis is an in-memory data store used for caching and fast data access. Below are common Redis commands used in this project and their typical usage:</p>
+    <table>
+      <tr><th>Command</th><th>Usage</th><th>Description</th></tr>
+      <tr><td>LPUSH key value</td><td>Adds value to the left of a list</td><td>Used to add items (e.g., comments, followers) to a list</td></tr>
+      <tr><td>RPUSH key value</td><td>Adds value to the right of a list</td><td>Used to append items (e.g., chat messages) to a list</td></tr>
+      <tr><td>LRANGE key start end</td><td>Gets a range of items from a list</td><td>Used to retrieve all or part of a list (e.g., all comments)</td></tr>
+      <tr><td>LLEN key</td><td>Gets the length of a list</td><td>Used to count items in a list (e.g., number of comments)</td></tr>
+      <tr><td>LREM key count value</td><td>Removes items from a list</td><td>Used to remove specific items (e.g., followers, reactions)</td></tr>
+      <tr><td>HSET key field value</td><td>Sets a field in a hash</td><td>Used to store structured data (e.g., post metadata, user profile)</td></tr>
+      <tr><td>HMGET key field [field ...]</td><td>Gets one or more fields from a hash</td><td>Used to retrieve specific fields (e.g., comment count)</td></tr>
+      <tr><td>HINCRBY key field increment</td><td>Increments a field in a hash</td><td>Used to update counters (e.g., follower count)</td></tr>
+      <tr><td>DEL key</td><td>Deletes a key</td><td>Used to remove data from cache</td></tr>
+      <tr><td>connect()</td><td>Connects to Redis server</td><td>Establishes connection for cache operations</td></tr>
+      <tr><td>ping()</td><td>Pings Redis server</td><td>Checks connection status</td></tr>
+    </table>
+    <p>These commands are used throughout the cache services to efficiently store, retrieve, and manage data for fast access and scalability.</p>
+  </div>
+
+  <div class="service-section">
+    <h2>Base Cache</h2>
+    <p><strong>Description:</strong> Abstract base class for all cache services. Handles Redis client connection and error logging.</p>
+  <div class="usage">Main Commands:</div>
+  <pre>
+createClient({ url })        // Create a Redis client connection
+client.on('error', ...)      // Log Redis connection errors
+  </pre>
+  </div>
+
+  <div class="service-section">
+    <h2>Comment Cache</h2>
+    <p><strong>Description:</strong> Manages caching of post comments. Supports saving, retrieving, and counting comments for posts using Redis lists and hashes.</p>
+  <div class="usage">Main Commands:</div>
+  <pre>
+LPUSH `comments:${postId}` value           // Add a comment to the post's comment list
+HMGET `posts:${postId}` 'commentsCount'    // Get the number of comments for a post
+HSET `posts:${postId}` 'commentsCount' count // Update the comment count for a post
+LRANGE `comments:${postId}` 0 -1           // Retrieve all comments for a post
+LLEN `comments:${postId}`                  // Get the length of the comment list
+  </pre>
+  </div>
+
+  <div class="service-section">
+    <h2>Follower Cache</h2>
+    <p><strong>Description:</strong> Handles caching of followers and following relationships. Supports adding/removing followers and updating follower counts using Redis lists and hashes.</p>
+  <div class="usage">Main Commands:</div>
+  <pre>
+LPUSH key value                      // Add a follower/following to the list
+LREM key 1 value                     // Remove a follower/following from the list
+HINCRBY `users:${userId}` prop value // Increment follower/following count
+LRANGE key 0 -1                      // Retrieve all followers/following
+  </pre>
+  </div>
+
+  <div class="service-section">
+    <h2>Message Cache</h2>
+    <p><strong>Description:</strong> Caches chat messages, chat lists, and chat users. Supports adding messages, chat lists, and users, and retrieving them using Redis lists.</p>
+  <div class="usage">Main Commands:</div>
+  <pre>
+LRANGE `chatList:${senderId}` 0 -1           // Get chat list for a user
+RPUSH `chatList:${senderId}` value           // Add a chat to the user's chat list
+RPUSH `messages:${conversationId}` value     // Add a message to a conversation
+RPUSH 'chatUsers' value                      // Add chat users to the global list
+  </pre>
+  </div>
+
+  <div class="service-section">
+    <h2>Post Cache</h2>
+    <p><strong>Description:</strong> Manages caching of posts and their metadata. Supports saving, retrieving, and updating posts and reactions using Redis hashes and lists.</p>
+  <div class="usage">Main Commands:</div>
+  <pre>
+HSET `posts:${postId}` field value   // Set a field (e.g., reactions, commentsCount) for a post
+LPUSH `posts` value                  // Add a post to the posts list
+LRANGE `posts` 0 -1                  // Retrieve all posts
+  </pre>
+  </div>
+
+  <div class="service-section">
+    <h2>Reaction Cache</h2>
+    <p><strong>Description:</strong> Handles caching of post reactions. Supports saving, removing, and retrieving reactions for posts using Redis lists and hashes.</p>
+  <div class="usage">Main Commands:</div>
+  <pre>
+LPUSH `reactions:${key}` value           // Add a reaction to the post's reaction list
+HSET `posts:${key}` 'reactions' value    // Update the reactions field for a post
+LRANGE `reactions:${key}` 0 -1           // Retrieve all reactions for a post
+LREM `reactions:${key}` 1 value          // Remove a reaction from the post's reaction list
+  </pre>
+  </div>
+
+  <div class="service-section">
+    <h2>Redis Connection</h2>
+    <p><strong>Description:</strong> Manages the connection to the Redis server. Handles connecting and pinging the Redis instance.</p>
+  <div class="usage">Main Commands:</div>
+  <pre>
+client.connect()    // Connect to the Redis server
+client.ping()       // Ping the Redis server to check connection
+  </pre>
+  </div>
+
+  <div class="service-section">
+    <h2>User Cache</h2>
+    <p><strong>Description:</strong> Caches user data, including profile, social links, notification settings, and counts. Supports saving and retrieving user data using Redis hashes and lists.</p>
+  <div class="usage">Main Commands:</div>
+  <pre>
+HSET `users:${userId}` field value   // Set a field (e.g., profile, social, notifications) for a user
+LPUSH `users` value                  // Add a user to the users list
+LRANGE `users` 0 -1                  // Retrieve all users
+  </pre>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+openapi: 3.0.3
+info:
+  title: Chatty Follower API
+  description: API endpoints for user following, unfollowing, blocking, and unblocking
+  version: 1.0.0
+servers:
+  - url: /api/v1/followers
+paths:
+  /user/following:
+    get:
+      summary: Get users the authenticated user is following
+      responses:
+        '200':
+          description: List of following users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+  /user/followers/{userId}:
+    get:
+      summary: Get followers of a user
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+          description: User ID
+      responses:
+        '200':
+          description: List of followers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+  /user/follow/{followerId}:
+    put:
+      summary: Follow a user
+      parameters:
+        - in: path
+          name: followerId
+          schema:
+            type: string
+          required: true
+          description: Follower user ID
+      responses:
+        '200':
+          description: Followed successfully
+        '400':
+          description: Invalid input
+  /user/unfollow/{followeeId}/{followerId}:
+    put:
+      summary: Unfollow a user
+      parameters:
+        - in: path
+          name: followeeId
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: followerId
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Unfollowed successfully
+        '400':
+          description: Invalid input
+  /user/block/{followerId}:
+    put:
+      summary: Block a user
+      parameters:
+        - in: path
+          name: followerId
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Blocked successfully
+        '400':
+          description: Invalid input
+  /user/unblock/{followerId}:
+    put:
+      summary: Unblock a user
+      parameters:
+        - in: path
+          name: followerId
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Unblocked successfully
+        '400':
+          description: Invalid input
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        avatar:
+          type: string
+        createdAt:
+          type: string
+          format: date-time

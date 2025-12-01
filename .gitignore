@@ -1,0 +1,65 @@
+
+# Node
+node_modules/
+chatty/node_modules/
+chatty-backend/node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# dotenv environment variables
+.env
+.env.*
+
+# Build output
+/dist/
+/build/
+/coverage/
+
+# VSCode
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.pid
+docker-compose.override.yml
+
+# Misc
+*.tgz
+.idea/
+*.swp
+
+# Test
+/coverage/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+crash.log
+
+# Ignore local database
+*.sqlite
+*.sqlite3
+
+# Ignore redis dump
+*.rdb
+
+# Ignore frontend build
+chatty/build/
+
+# Ignore backend build
+chatty-backend/build/

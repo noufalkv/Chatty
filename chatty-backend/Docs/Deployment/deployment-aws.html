@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AWS Setup - Chatty Backend Deployment</title>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f9f9f9; margin: 0; }
+    header { background: #34495e; color: #fff; padding: 2rem 1rem 1rem 1rem; text-align: center; }
+    nav { background: #2c3e50; color: #fff; padding: 1rem; text-align: center; }
+    nav a { color: #fff; margin: 0 1rem; text-decoration: none; font-weight: bold; }
+    main { max-width: 700px; margin: 2rem auto; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-radius: 8px; padding: 2rem; }
+    h2 { color: #2c3e50; margin-top: 2rem; }
+    ol { margin-left: 2rem; }
+    .highlight { background: #eafaf1; border-left: 4px solid #27ae60; padding: 1rem; margin: 1rem 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AWS Setup</h1>
+    <p>Step-by-step instructions for preparing your AWS environment.</p>
+  </header>
+  <nav>
+    <a href="deployment-index.html">Home</a>
+    <a href="deployment-terraform.html">Terraform</a>
+    <a href="deployment-scripts.html">Scripts</a>
+    <a href="deployment-cicd.html">CI/CD</a>
+    <a href="deployment-codedeploy.html">CodeDeploy</a>
+    <a href="deployment-files.html">Infrastructure Files</a>
+  </nav>
+  <main>
+# Enter your AWS Access Key, Secret Key, region, and output format</code></pre>
+    <h2>Step-by-Step AWS Setup</h2>
+    <p>
+      Setting up AWS is the foundation for a secure, scalable, and automated deployment. Each step below is essential for preparing your cloud environment and enabling infrastructure automation.
+    </p>
+    <ol>
+      <li><strong>Create an AWS Account:</strong> Sign up at <a href="https://aws.amazon.com/">aws.amazon.com</a> and enable billing. This gives you access to all AWS services and resources.</li>
+      <li><strong>IAM User & CLI:</strong> Create an IAM user with programmatic access. Attach policies for EC2, S3, CodeDeploy, and Route53. Download credentials and run <code>aws configure</code> locally. This step ensures secure, auditable access for automation and deployment.<br>
+        <pre><code>aws configure
+# Enter your AWS Access Key, Secret Key, region, and output format</code></pre>
+        <b>Tip:</b> Never use your root account for deployments. Always use IAM users with least privilege.
+      </li>
+      <li><strong>Domain & Route53:</strong> Register a domain (e.g., via Namecheap, GoDaddy). In AWS Route53, create a hosted zone for your domain. Copy the NS records to your domain provider's dashboard. This step enables custom DNS for your app and secure SSL certificates.</li>
+      <li><strong>S3 Bucket for Env Files & Terraform State:</strong> Create an S3 bucket (e.g., <code>chatty-deploy-env</code>) for storing environment files and remote Terraform state. Add a subfolder (e.g., <code>develop</code>). S3 is used for sharing configuration and state between team members and automation tools.</li>
+      <li><strong>Environment Variables:</strong> Prepare a <code>.env</code> file based on <code>.env.development.example</code>. Zip and upload to S3 for use in EC2 user-data scripts. This keeps secrets and configuration out of your codebase and enables secure, automated provisioning.</li>
+    </ol>
+    <div class="highlight">
+      <strong>Reference:</strong> See <span class="file-link">README.md</span> for screenshots and step-by-step instructions.<br>
+      <strong>Best Practice:</strong> Use separate IAM users for automation and personal access. Enable MFA for security.
+    </div>
+  </main>
+</body>
+</html>
