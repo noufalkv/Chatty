@@ -41,4 +41,4 @@ jobs:
                   password: ${{ secrets.DOCKER_PASSWORD }}
 
             - name: Push Docker image
-    run: docker push noufalkv/${{ matrix.service }}:${{ github.sha }}
+              run: docker push noufalkv/${{ matrix.service }}:${{ github.sha }}
