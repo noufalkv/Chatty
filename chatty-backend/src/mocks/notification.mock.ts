@@ -10,7 +10,7 @@ export const notificationMockRequest = (
 ) => ({
   session: sessionData,
   params,
-  currentUser,
+  currentUser
 });
 
 export const notificationMockResponse = (): Response => {
@@ -39,5 +39,5 @@ export const notificationData = {
   imgVersion: '',
   gifUrl: '',
   read: false,
-  createdAt: new Date(),
+  createdAt: new Date()
 } as unknown as INotificationDocument;

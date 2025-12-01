@@ -14,7 +14,7 @@ export class Delete {
     const { imageId } = req.params;
     socketIOImageObject.emit('delete image', imageId);
     imageQueue.addImageJob('removeImageFromDB', {
-      imageId,
+      imageId
     });
     res.status(HTTP_STATUS.OK).json({ message: 'Image deleted successfully' });
   }
@@ -36,7 +36,7 @@ export class Delete {
     ) as Promise<IUserDocument>;
     (await Promise.all([bgImageId, bgImageVersion])) as [IUserDocument, IUserDocument];
     imageQueue.addImageJob('removeImageFromDB', {
-      imageId: image?._id,
+      imageId: image?._id
     });
     res.status(HTTP_STATUS.OK).json({ message: 'Image deleted successfully' });
   }

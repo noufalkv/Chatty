@@ -35,14 +35,14 @@ export class Get {
       newSkip,
       limit,
       skip,
-      userId: `${req.currentUser!.userId}`,
+      userId: `${req.currentUser!.userId}`
     });
     const followers: IFollowerData[] = await Get.prototype.followers(`${req.currentUser!.userId}`);
     res.status(HTTP_STATUS.OK).json({
       message: 'Get users',
       users: allUsers.users,
       totalUsers: allUsers.totalUsers,
-      followers,
+      followers
     });
   }
 

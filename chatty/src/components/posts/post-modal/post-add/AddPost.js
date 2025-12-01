@@ -32,7 +32,7 @@ const AddPost = ({ selectedImage, selectedPostVideo }) => {
     gifUrl: '',
     profilePicture: '',
     image: '',
-    video: '',
+    video: ''
   });
   const [disable, setDisable] = useState(true);
   const [apiResponse, setApiResponse] = useState('');
@@ -193,7 +193,7 @@ const AddPost = ({ selectedImage, selectedPostVideo }) => {
                 postData?.gifUrl ||
                 postData?.image
                   ? '700px'
-                  : 'auto',
+                  : 'auto'
             }}
           >
             {loading && (
@@ -349,6 +349,6 @@ const AddPost = ({ selectedImage, selectedPostVideo }) => {
 };
 AddPost.propTypes = {
   selectedImage: PropTypes.any,
-  selectedPostVideo: PropTypes.any,
+  selectedPostVideo: PropTypes.any
 };
 export default AddPost;

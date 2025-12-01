@@ -27,7 +27,7 @@ describe('Add', () => {
         postId: '6027f77087c9d9ccb1555268',
         comment: 'This is a comment',
         profilePicture: 'https://place-hold.it/500x500',
-        userTo: `${existingUser._id}`,
+        userTo: `${existingUser._id}`
       },
       authUserPayload
     ) as Request;
@@ -47,7 +47,7 @@ describe('Add', () => {
         postId: '6027f77087c9d9ccb1555268',
         comment: 'This is a comment',
         profilePicture: 'https://place-hold.it/500x500',
-        userTo: `${existingUser._id}`,
+        userTo: `${existingUser._id}`
       },
       authUserPayload
     ) as Request;
@@ -56,7 +56,7 @@ describe('Add', () => {
     await Add.prototype.comment(req, res);
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
-      message: 'Comment created successfully',
+      message: 'Comment created successfully'
     });
   });
 });

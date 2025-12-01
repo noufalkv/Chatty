@@ -11,7 +11,7 @@ import {
   toggleFeelingModal,
   toggleGifModal,
   toggleImageModal,
-  toggleVideoModal,
+  toggleVideoModal
 } from '@redux/reducers/modal/modal.reducer';
 import AddPost from '@components/posts/post-modal/post-add/AddPost';
 import { useRef, useState } from 'react';

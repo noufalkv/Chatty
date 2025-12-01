@@ -13,7 +13,7 @@ describe('SearchList', () => {
       setIsSearching: null,
       setSearch: null,
       setSelectedUser: null,
-      setComponentType: null,
+      setComponentType: null
     };
   });
 

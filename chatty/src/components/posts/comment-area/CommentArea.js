@@ -84,7 +84,7 @@ const CommentArea = ({ post }) => {
         profilePicture: profile?.profilePicture,
         previousReaction: Object.keys(reactionResponse.data.reactions).length
           ? reactionResponse.data.reactions?.type
-          : '',
+          : ''
       };
 
       if (!Object.keys(reactionResponse.data.reactions).length) {
@@ -129,7 +129,7 @@ const CommentArea = ({ post }) => {
       postId: post?._id,
       profilePicture: profile?.profilePicture,
       username: profile?.username,
-      type: newReaction,
+      type: newReaction
     };
     if (hasResponse && previousReaction !== newReaction) {
       postReactions.push(newPostReaction);
@@ -148,7 +148,7 @@ const CommentArea = ({ post }) => {
       type: reaction,
       postReactions: post.reactions,
       profilePicture: profile?.profilePicture,
-      previousReaction: hasResponse ? previousReaction : '',
+      previousReaction: hasResponse ? previousReaction : ''
     };
     socketService?.socket?.emit('reaction', socketReactionData);
   };
@@ -189,7 +189,7 @@ const CommentArea = ({ post }) => {
 };
 
 CommentArea.propTypes = {
-  post: PropTypes.object,
+  post: PropTypes.object
 };
 
 export default CommentArea;

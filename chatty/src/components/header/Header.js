@@ -37,7 +37,7 @@ const Header = () => {
     imgUrl: '',
     comment: '',
     reaction: '',
-    senderName: '',
+    senderName: ''
   });
   const [messageCount, setMessageCount] = useState(0);
   const [messageNotifications, setMessageNotifications] = useState([]);
@@ -201,7 +201,7 @@ const Header = () => {
                   imgUrl: '',
                   comment: '',
                   reaction: '',
-                  senderName: '',
+                  senderName: ''
                 });
               }}
             />

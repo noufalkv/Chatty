@@ -49,7 +49,7 @@ const FollowerCard = ({ userData }) => {
     try {
       socketService?.socket?.emit('block user', {
         blockedUser: userInfo._id,
-        blockedBy: user?._id,
+        blockedBy: user?._id
       });
       FollowersUtils.blockUser(userInfo, dispatch);
     } catch (error) {
@@ -61,7 +61,7 @@ const FollowerCard = ({ userData }) => {
     try {
       socketService?.socket?.emit('unblock user', {
         blockedUser: userInfo._id,
-        blockedBy: user?._id,
+        blockedBy: user?._id
       });
       FollowersUtils.unblockUser(userInfo, dispatch);
     } catch (error) {
@@ -140,6 +140,6 @@ const FollowerCard = ({ userData }) => {
 };
 
 FollowerCard.propTypes = {
-  userData: PropTypes.object,
+  userData: PropTypes.object
 };
 export default FollowerCard;

@@ -10,7 +10,7 @@ const ImageModal = ({
   onClickRight,
   showArrow,
   lastItemRight,
-  lastItemLeft,
+  lastItemLeft
 }) => {
   return (
     <div className="image-modal-container" data-testid="image-modal">
@@ -23,7 +23,7 @@ const ImageModal = ({
           onClick={onClickLeft}
           style={{
             pointerEvents: `${lastItemLeft ? 'none' : 'all'}`,
-            color: `${lastItemLeft ? '#bdbdbd' : ''}`,
+            color: `${lastItemLeft ? '#bdbdbd' : ''}`
           }}
         >
           <FaArrowLeft />
@@ -40,7 +40,7 @@ const ImageModal = ({
           onClick={onClickRight}
           style={{
             pointerEvents: `${lastItemRight ? 'none' : 'all'}`,
-            color: `${lastItemRight ? '#bdbdbd' : ''}`,
+            color: `${lastItemRight ? '#bdbdbd' : ''}`
           }}
         >
           <FaArrowRight />
@@ -57,7 +57,7 @@ ImageModal.propTypes = {
   onClickLeft: PropTypes.func,
   showArrow: PropTypes.bool,
   lastItemRight: PropTypes.bool,
-  lastItemLeft: PropTypes.bool,
+  lastItemLeft: PropTypes.bool
 };
 
 export default ImageModal;

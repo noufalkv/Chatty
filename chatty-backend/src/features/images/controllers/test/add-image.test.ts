@@ -20,8 +20,8 @@ jest.mock('@global/helpers/cloudinary-upload');
 Object.defineProperties(imageServer, {
   socketIOImageObject: {
     value: new Server(),
-    writable: true,
-  },
+    writable: true
+  }
 });
 
 describe('Add', () => {
@@ -51,7 +51,7 @@ describe('Add', () => {
       );
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Image added successfully',
+        message: 'Image added successfully'
       });
     });
 
@@ -78,7 +78,7 @@ describe('Add', () => {
       );
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Image added successfully',
+        message: 'Image added successfully'
       });
     });
 
@@ -97,12 +97,12 @@ describe('Add', () => {
           key: `${req.currentUser?.userId}`,
           value: expect.stringContaining('dxsuaev5w/image/upload/v1234/123456'),
           imgId: '123456',
-          imgVersion: '1234',
+          imgVersion: '1234'
         })
       );
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Image added successfully',
+        message: 'Image added successfully'
       });
     });
   });
@@ -123,7 +123,7 @@ describe('Add', () => {
       expect(cloudinaryUploads.uploads).toHaveBeenCalledWith(req.body.image);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Image added successfully',
+        message: 'Image added successfully'
       });
     });
 
@@ -140,7 +140,7 @@ describe('Add', () => {
       expect(cloudinaryUploads.uploads).not.toHaveBeenCalledWith(req.body.image);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Image added successfully',
+        message: 'Image added successfully'
       });
     });
 
@@ -197,11 +197,11 @@ describe('Add', () => {
       expect(imageServer.socketIOImageObject.emit).toHaveBeenCalledWith('update user', {
         bgImageId: '123456',
         bgImageVersion: '1234',
-        userId: existingUser,
+        userId: existingUser
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Image added successfully',
+        message: 'Image added successfully'
       });
     });
 
@@ -221,11 +221,11 @@ describe('Add', () => {
       expect(imageQueue.addImageJob).toHaveBeenCalledWith('updateBGImageInDB', {
         key: `${req.currentUser?.userId}`,
         imgId: '123456',
-        imgVersion: '1234',
+        imgVersion: '1234'
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Image added successfully',
+        message: 'Image added successfully'
       });
     });
   });

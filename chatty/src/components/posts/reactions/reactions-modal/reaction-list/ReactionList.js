@@ -32,7 +32,7 @@ const ReactionList = ({ postReactions }) => {
 };
 
 ReactionList.propTypes = {
-  postReactions: PropTypes.array,
+  postReactions: PropTypes.array
 };
 
 export default ReactionList;

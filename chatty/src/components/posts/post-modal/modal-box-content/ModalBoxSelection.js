@@ -91,6 +91,6 @@ const ModalBoxSelection = ({ setSelectedPostImage, setSelectedVideo }) => {
 };
 ModalBoxSelection.propTypes = {
   setSelectedPostImage: PropTypes.func,
-  setSelectedVideo: PropTypes.func,
+  setSelectedVideo: PropTypes.func
 };
 export default ModalBoxSelection;

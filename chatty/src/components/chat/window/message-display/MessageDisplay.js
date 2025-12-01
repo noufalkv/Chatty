@@ -17,7 +17,7 @@ const MessageDisplay = ({ chatMessages, profile, updateMessageReaction, deleteCh
   const [deleteDialog, setDeleteDialog] = useState({
     open: false,
     message: null,
-    type: '',
+    type: ''
   });
   const [activeElementIndex, setActiveElementIndex] = useState(null);
   const [selectedReaction, setSelectedReaction] = useState(null);
@@ -40,7 +40,7 @@ const MessageDisplay = ({ chatMessages, profile, updateMessageReaction, deleteCh
     setDeleteDialog({
       open: true,
       message,
-      type,
+      type
     });
   };
 
@@ -77,14 +77,14 @@ const MessageDisplay = ({ chatMessages, profile, updateMessageReaction, deleteCh
             setDeleteDialog({
               open: false,
               message: null,
-              type: '',
+              type: ''
             });
           }}
           secondBtnHandler={() => {
             setDeleteDialog({
               open: false,
               message: null,
-              type: '',
+              type: ''
             });
           }}
         />
@@ -159,7 +159,7 @@ MessageDisplay.propTypes = {
   chatMessages: PropTypes.array,
   profile: PropTypes.object,
   updateMessageReaction: PropTypes.func,
-  deleteChatMessage: PropTypes.func,
+  deleteChatMessage: PropTypes.func
 };
 
 export default MessageDisplay;

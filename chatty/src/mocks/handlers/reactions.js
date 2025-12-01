@@ -10,7 +10,7 @@ export const getReactionsByUsernameMock = rest.get(
     const result = {
       message: 'Single post reaction by username',
       reactions: postReactionOne,
-      count: 1,
+      count: 1
     };
     return res(ctx.json(result));
   }
@@ -22,7 +22,7 @@ export const getPostReactionsMock = rest.get(
     const result = {
       message: 'Post reactions',
       reactions: [postReactionOne, postReactionTwo],
-      count: 2,
+      count: 2
     };
     return res(ctx.json(result));
   }
@@ -34,7 +34,7 @@ export const getSinglePostReactionMock = rest.get(
     const result = {
       message: 'Single post reaction',
       reactions: postReactionOne,
-      count: 1,
+      count: 1
     };
     return res(ctx.json(result));
   }
@@ -42,7 +42,7 @@ export const getSinglePostReactionMock = rest.get(
 
 export const addReactionMock = rest.post(`${BASE_URL}/post/reaction`, (req, res, ctx) => {
   const result = {
-    message: 'Reaction added successfully',
+    message: 'Reaction added successfully'
   };
   return res(ctx.json(result));
 });
@@ -51,5 +51,5 @@ export const reactionHandlers = [
   getReactionsByUsernameMock,
   getPostReactionsMock,
   getSinglePostReactionMock,
-  addReactionMock,
+  addReactionMock
 ];

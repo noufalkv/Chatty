@@ -37,7 +37,7 @@ class ImageService {
       bgImageVersion: type === 'background' ? imgVersion : '',
       bgImageId: type === 'background' ? imgId : '',
       imgVersion,
-      imgId,
+      imgId
     });
   }
 
@@ -47,7 +47,7 @@ class ImageService {
 
   public async getImageByBackgroundId(bgImageId: string): Promise<IFileImageDocument> {
     const image: IFileImageDocument = (await ImageModel.findOne({
-      bgImageId,
+      bgImageId
     }).exec()) as IFileImageDocument;
     return image;
   }
@@ -57,7 +57,7 @@ class ImageService {
       return [];
     }
     const images: IFileImageDocument[] = await ImageModel.aggregate([
-      { $match: { userId: new mongoose.Types.ObjectId(userId) } },
+      { $match: { userId: new mongoose.Types.ObjectId(userId) } }
     ]);
     return images;
   }

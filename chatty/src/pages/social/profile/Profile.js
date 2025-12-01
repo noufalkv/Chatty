@@ -209,7 +209,7 @@ const Profile = () => {
                               dispatch(
                                 toggleDeleteDialog({
                                   toggle: !deleteDialogIsOpen,
-                                  data: image?._id,
+                                  data: image?._id
                                 })
                               );
                             }}

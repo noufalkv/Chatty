@@ -20,7 +20,7 @@ const LeftMessageDisplay = ({
   setSelectedReaction,
   setShowImageModal,
   setImageUrl,
-  showImageModal,
+  showImageModal
 }) => {
   return (
     <div className="message left-message" data-testid="left-message">
@@ -34,7 +34,7 @@ const LeftMessageDisplay = ({
                   conversationId: chat?.conversationId,
                   messageId: chat?._id,
                   reaction: event,
-                  type: 'add',
+                  type: 'add'
                 };
                 handleReactionClick(body);
                 setToggleReaction(false);
@@ -84,7 +84,7 @@ const LeftMessageDisplay = ({
                     <div
                       className="message-image"
                       style={{
-                        marginTop: `${chat?.body && chat?.body !== 'Sent an Image' ? '5px' : ''}`,
+                        marginTop: `${chat?.body && chat?.body !== 'Sent an Image' ? '5px' : ''}`
                       }}
                     >
                       <img
@@ -127,7 +127,7 @@ const LeftMessageDisplay = ({
                         conversationId: chat?.conversationId,
                         messageId: chat?._id,
                         reaction: data?.type,
-                        type: 'remove',
+                        type: 'remove'
                       };
                       setSelectedReaction(body);
                     }
@@ -160,6 +160,6 @@ LeftMessageDisplay.propTypes = {
   setSelectedReaction: PropTypes.func,
   setShowImageModal: PropTypes.func,
   showImageModal: PropTypes.bool,
-  setImageUrl: PropTypes.func,
+  setImageUrl: PropTypes.func
 };
 export default LeftMessageDisplay;

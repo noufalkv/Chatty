@@ -49,5 +49,5 @@ export const chatHandlers = [
   chatListMock,
   chatMessagesMock,
   addChatUsersMock,
-  chatMessagesUserTwoMock,
+  chatMessagesUserTwoMock
 ];

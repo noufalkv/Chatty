@@ -221,6 +221,6 @@ const Post = ({ post, showIcons }) => {
 };
 Post.propTypes = {
   post: PropTypes.object.isRequired,
-  showIcons: PropTypes.bool,
+  showIcons: PropTypes.bool
 };
 export default Post;

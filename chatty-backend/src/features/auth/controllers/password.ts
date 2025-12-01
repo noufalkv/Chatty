@@ -39,7 +39,7 @@ export class Password {
     emailQueue.addEmailJob('forgotPasswordEmail', {
       template,
       receiverEmail: email,
-      subject: 'Reset your password',
+      subject: 'Reset your password'
     });
     res.status(HTTP_STATUS.OK).json({ message: 'Password reset email sent.' });
   }
@@ -65,14 +65,14 @@ export class Password {
       username: existingUser.username!,
       email: existingUser.email!,
       ipaddress: publicIP.address(),
-      date: moment().format('DD//MM//YYYY HH:mm'),
+      date: moment().format('DD//MM//YYYY HH:mm')
     };
     const template: string =
       resetPasswordTemplate.passwordResetConfirmationTemplate(templateParams);
     emailQueue.addEmailJob('forgotPasswordEmail', {
       template,
       receiverEmail: existingUser.email!,
-      subject: 'Password Reset Confirmation',
+      subject: 'Password Reset Confirmation'
     });
     res.status(HTTP_STATUS.OK).json({ message: 'Password successfully updated.' });
   }

@@ -26,15 +26,15 @@ export const AppRouter = () => {
   const elements = useRoutes([
     {
       path: '/',
-      element: <AuthTabs />,
+      element: <AuthTabs />
     },
     {
       path: '/forgot-password',
-      element: <ForgotPassword />,
+      element: <ForgotPassword />
     },
     {
       path: '/reset-password',
-      element: <ResetPassword />,
+      element: <ResetPassword />
     },
     {
       path: '/app/social',
@@ -50,7 +50,7 @@ export const AppRouter = () => {
             <Suspense fallback={<StreamsSkeleton />}>
               <Streams />
             </Suspense>
-          ),
+          )
         },
         {
           path: 'chat/messages',
@@ -58,7 +58,7 @@ export const AppRouter = () => {
             <Suspense fallback={<ChatSkeleton />}>
               <Chat />
             </Suspense>
-          ),
+          )
         },
         {
           path: 'people',
@@ -66,7 +66,7 @@ export const AppRouter = () => {
             <Suspense fallback={<CardSkeleton />}>
               <People />
             </Suspense>
-          ),
+          )
         },
         {
           path: 'followers',
@@ -74,7 +74,7 @@ export const AppRouter = () => {
             <Suspense fallback={<CardSkeleton />}>
               <Followers />
             </Suspense>
-          ),
+          )
         },
         {
           path: 'following',
@@ -82,7 +82,7 @@ export const AppRouter = () => {
             <Suspense fallback={<CardSkeleton />}>
               <Following />
             </Suspense>
-          ),
+          )
         },
         {
           path: 'photos',
@@ -90,7 +90,7 @@ export const AppRouter = () => {
             <Suspense fallback={<PhotoSkeleton />}>
               <Photos />
             </Suspense>
-          ),
+          )
         },
         {
           path: 'videos',
@@ -98,7 +98,7 @@ export const AppRouter = () => {
             <Suspense fallback={<VideoSkeleton />}>
               <Videos />
             </Suspense>
-          ),
+          )
         },
         {
           path: 'notifications',
@@ -106,7 +106,7 @@ export const AppRouter = () => {
             <Suspense fallback={<NotificationSkeleton />}>
               <Notification />
             </Suspense>
-          ),
+          )
         },
         {
           path: 'profile/:username',
@@ -114,14 +114,14 @@ export const AppRouter = () => {
             <Suspense fallback={<ProfileSkeleton />}>
               <Profile />
             </Suspense>
-          ),
-        },
-      ],
+          )
+        }
+      ]
     },
     {
       path: '*',
-      element: <Error />,
-    },
+      element: <Error />
+    }
   ]);
 
   return elements;

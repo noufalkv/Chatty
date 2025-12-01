@@ -14,8 +14,8 @@ jest.mock('@service/redis/user.cache');
 Object.defineProperties(userServer, {
   socketIOUserObject: {
     value: new Server(),
-    writable: true,
-  },
+    writable: true
+  }
 });
 
 describe('EditBasicInfo', () => {
@@ -34,7 +34,7 @@ describe('EditBasicInfo', () => {
         quote: 'This is cool',
         work: 'KickChat Inc.',
         school: 'Taltech',
-        location: 'Tallinn',
+        location: 'Tallinn'
       };
       const req: Request = authMockRequest({}, basicInfo, authUserPayload, {}) as Request;
       const res: Response = authMockResponse();
@@ -50,7 +50,7 @@ describe('EditBasicInfo', () => {
       }
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Updated successfully',
+        message: 'Updated successfully'
       });
     });
 
@@ -59,7 +59,7 @@ describe('EditBasicInfo', () => {
         quote: 'This is cool',
         work: 'KickChat Inc.',
         school: 'Taltech',
-        location: 'Tallinn',
+        location: 'Tallinn'
       };
       const req: Request = authMockRequest({}, basicInfo, authUserPayload, {}) as Request;
       const res: Response = authMockResponse();
@@ -68,11 +68,11 @@ describe('EditBasicInfo', () => {
       await Edit.prototype.info(req, res);
       expect(userQueue.addUserJob).toHaveBeenCalledWith('updateBasicInfoInDB', {
         key: `${req.currentUser?.userId}`,
-        value: req.body,
+        value: req.body
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Updated successfully',
+        message: 'Updated successfully'
       });
     });
   });
@@ -83,7 +83,7 @@ describe('EditBasicInfo', () => {
         facebook: 'https://facebook.com/tester',
         instagram: 'https://instagram.com',
         youtube: 'https://youtube.com',
-        twitter: 'https://twitter.com',
+        twitter: 'https://twitter.com'
       };
       const req: Request = authMockRequest({}, socialInfo, authUserPayload, {}) as Request;
       const res: Response = authMockResponse();
@@ -97,7 +97,7 @@ describe('EditBasicInfo', () => {
       );
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Updated successfully',
+        message: 'Updated successfully'
       });
     });
 
@@ -106,7 +106,7 @@ describe('EditBasicInfo', () => {
         facebook: 'https://facebook.com/tester',
         instagram: 'https://instagram.com',
         youtube: 'https://youtube.com',
-        twitter: 'https://twitter.com',
+        twitter: 'https://twitter.com'
       };
       const req: Request = authMockRequest({}, socialInfo, authUserPayload, {}) as Request;
       const res: Response = authMockResponse();
@@ -115,11 +115,11 @@ describe('EditBasicInfo', () => {
       await Edit.prototype.social(req, res);
       expect(userQueue.addUserJob).toHaveBeenCalledWith('updateSocialLinksInDB', {
         key: `${req.currentUser?.userId}`,
-        value: req.body,
+        value: req.body
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Updated successfully',
+        message: 'Updated successfully'
       });
     });
   });

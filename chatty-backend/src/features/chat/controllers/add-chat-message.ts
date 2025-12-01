@@ -32,7 +32,7 @@ export class Add {
       body,
       gifUrl,
       isRead,
-      selectedImage,
+      selectedImage
     } = req.body;
     let fileUrl = '';
     const messageObjectId: ObjectId = new ObjectId();
@@ -75,7 +75,7 @@ export class Add {
       reaction: [],
       createdAt: new Date(),
       deleteForEveryone: false,
-      deleteForMe: false,
+      deleteForMe: false
     };
     Add.prototype.emitSocketIOEvent(messageData);
 
@@ -85,7 +85,7 @@ export class Add {
         message: body,
         receiverName: receiverUsername,
         receiverId,
-        messageData,
+        messageData
       });
     }
 
@@ -128,7 +128,7 @@ export class Add {
     currentUser,
     message,
     receiverName,
-    receiverId,
+    receiverId
   }: IMessageNotification): Promise<void> {
     const cachedUser: IUserDocument = (await userCache.getUserFromCache(
       `${receiverId}`
@@ -137,13 +137,13 @@ export class Add {
       const templateParams: INotificationTemplate = {
         username: receiverName,
         message,
-        header: `Message notification from ${currentUser.username}`,
+        header: `Message notification from ${currentUser.username}`
       };
       const template: string = notificationTemplate.notificationMessageTemplate(templateParams);
       emailQueue.addEmailJob('directMessageEmail', {
         receiverEmail: cachedUser.email!,
         template,
-        subject: `You've received messages from ${currentUser.username}`,
+        subject: `You've received messages from ${currentUser.username}`
       });
     }
   }

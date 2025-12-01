@@ -162,7 +162,7 @@ const ReactionsAndCommentsDisplay = ({ post }) => {
 };
 
 ReactionsAndCommentsDisplay.propTypes = {
-  post: PropTypes.object,
+  post: PropTypes.object
 };
 
 export default ReactionsAndCommentsDisplay;

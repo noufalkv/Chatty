@@ -16,8 +16,8 @@ jest.mock('@service/redis/message.cache');
 Object.defineProperties(chatServer, {
   socketIOChatObject: {
     value: new Server(),
-    writable: true,
-  },
+    writable: true
+  }
 });
 
 describe('Update', () => {
@@ -36,7 +36,7 @@ describe('Update', () => {
         {},
         {
           senderId: `${existingUser._id}`,
-          receiverId: '60263f14648fed5246e322d8',
+          receiverId: '60263f14648fed5246e322d8'
         },
         authUserPayload
       ) as Request;
@@ -53,7 +53,7 @@ describe('Update', () => {
       expect(chatServer.socketIOChatObject.emit).toHaveBeenCalledWith('chat list', messageDataMock);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Message marked as read',
+        message: 'Message marked as read'
       });
     });
 
@@ -62,7 +62,7 @@ describe('Update', () => {
         {},
         {
           senderId: `${existingUser._id}`,
-          receiverId: '60263f14648fed5246e322d8',
+          receiverId: '60263f14648fed5246e322d8'
         },
         authUserPayload
       ) as Request;
@@ -74,7 +74,7 @@ describe('Update', () => {
       expect(chatQueue.addChatJob).toHaveBeenCalled();
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Message marked as read',
+        message: 'Message marked as read'
       });
     });
   });

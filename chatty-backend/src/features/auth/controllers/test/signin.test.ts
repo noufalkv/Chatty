@@ -135,7 +135,7 @@ describe('SignIn', () => {
     expect(res.json).toHaveBeenCalledWith({
       message: 'User login successfully',
       user: mergedAuthAndUserData,
-      token: req.session?.jwt,
+      token: req.session?.jwt
     });
   });
 });

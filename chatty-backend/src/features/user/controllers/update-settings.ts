@@ -17,7 +17,7 @@ export class UpdateSettings {
     );
     userQueue.addUserJob('updateNotificationSettings', {
       key: `${req.currentUser!.userId}`,
-      value: req.body,
+      value: req.body
     });
     res
       .status(HTTP_STATUS.OK)

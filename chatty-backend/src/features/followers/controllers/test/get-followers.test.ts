@@ -4,7 +4,7 @@ import { authUserPayload } from '@root/mocks/auth.mock';
 import {
   followersMockRequest,
   followersMockResponse,
-  mockFollowerData,
+  mockFollowerData
 } from '@root/mocks/followers.mock';
 import { FollowerCache } from '@service/redis/follower.cache';
 import { Get } from '@follower/controllers/get-followers';
@@ -40,7 +40,7 @@ describe('Get', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'User following',
-        following: [mockFollowerData],
+        following: [mockFollowerData]
       });
     });
 
@@ -57,7 +57,7 @@ describe('Get', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'User following',
-        following: [mockFollowerData],
+        following: [mockFollowerData]
       });
     });
 
@@ -71,7 +71,7 @@ describe('Get', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'User following',
-        following: [],
+        following: []
       });
     });
   });
@@ -79,7 +79,7 @@ describe('Get', () => {
   describe('userFollowers', () => {
     it('should send correct json response if user follower exist in cache', async () => {
       const req: Request = followersMockRequest({}, authUserPayload, {
-        userId: `${existingUserTwo._id}`,
+        userId: `${existingUserTwo._id}`
       }) as Request;
       const res: Response = followersMockResponse();
       jest
@@ -93,13 +93,13 @@ describe('Get', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'User followers',
-        followers: [mockFollowerData],
+        followers: [mockFollowerData]
       });
     });
 
     it('should send correct json response if user following exist in database', async () => {
       const req: Request = followersMockRequest({}, authUserPayload, {
-        userId: `${existingUserTwo._id}`,
+        userId: `${existingUserTwo._id}`
       }) as Request;
       const res: Response = followersMockResponse();
       jest.spyOn(FollowerCache.prototype, 'getFollowersFromCache').mockResolvedValue([]);
@@ -112,13 +112,13 @@ describe('Get', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'User followers',
-        followers: [mockFollowerData],
+        followers: [mockFollowerData]
       });
     });
 
     it('should return empty following if user following does not exist', async () => {
       const req: Request = followersMockRequest({}, authUserPayload, {
-        userId: `${existingUserTwo._id}`,
+        userId: `${existingUserTwo._id}`
       }) as Request;
       const res: Response = followersMockResponse();
       jest.spyOn(FollowerCache.prototype, 'getFollowersFromCache').mockResolvedValue([]);
@@ -128,7 +128,7 @@ describe('Get', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'User followers',
-        followers: [],
+        followers: []
       });
     });
   });

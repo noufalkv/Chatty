@@ -22,7 +22,7 @@ const RightMessageDisplay = ({
   setSelectedReaction,
   setShowImageModal,
   setImageUrl,
-  showImageModal,
+  showImageModal
 }) => {
   return (
     <div className="message right-message" data-testid="right-message">
@@ -36,7 +36,7 @@ const RightMessageDisplay = ({
                   conversationId: chat?.conversationId,
                   messageId: chat?._id,
                   reaction: event,
-                  type: 'add',
+                  type: 'add'
                 };
                 handleReactionClick(body);
                 setToggleReaction(false);
@@ -116,7 +116,7 @@ const RightMessageDisplay = ({
                       conversationId: chat?.conversationId,
                       messageId: chat?._id,
                       reaction: data?.type,
-                      type: 'remove',
+                      type: 'remove'
                     };
                     setSelectedReaction(body);
                   }
@@ -163,6 +163,6 @@ RightMessageDisplay.propTypes = {
   setSelectedReaction: PropTypes.func,
   setShowImageModal: PropTypes.func,
   showImageModal: PropTypes.bool,
-  setImageUrl: PropTypes.func,
+  setImageUrl: PropTypes.func
 };
 export default RightMessageDisplay;

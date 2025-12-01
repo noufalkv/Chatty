@@ -7,7 +7,7 @@ const Dialog = ({
   firstButtonText,
   secondButtonText,
   firstBtnHandler,
-  secondBtnHandler,
+  secondBtnHandler
 }) => {
   return (
     <div className="dialog-container" data-testid="dialog-container">
@@ -35,7 +35,7 @@ Dialog.propTypes = {
   firstButtonText: PropTypes.string,
   secondButtonText: PropTypes.string,
   firstBtnHandler: PropTypes.func,
-  secondBtnHandler: PropTypes.func,
+  secondBtnHandler: PropTypes.func
 };
 
 export default Dialog;

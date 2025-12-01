@@ -22,7 +22,7 @@ const Reactions = ({ handleClick, showLabel = true }) => {
 
 Reactions.propTypes = {
   handleClick: PropTypes.func,
-  showLabel: PropTypes.bool,
+  showLabel: PropTypes.bool
 };
 
 export default Reactions;

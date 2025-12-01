@@ -21,7 +21,7 @@ export class Add {
       avatarColor: `${req.currentUser?.avatarColor}`,
       profilePicture,
       comment,
-      createdAt: new Date(),
+      createdAt: new Date()
     } as ICommentDocument;
     await commentCache.savePostCommentToCache(postId, JSON.stringify(commentData));
 
@@ -30,7 +30,7 @@ export class Add {
       userTo,
       userFrom: req.currentUser!.userId,
       username: req.currentUser!.username,
-      comment: commentData,
+      comment: commentData
     };
     commentQueue.addCommentJob('addCommentToDB', databaseCommentData);
     res.status(HTTP_STATUS.OK).json({ message: 'Comment created successfully' });

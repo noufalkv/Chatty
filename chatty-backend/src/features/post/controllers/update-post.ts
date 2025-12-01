@@ -29,7 +29,7 @@ export class Update {
       imgId,
       imgVersion,
       videoId: '',
-      videoVersion: '',
+      videoVersion: ''
     } as IPostDocument;
 
     const postUpdated: IPostDocument = await postCache.updatePostInCache(postId, updatedPost);
@@ -77,7 +77,7 @@ export class Update {
       imgId,
       profilePicture,
       videoId,
-      videoVersion,
+      videoVersion
     } = req.body;
     const { postId } = req.params;
     const updatedPost: IPostDocument = {
@@ -90,7 +90,7 @@ export class Update {
       imgId: imgId ? imgId : '',
       imgVersion: imgVersion ? imgVersion : '',
       videoId: videoId ? videoId : '',
-      videoVersion: videoVersion ? videoVersion : '',
+      videoVersion: videoVersion ? videoVersion : ''
     } as IPostDocument;
 
     const postUpdated: IPostDocument = await postCache.updatePostInCache(postId, updatedPost);
@@ -117,7 +117,7 @@ export class Update {
       imgId: image ? result.public_id : '',
       imgVersion: image ? result.version.toString() : '',
       videoId: video ? result.public_id : '',
-      videoVersion: video ? result.version.toString() : '',
+      videoVersion: video ? result.version.toString() : ''
     } as IPostDocument;
 
     const postUpdated: IPostDocument = await postCache.updatePostInCache(postId, updatedPost);
@@ -127,7 +127,7 @@ export class Update {
       imageQueue.addImageJob('addImageToDB', {
         key: `${req.currentUser!.userId}`,
         imgId: result.public_id,
-        imgVersion: result.version.toString(),
+        imgVersion: result.version.toString()
       });
     }
     return result;

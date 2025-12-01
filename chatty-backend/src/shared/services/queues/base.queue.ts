@@ -44,7 +44,7 @@ export abstract class BaseQueue {
 
     createBullBoard({
       queues: bullAdapters,
-      serverAdapter,
+      serverAdapter
     });
 
     this.log = config.createLogger(`${queueName}Queue`);

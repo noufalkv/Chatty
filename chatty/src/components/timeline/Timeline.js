@@ -27,13 +27,13 @@ const Timeline = ({ userProfileData, loading }) => {
     quote: '',
     work: '',
     school: '',
-    location: '',
+    location: ''
   });
   const [editableSocialInputs, setEditableSocialInputs] = useState({
     instagram: '',
     twitter: '',
     facebook: '',
-    youtube: '',
+    youtube: ''
   });
   const { username } = useParams();
   const dispatch = useDispatch();
@@ -56,7 +56,7 @@ const Timeline = ({ userProfileData, loading }) => {
         quote: userProfileData.user.quote,
         work: userProfileData.user.work,
         school: userProfileData.user.school,
-        location: userProfileData.user.location,
+        location: userProfileData.user.location
       });
       setEditableSocialInputs(userProfileData.user?.social);
     }
@@ -170,6 +170,6 @@ const Timeline = ({ userProfileData, loading }) => {
 
 Timeline.propTypes = {
   userProfileData: PropTypes.object,
-  loading: PropTypes.bool,
+  loading: PropTypes.bool
 };
 export default Timeline;

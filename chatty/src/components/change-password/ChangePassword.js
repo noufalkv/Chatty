@@ -34,7 +34,7 @@ const ChangePassword = () => {
       const response = await userService.changePassword({
         currentPassword,
         newPassword,
-        confirmPassword,
+        confirmPassword
       });
       setCurrentPassword('');
       setNewPassword('');
@@ -46,7 +46,7 @@ const ChangePassword = () => {
             dispatch,
             deleteStorageUsername,
             deleteSessionPageReload,
-            setLoggedIn,
+            setLoggedIn
           });
           await userService.logoutUser();
           navigate('/');

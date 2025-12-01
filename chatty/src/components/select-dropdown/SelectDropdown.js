@@ -35,7 +35,7 @@ const SelectDropdown = ({ isActive, setSelectedItem, items = [] }) => {
 SelectDropdown.propTypes = {
   isActive: PropTypes.bool,
   setSelectedItem: PropTypes.func,
-  items: PropTypes.array,
+  items: PropTypes.array
 };
 
 export default SelectDropdown;

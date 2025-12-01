@@ -31,5 +31,5 @@ export const notificationHandlers = [
   getUserNotificationsMock,
   emptyNotificationsMock,
   markNotificationMock,
-  deleteNotificationMock,
+  deleteNotificationMock
 ];

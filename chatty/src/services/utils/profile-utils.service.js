@@ -4,7 +4,7 @@ export class ProfileUtils {
   static navigateToProfile(data, navigate) {
     const url = `/app/social/profile/${data?.username}?${createSearchParams({
       id: data?._id,
-      uId: data?.uId,
+      uId: data?.uId
     })}`;
     navigate(url);
   }

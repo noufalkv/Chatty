@@ -32,7 +32,7 @@ describe('Get', () => {
       expect(res.json).toHaveBeenCalledWith({
         message: 'All posts',
         posts: [postMockData],
-        totalPosts: 1,
+        totalPosts: 1
       });
     });
 
@@ -50,7 +50,7 @@ describe('Get', () => {
       expect(res.json).toHaveBeenCalledWith({
         message: 'All posts',
         posts: [postMockData],
-        totalPosts: 1,
+        totalPosts: 1
       });
     });
 
@@ -67,7 +67,7 @@ describe('Get', () => {
       expect(res.json).toHaveBeenCalledWith({
         message: 'All posts',
         posts: [],
-        totalPosts: 0,
+        totalPosts: 0
       });
     });
   });
@@ -85,7 +85,7 @@ describe('Get', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'All posts with images',
-        posts: [postMockData],
+        posts: [postMockData]
       });
     });
 
@@ -97,12 +97,12 @@ describe('Get', () => {
 
       await Get.prototype.postsWithImages(req, res);
       expect(postService.getPosts).toHaveBeenCalledWith({ imgId: '$ne', gifUrl: '$ne' }, 0, 10, {
-        createdAt: -1,
+        createdAt: -1
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'All posts with images',
-        posts: [postMockData],
+        posts: [postMockData]
       });
     });
 
@@ -116,7 +116,7 @@ describe('Get', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'All posts with images',
-        posts: [],
+        posts: []
       });
     });
   });

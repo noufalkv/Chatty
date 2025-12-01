@@ -71,7 +71,7 @@ const ChatWindow = () => {
         chatMessages,
         gifUrl,
         selectedImage,
-        isRead: checkUserOne && checkUserTwo,
+        isRead: checkUserOne && checkUserTwo
       });
       await chatService.saveChatMessage(messageData);
     } catch (error) {

@@ -7,7 +7,7 @@ import {
   IMessageData,
   IChatUsers,
   IChatList,
-  IGetMessageFromCache,
+  IGetMessageFromCache
 } from '@chat/interfaces/chat.interface';
 import { Helpers } from '@global/helpers/helpers';
 import { IReaction } from '@reaction/interfaces/reaction.interface';

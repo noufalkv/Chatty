@@ -24,7 +24,7 @@ describe('Settings', () => {
         messages: true,
         reactions: false,
         comments: true,
-        follows: false,
+        follows: false
       };
       const req: Request = authMockRequest({}, settings, authUserPayload) as Request;
       const res: Response = authMockResponse();
@@ -39,12 +39,12 @@ describe('Settings', () => {
       );
       expect(userQueue.addUserJob).toHaveBeenCalledWith('updateNotificationSettings', {
         key: `${req.currentUser?.userId}`,
-        value: req.body,
+        value: req.body
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'Notification settings updated successfully',
-        settings: req.body,
+        settings: req.body
       });
     });
   });

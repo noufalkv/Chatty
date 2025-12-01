@@ -31,7 +31,7 @@ const NotificationSettings = () => {
       if (index === itemIndex) {
         return {
           ...item,
-          toggle: !item.toggle,
+          toggle: !item.toggle
         };
       }
       return item;

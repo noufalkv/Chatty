@@ -22,7 +22,7 @@ export class Update {
     socketIOChatObject.emit('chat list', updatedMessage);
     chatQueue.addChatJob('markMessagesAsReadInDB', {
       senderId: new mongoose.Types.ObjectId(senderId),
-      receiverId: new mongoose.Types.ObjectId(receiverId),
+      receiverId: new mongoose.Types.ObjectId(receiverId)
     });
     res.status(HTTP_STATUS.OK).json({ message: 'Message marked as read' });
   }

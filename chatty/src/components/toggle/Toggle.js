@@ -20,7 +20,7 @@ const Toggle = ({ toggle, onClick }) => {
 
 Toggle.propTypes = {
   toggle: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired
 };
 
 export default Toggle;

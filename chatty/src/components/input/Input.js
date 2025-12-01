@@ -39,7 +39,7 @@ Input.propTypes = {
   onClick: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
-  style: PropTypes.object,
+  style: PropTypes.object
 };
 
 export default Input;

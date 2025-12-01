@@ -61,7 +61,7 @@ const ChatList = () => {
         senderId: profile?._id,
         senderAvatarColor: profile?.avatarColor,
         senderProfilePicture: profile?.profilePicture,
-        body: '',
+        body: ''
       };
       ChatUtils.joinRoomEvent(user, profile);
       ChatUtils.privateChatMessages = [];
@@ -102,7 +102,7 @@ const ChatList = () => {
         params: chatMessageList.length ? updateQueryParams(chatMessageList[0]) : null,
         pathname: location.pathname,
         navigate,
-        dispatch,
+        dispatch
       });
     }
   };

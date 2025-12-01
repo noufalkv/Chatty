@@ -10,7 +10,7 @@ describe('CardElementButtons', () => {
       btnTextTwo: 'Button 2',
       onClickBtnOne: null,
       onClickBtnTwo: null,
-      onNavigateToProfile: null,
+      onNavigateToProfile: null
     };
     render(<CardElementButtons {...props} />);
     const buttonElements = screen.queryAllByRole('button');
@@ -30,7 +30,7 @@ describe('CardElementButtons', () => {
       btnTextTwo: 'Button 2',
       onClickBtnOne: buttonOneClick,
       onClickBtnTwo: null,
-      onNavigateToProfile: profileButtonClick,
+      onNavigateToProfile: profileButtonClick
     };
     render(<CardElementButtons {...props} />);
     const buttonElements = screen.queryAllByRole('button');
@@ -45,7 +45,7 @@ describe('CardElementButtons', () => {
     const props = {
       btnTextOne: 'Button 1',
       btnTextTwo: 'Button 2',
-      onClickBtnTwo: buttonOneClick,
+      onClickBtnTwo: buttonOneClick
     };
     const { rerender } = render(<CardElementButtons {...props} />);
     rerender(<CardElementButtons isChecked={true} {...props} />);

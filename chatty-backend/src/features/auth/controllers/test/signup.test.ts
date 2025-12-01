@@ -31,7 +31,7 @@ describe('SignUp', () => {
         email: 'manny@test.com',
         password: 'qwerty',
         avatarColor: 'red',
-        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
       }
     ) as Request;
     const res: Response = authMockResponse();
@@ -48,7 +48,7 @@ describe('SignUp', () => {
         email: 'manny@test.com',
         password: 'qwerty',
         avatarColor: 'red',
-        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
       }
     ) as Request;
     const res: Response = authMockResponse();
@@ -65,7 +65,7 @@ describe('SignUp', () => {
         email: 'manny@test.com',
         password: 'qwerty',
         avatarColor: 'red',
-        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
       }
     ) as Request;
     const res: Response = authMockResponse();
@@ -82,7 +82,7 @@ describe('SignUp', () => {
         email: 'not valid',
         password: 'qwerty',
         avatarColor: 'red',
-        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
       }
     ) as Request;
     const res: Response = authMockResponse();
@@ -100,7 +100,7 @@ describe('SignUp', () => {
         email: '',
         password: 'qwerty',
         avatarColor: 'red',
-        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
       }
     ) as Request;
     const res: Response = authMockResponse();
@@ -117,7 +117,7 @@ describe('SignUp', () => {
         email: 'manny@test.com',
         password: '',
         avatarColor: 'red',
-        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
       }
     ) as Request;
     const res: Response = authMockResponse();
@@ -134,7 +134,7 @@ describe('SignUp', () => {
         email: 'manny@test.com',
         password: 'ma',
         avatarColor: 'red',
-        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
       }
     ) as Request;
     const res: Response = authMockResponse();
@@ -151,7 +151,7 @@ describe('SignUp', () => {
         email: 'manny@test.com',
         password: 'mathematics1',
         avatarColor: 'red',
-        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
       }
     ) as Request;
     const res: Response = authMockResponse();
@@ -168,7 +168,7 @@ describe('SignUp', () => {
         email: 'manny@test.com',
         password: 'qwerty',
         avatarColor: 'red',
-        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
       }
     ) as Request;
     const res: Response = authMockResponse();
@@ -185,7 +185,7 @@ describe('SignUp', () => {
         email: 'manny@test.com',
         password: 'qwerty',
         avatarColor: 'red',
-        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
       }
     ) as Request;
     const res: Response = authMockResponse();
@@ -203,7 +203,7 @@ describe('SignUp', () => {
     expect(res.json).toHaveBeenCalledWith({
       message: 'User created successfully',
       user: userSpy.mock.calls[0][2],
-      token: req.session?.jwt,
+      token: req.session?.jwt
     });
   });
 });

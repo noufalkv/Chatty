@@ -21,7 +21,7 @@ export class Delete {
     socketIOChatObject.emit('chat list', updatedMessage);
     chatQueue.addChatJob('markMessageAsDeletedInDB', {
       messageId: new mongoose.Types.ObjectId(messageId),
-      type,
+      type
     });
 
     res.status(HTTP_STATUS.OK).json({ message: 'Message marked as deleted' });

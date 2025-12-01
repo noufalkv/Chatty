@@ -38,7 +38,7 @@ describe('Chat', () => {
     server.use(chatMessagesMock);
     const url = `/app/social/chat/messages?${createSearchParams({
       username: 'danny',
-      id: '123456',
+      id: '123456'
     })}`;
     const history = createBrowserHistory();
     history.push(url);

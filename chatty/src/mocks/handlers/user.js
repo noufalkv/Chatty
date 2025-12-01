@@ -34,7 +34,7 @@ export const getAllUsersMock = rest.get(`${BASE_URL}/user/all/1`, (req, res, ctx
     message: 'Get users',
     users: [existingUserTwo, existingUserThree],
     followers: [existingUserThree],
-    totalUsers: 2,
+    totalUsers: 2
   };
   return res(ctx.status(200), ctx.json(result));
 });
@@ -44,7 +44,7 @@ export const emptyUsersMock = rest.get(`${BASE_URL}/user/all/1`, (req, res, ctx)
     message: 'Get users',
     users: [],
     followers: [],
-    totalUsers: 0,
+    totalUsers: 0
   };
   return res(ctx.status(200), ctx.json(result));
 });
@@ -55,7 +55,7 @@ export const getUserProfileByUsernameMock = rest.get(
     const result = {
       message: 'Get user profile and posts',
       user: existingUser,
-      posts: [postMockData],
+      posts: [postMockData]
     };
     return res(ctx.status(200), ctx.json(result));
   }
@@ -65,7 +65,7 @@ export const changePasswordMock = rest.put(
   `${BASE_URL}/user/profile/change-password`,
   (req, res, ctx) => {
     const result = {
-      message: 'Password updated successfully. You will be redirected shortly to the login page',
+      message: 'Password updated successfully. You will be redirected shortly to the login page'
     };
     return res(ctx.status(200), ctx.json(result));
   }
@@ -78,5 +78,5 @@ export const userHandlers = [
   getAllUsersMock,
   getUserProfileByUsernameMock,
   emptyUsersMock,
-  changePasswordMock,
+  changePasswordMock
 ];

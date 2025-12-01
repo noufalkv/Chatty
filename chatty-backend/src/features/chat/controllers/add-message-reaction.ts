@@ -23,7 +23,7 @@ export class Message {
       messageId: new mongoose.Types.ObjectId(messageId),
       senderName: req.currentUser!.username,
       reaction,
-      type,
+      type
     });
     res.status(HTTP_STATUS.OK).json({ message: 'Message reaction added' });
   }

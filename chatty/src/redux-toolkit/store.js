@@ -17,6 +17,6 @@ export const store = configureStore({
     post: postReducer,
     allPosts: postsReducer,
     userPostReactions: userPostReactionReducer,
-    chat: chatReducer,
-  },
+    chat: chatReducer
+  }
 });

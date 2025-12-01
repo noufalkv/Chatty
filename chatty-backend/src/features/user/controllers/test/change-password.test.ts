@@ -30,7 +30,7 @@ describe('ChangePassword', () => {
         {
           currentPassword: '',
           newPassword: 'manny2',
-          confirmPassword: 'manny2',
+          confirmPassword: 'manny2'
         }
       ) as Request;
       const res: Response = authMockResponse();
@@ -46,7 +46,7 @@ describe('ChangePassword', () => {
         {
           currentPassword: 'manny1',
           newPassword: '',
-          confirmPassword: 'manny2',
+          confirmPassword: 'manny2'
         }
       ) as Request;
       const res: Response = authMockResponse();
@@ -62,7 +62,7 @@ describe('ChangePassword', () => {
         {
           currentPassword: 'manny1',
           newPassword: 'manny2',
-          confirmPassword: '',
+          confirmPassword: ''
         }
       ) as Request;
       const res: Response = authMockResponse();
@@ -80,14 +80,14 @@ describe('ChangePassword', () => {
         {
           currentPassword: 'manny1',
           newPassword: 'manny2',
-          confirmPassword: 'manny2',
+          confirmPassword: 'manny2'
         },
         authUserPayload
       ) as Request;
       const res: Response = authMockResponse();
       const mockUser = {
         ...existingUser,
-        comparePassword: () => false,
+        comparePassword: () => false
       };
       jest.spyOn(authService, 'getAuthUserByUsername').mockResolvedValue(mockUser as any);
 
@@ -103,7 +103,7 @@ describe('ChangePassword', () => {
         {
           currentPassword: 'manny1',
           newPassword: 'manny2',
-          confirmPassword: 'manny2',
+          confirmPassword: 'manny2'
         },
         authUserPayload
       ) as Request;
@@ -111,7 +111,7 @@ describe('ChangePassword', () => {
       const mockUser = {
         ...existingUser,
         comparePassword: () => true,
-        hashPassword: () => 'djejdjr123482ejsj',
+        hashPassword: () => 'djejdjr123482ejsj'
       };
       jest.spyOn(authService, 'getAuthUserByUsername').mockResolvedValue(mockUser as any);
       jest.spyOn(userService, 'updatePassword');
@@ -128,7 +128,7 @@ describe('ChangePassword', () => {
       );
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Password updated successfully. You will be redirected shortly to the login page.',
+        message: 'Password updated successfully. You will be redirected shortly to the login page.'
       });
     });
   });

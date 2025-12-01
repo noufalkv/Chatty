@@ -7,7 +7,7 @@ const CardElementButtons = ({
   btnTextTwo,
   onClickBtnOne,
   onClickBtnTwo,
-  onNavigateToProfile,
+  onNavigateToProfile
 }) => {
   return (
     <div className="card-element-buttons" data-testid="card-element-buttons">
@@ -41,6 +41,6 @@ CardElementButtons.propTypes = {
   btnTextTwo: PropTypes.string,
   onClickBtnOne: PropTypes.func,
   onClickBtnTwo: PropTypes.func,
-  onNavigateToProfile: PropTypes.func,
+  onNavigateToProfile: PropTypes.func
 };
 export default CardElementButtons;

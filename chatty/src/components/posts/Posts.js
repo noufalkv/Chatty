@@ -51,6 +51,6 @@ const Posts = ({ allPosts, userFollowing, postsLoading }) => {
 Posts.propTypes = {
   allPosts: PropTypes.array.isRequired,
   userFollowing: PropTypes.array.isRequired,
-  postsLoading: PropTypes.bool,
+  postsLoading: PropTypes.bool
 };
 export default Posts;

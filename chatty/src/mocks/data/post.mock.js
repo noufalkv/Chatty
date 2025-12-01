@@ -20,8 +20,8 @@ export const postMockData = {
     happy: 0,
     wow: 0,
     sad: 0,
-    angry: 0,
-  },
+    angry: 0
+  }
 };
 
 export const editPostMockData = {
@@ -46,8 +46,8 @@ export const editPostMockData = {
     happy: 0,
     wow: 0,
     sad: 0,
-    angry: 0,
-  },
+    angry: 0
+  }
 };
 
 export const postComment = {
@@ -58,7 +58,7 @@ export const postComment = {
   profilePicture: 'https://place-hold.it/500x500',
   comment: 'I like it',
   createdAt: '2022-05-16',
-  userTo: '60263f14648fed5246e322d9',
+  userTo: '60263f14648fed5246e322d9'
 };
 
 export const postReactionOne = {
@@ -70,7 +70,7 @@ export const postReactionOne = {
   profilePicture: 'https://place-hold.it/500x500',
   createdAt: '2022-05-16',
   userTo: '60263f14648fed5246e322d9',
-  comment: '',
+  comment: ''
 };
 
 export const postReactionTwo = {
@@ -82,5 +82,5 @@ export const postReactionTwo = {
   profilePicture: 'https://place-hold.it/500x500',
   createdAt: '2022-05-16',
   userTo: '60263f14648fed5246e322d9',
-  comment: '',
+  comment: ''
 };

@@ -15,8 +15,8 @@ jest.mock('@service/redis/message.cache');
 Object.defineProperties(chatServer, {
   socketIOChatObject: {
     value: new Server(),
-    writable: true,
-  },
+    writable: true
+  }
 });
 
 describe('Message', () => {
@@ -37,7 +37,7 @@ describe('Message', () => {
           conversationId: '602854c81c9ca7939aaeba43',
           messageId: `${mockMessageId}`,
           reaction: 'love',
-          type: 'add',
+          type: 'add'
         },
         authUserPayload
       ) as Request;
@@ -62,7 +62,7 @@ describe('Message', () => {
       );
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Message reaction added',
+        message: 'Message reaction added'
       });
     });
 
@@ -73,7 +73,7 @@ describe('Message', () => {
           conversationId: '602854c81c9ca7939aaeba43',
           messageId: `${mockMessageId}`,
           reaction: 'love',
-          type: 'add',
+          type: 'add'
         },
         authUserPayload
       ) as Request;
@@ -85,11 +85,11 @@ describe('Message', () => {
         messageId: mockMessageId,
         senderName: req.currentUser!.username,
         reaction: 'love',
-        type: 'add',
+        type: 'add'
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Message reaction added',
+        message: 'Message reaction added'
       });
     });
   });

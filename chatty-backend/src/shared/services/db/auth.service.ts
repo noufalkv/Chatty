@@ -16,7 +16,7 @@ class AuthService {
       { _id: authId },
       {
         passwordResetToken: token,
-        passwordResetExpires: tokenExpiration,
+        passwordResetExpires: tokenExpiration
       }
     );
   }
@@ -25,8 +25,8 @@ class AuthService {
     const query = {
       $or: [
         { username: Helpers.firstLetterUppercase(username) },
-        { email: Helpers.lowerCase(email) },
-      ],
+        { email: Helpers.lowerCase(email) }
+      ]
     };
     const user: IAuthDocument = (await AuthModel.findOne(query).exec()) as IAuthDocument;
     return user;
@@ -34,14 +34,14 @@ class AuthService {
 
   public async getAuthUserByUsername(username: string): Promise<IAuthDocument> {
     const user: IAuthDocument = (await AuthModel.findOne({
-      username: Helpers.firstLetterUppercase(username),
+      username: Helpers.firstLetterUppercase(username)
     }).exec()) as IAuthDocument;
     return user;
   }
 
   public async getAuthUserByEmail(email: string): Promise<IAuthDocument> {
     const user: IAuthDocument = (await AuthModel.findOne({
-      email: Helpers.lowerCase(email),
+      email: Helpers.lowerCase(email)
     }).exec()) as IAuthDocument;
     return user;
   }
@@ -49,7 +49,7 @@ class AuthService {
   public async getAuthUserByPasswordToken(token: string): Promise<IAuthDocument> {
     const user: IAuthDocument = (await AuthModel.findOne({
       passwordResetToken: token,
-      passwordResetExpires: { $gt: Date.now() },
+      passwordResetExpires: { $gt: Date.now() }
     }).exec()) as IAuthDocument;
     return user;
   }

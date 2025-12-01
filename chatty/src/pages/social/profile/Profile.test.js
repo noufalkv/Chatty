@@ -8,15 +8,15 @@ import { createSearchParams } from 'react-router-dom';
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useParams: () => ({
-    username: 'Manny',
-  }),
+    username: 'Manny'
+  })
 }));
 
 describe('Profile', () => {
   beforeEach(() => {
     const url = `/app/social/profile/${existingUser?.username}?${createSearchParams({
       id: existingUser._id,
-      uId: existingUser.uId,
+      uId: existingUser.uId
     })}`;
     const history = createBrowserHistory();
     history.push(url);

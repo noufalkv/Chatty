@@ -6,7 +6,7 @@ describe('CountContainer', () => {
     const props = {
       loading: true,
       followersCount: undefined,
-      followingCount: undefined,
+      followingCount: undefined
     };
     render(<CountContainer {...props} />);
     const countContainer = screen.queryByTestId('count-container-skeleton');
@@ -17,7 +17,7 @@ describe('CountContainer', () => {
     const props = {
       loading: false,
       followersCount: 537377372,
-      followingCount: 36362636,
+      followingCount: 36362636
     };
     render(<CountContainer {...props} />);
     const items = screen.queryAllByTestId('info');

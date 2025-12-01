@@ -60,7 +60,7 @@ export class CommentCache extends BaseCache {
       }
       const response: ICommentNameList = {
         count: commentsCount,
-        names: list,
+        names: list
       };
       return [response];
     } catch (error) {

@@ -11,31 +11,31 @@ const BasicInfo = ({ editableInputs, username, profile, loading, setEditableInpu
     quoteMsg: 'No information',
     workMsg: 'No information',
     schoolMsg: 'No information',
-    locationMsg: 'No information',
+    locationMsg: 'No information'
   };
   const noSocialInfo = {
     instagramMsg: '',
     twitterMsg: '',
     facebookMsg: '',
-    youtubeMsg: '',
+    youtubeMsg: ''
   };
   const editableSocialInputs = {
     instagram: '',
     twitter: '',
     facebook: '',
-    youtube: '',
+    youtube: ''
   };
   const basicInfoPlaceholder = {
     quotePlacehoder: 'Add your quote',
     workPlacehoder: 'Add company name',
     schoolPlacehoder: 'Add school name',
-    locationPlacehoder: 'Add city and country names',
+    locationPlacehoder: 'Add city and country names'
   };
   const socialLinksPlaceholder = {
     instagramPlacehoder: '',
     twitterPlacehoder: '',
     facebookPlacehoder: '',
-    youtubePlacehoder: '',
+    youtubePlacehoder: ''
   };
 
   const updateBasicInfo = async () => {
@@ -76,7 +76,7 @@ BasicInfo.propTypes = {
   profile: PropTypes.object,
   loading: PropTypes.bool,
   editableInputs: PropTypes.object,
-  setEditableInputs: PropTypes.func,
+  setEditableInputs: PropTypes.func
 };
 
 export default BasicInfo;

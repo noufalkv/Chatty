@@ -54,7 +54,7 @@ export class PostUtils {
         imgVersion: '',
         video: '',
         videoId: '',
-        videoVersion: '',
+        videoVersion: ''
       })
     );
   }

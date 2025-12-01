@@ -23,7 +23,7 @@ const ReactionWrapper = ({ children, closeModal }) => {
 
 ReactionWrapper.propTypes = {
   children: PropTypes.node.isRequired,
-  closeModal: PropTypes.func,
+  closeModal: PropTypes.func
 };
 
 export default ReactionWrapper;

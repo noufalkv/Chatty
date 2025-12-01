@@ -26,7 +26,7 @@ const Sidebar = () => {
     if (name === 'Profile') {
       url = `${url}/${profile?.username}?${createSearchParams({
         id: profile?._id,
-        uId: profile?.uId,
+        uId: profile?.uId
       })}`;
     }
 

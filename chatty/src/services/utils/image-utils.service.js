@@ -46,7 +46,7 @@ export class ImageUtils {
         imgVersion: '',
         videoId: '',
         videoVersion: '',
-        post,
+        post
       })
     );
   }

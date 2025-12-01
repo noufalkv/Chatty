@@ -54,7 +54,7 @@ describe('Password', () => {
       expect(emailQueue.addEmailJob).toHaveBeenCalled();
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Password reset email sent.',
+        message: 'Password reset email sent.'
       });
     });
   });
@@ -87,7 +87,7 @@ describe('Password', () => {
         { password: CORRECT_PASSWORD, confirmPassword: CORRECT_PASSWORD },
         null,
         {
-          token: '',
+          token: ''
         }
       ) as Request;
       const res: Response = authMockResponse();
@@ -104,7 +104,7 @@ describe('Password', () => {
         { password: CORRECT_PASSWORD, confirmPassword: CORRECT_PASSWORD },
         null,
         {
-          token: '12sde3',
+          token: '12sde3'
         }
       ) as Request;
       const res: Response = authMockResponse();
@@ -114,7 +114,7 @@ describe('Password', () => {
       expect(emailQueue.addEmailJob).toHaveBeenCalled();
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Password successfully updated.',
+        message: 'Password successfully updated.'
       });
     });
   });

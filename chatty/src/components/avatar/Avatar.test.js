@@ -10,7 +10,7 @@ describe('Avatar', () => {
         name: 'Martin',
         bgColor: 'green',
         textColor: 'white',
-        size: 40,
+        size: 40
       };
     });
 
@@ -40,7 +40,7 @@ describe('Avatar', () => {
         name: 'Martin',
         bgColor: 'green',
         textColor: 'white',
-        size: 40,
+        size: 40
       };
     });
 

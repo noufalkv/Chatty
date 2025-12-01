@@ -3,7 +3,7 @@ import { authUserPayload } from '@root/mocks/auth.mock';
 import {
   notificationData,
   notificationMockRequest,
-  notificationMockResponse,
+  notificationMockResponse
 } from '@root/mocks/notification.mock';
 import { Get } from '@notification/controllers/get-notifications';
 import { notificationService } from '@service/db/notification.service';
@@ -24,7 +24,7 @@ describe('Get', () => {
 
   it('should send correct json response', async () => {
     const req: Request = notificationMockRequest({}, authUserPayload, {
-      notificationId: '12345',
+      notificationId: '12345'
     }) as Request;
     const res: Response = notificationMockResponse();
     jest.spyOn(notificationService, 'getNotifications').mockResolvedValue([notificationData]);
@@ -34,7 +34,7 @@ describe('Get', () => {
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
       message: 'User notifications',
-      notifications: [notificationData],
+      notifications: [notificationData]
     });
   });
 });

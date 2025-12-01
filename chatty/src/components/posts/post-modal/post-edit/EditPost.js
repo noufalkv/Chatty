@@ -36,7 +36,7 @@ const EditPost = () => {
     imgVersion: '',
     videoId: '',
     videoVersion: '',
-    video: '',
+    video: ''
   });
   const [disable, setDisable] = useState(true);
   const [apiResponse, setApiResponse] = useState('');
@@ -278,7 +278,7 @@ const EditPost = () => {
             className="modal-box"
             style={{
               height:
-                selectedPostImage || hasVideo || post?.gifUrl || post?.imgId ? '700px' : 'auto',
+                selectedPostImage || hasVideo || post?.gifUrl || post?.imgId ? '700px' : 'auto'
             }}
           >
             {loading && (

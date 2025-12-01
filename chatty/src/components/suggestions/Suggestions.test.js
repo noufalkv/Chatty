@@ -25,7 +25,7 @@ const user = {
   createdAt: '2022-06-15',
   bgImageVersion: '',
   bgImageId: '',
-  profilePicture: '',
+  profilePicture: ''
 };
 
 describe('Suggestions', () => {

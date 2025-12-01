@@ -8,7 +8,7 @@ import reducer, {
   toggleGifModal,
   toggleImageModal,
   toggleVideoModal,
-  toggleReactionsModal,
+  toggleReactionsModal
 } from '@redux/reducers/modal/modal.reducer';
 
 const initialState = {
@@ -23,7 +23,7 @@ const initialState = {
   gifModalIsOpen: false,
   reactionsModalIsOpen: false,
   commentsModalIsOpen: false,
-  deleteDialogIsOpen: false,
+  deleteDialogIsOpen: false
 };
 
 const modalData = {
@@ -38,7 +38,7 @@ const modalData = {
   gifModalIsOpen: true,
   reactionsModalIsOpen: true,
   commentsModalIsOpen: true,
-  deleteDialogIsOpen: true,
+  deleteDialogIsOpen: true
 };
 
 describe('modal reducer', () => {
@@ -74,7 +74,7 @@ describe('modal reducer', () => {
       gifModalIsOpen: false,
       reactionsModalIsOpen: false,
       commentsModalIsOpen: false,
-      deleteDialogIsOpen: false,
+      deleteDialogIsOpen: false
     });
   });
 
@@ -91,7 +91,7 @@ describe('modal reducer', () => {
       gifModalIsOpen: false,
       reactionsModalIsOpen: false,
       commentsModalIsOpen: false,
-      deleteDialogIsOpen: false,
+      deleteDialogIsOpen: false
     });
   });
 
@@ -108,7 +108,7 @@ describe('modal reducer', () => {
       gifModalIsOpen: false,
       reactionsModalIsOpen: false,
       commentsModalIsOpen: false,
-      deleteDialogIsOpen: false,
+      deleteDialogIsOpen: false
     });
   });
 
@@ -125,7 +125,7 @@ describe('modal reducer', () => {
       gifModalIsOpen: false,
       reactionsModalIsOpen: false,
       commentsModalIsOpen: false,
-      deleteDialogIsOpen: false,
+      deleteDialogIsOpen: false
     });
   });
 
@@ -142,7 +142,7 @@ describe('modal reducer', () => {
       gifModalIsOpen: false,
       reactionsModalIsOpen: false,
       commentsModalIsOpen: false,
-      deleteDialogIsOpen: false,
+      deleteDialogIsOpen: false
     });
   });
 
@@ -159,7 +159,7 @@ describe('modal reducer', () => {
       gifModalIsOpen: false,
       reactionsModalIsOpen: false,
       commentsModalIsOpen: false,
-      deleteDialogIsOpen: false,
+      deleteDialogIsOpen: false
     });
   });
 
@@ -176,7 +176,7 @@ describe('modal reducer', () => {
       gifModalIsOpen: true,
       reactionsModalIsOpen: false,
       commentsModalIsOpen: false,
-      deleteDialogIsOpen: false,
+      deleteDialogIsOpen: false
     });
   });
 
@@ -193,7 +193,7 @@ describe('modal reducer', () => {
       gifModalIsOpen: false,
       reactionsModalIsOpen: true,
       commentsModalIsOpen: false,
-      deleteDialogIsOpen: false,
+      deleteDialogIsOpen: false
     });
   });
 
@@ -210,7 +210,7 @@ describe('modal reducer', () => {
       gifModalIsOpen: false,
       reactionsModalIsOpen: false,
       commentsModalIsOpen: true,
-      deleteDialogIsOpen: false,
+      deleteDialogIsOpen: false
     });
   });
 
@@ -229,7 +229,7 @@ describe('modal reducer', () => {
       gifModalIsOpen: false,
       reactionsModalIsOpen: false,
       commentsModalIsOpen: false,
-      deleteDialogIsOpen: true,
+      deleteDialogIsOpen: true
     });
   });
 });

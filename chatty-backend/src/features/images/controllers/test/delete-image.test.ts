@@ -15,8 +15,8 @@ jest.mock('@service/redis/user.cache');
 Object.defineProperties(imageServer, {
   socketIOImageObject: {
     value: new Server(),
-    writable: true,
-  },
+    writable: true
+  }
 });
 
 describe('Delete', () => {
@@ -31,7 +31,7 @@ describe('Delete', () => {
 
   it('should send correct json response for image upload', async () => {
     const req: Request = imagesMockRequest({}, {}, authUserPayload, {
-      imageId: '12345',
+      imageId: '12345'
     }) as Request;
     const res: Response = imagesMockResponse();
     jest.spyOn(imageServer.socketIOImageObject, 'emit');
@@ -43,17 +43,17 @@ describe('Delete', () => {
       req.params.imageId
     );
     expect(imageQueue.addImageJob).toHaveBeenCalledWith('removeImageFromDB', {
-      imageId: req.params.imageId,
+      imageId: req.params.imageId
     });
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
-      message: 'Image deleted successfully',
+      message: 'Image deleted successfully'
     });
   });
 
   it('should send correct json response for background image upload', async () => {
     const req: Request = imagesMockRequest({}, {}, authUserPayload, {
-      bgImageId: '12345',
+      bgImageId: '12345'
     }) as Request;
     const res: Response = imagesMockResponse();
     jest.spyOn(imageServer.socketIOImageObject, 'emit');
@@ -67,7 +67,7 @@ describe('Delete', () => {
       req.params.imageId
     );
     expect(imageQueue.addImageJob).toHaveBeenCalledWith('removeImageFromDB', {
-      imageId: req.params.imageId,
+      imageId: req.params.imageId
     });
     expect(UserCache.prototype.updateSingleUserItemInCache).toHaveBeenCalledWith(
       `${req.currentUser?.userId}`,
@@ -76,7 +76,7 @@ describe('Delete', () => {
     );
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
-      message: 'Image deleted successfully',
+      message: 'Image deleted successfully'
     });
   });
 });

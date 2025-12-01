@@ -23,7 +23,7 @@ import {
   FaUserCheck,
   FaUserPlus,
   FaUsers,
-  FaVideo,
+  FaVideo
 } from 'react-icons/fa';
 
 export const sideBarItems = [
@@ -31,79 +31,79 @@ export const sideBarItems = [
     index: 1,
     name: 'Streams',
     url: '/app/social/streams',
-    iconName: 'FaNewspaper',
+    iconName: 'FaNewspaper'
   },
   {
     index: 2,
     name: 'Chat',
     url: '/app/social/chat/messages',
-    iconName: 'FaComments',
+    iconName: 'FaComments'
   },
   {
     index: 3,
     name: 'People',
     url: '/app/social/people',
-    iconName: 'FaUsers',
+    iconName: 'FaUsers'
   },
   {
     index: 4,
     name: 'Following',
     url: '/app/social/following',
-    iconName: 'FaUserPlus',
+    iconName: 'FaUserPlus'
   },
   {
     index: 5,
     name: 'Followers',
     url: '/app/social/followers',
-    iconName: 'FaHeart',
+    iconName: 'FaHeart'
   },
   {
     index: 6,
     name: 'Photos',
     url: '/app/social/photos',
-    iconName: 'FaImages',
+    iconName: 'FaImages'
   },
   {
     index: 7,
     name: 'Videos',
     url: '/app/social/videos',
-    iconName: 'FaVideo',
+    iconName: 'FaVideo'
   },
   {
     index: 8,
     name: 'Notifications',
     url: '/app/social/notifications',
-    iconName: 'FaRegBell',
+    iconName: 'FaRegBell'
   },
   {
     index: 9,
     name: 'Profile',
     url: '/app/social/profile',
-    iconName: 'FaRegUser',
-  },
+    iconName: 'FaRegUser'
+  }
 ];
 
 export const feelingsList = [
   {
     index: 0,
     name: 'happy',
-    image: happyFeelings,
+    image: happyFeelings
   },
   {
     index: 1,
     name: 'excited',
-    image: excited,
+    image: excited
   },
   {
     index: 2,
     name: 'blessed',
-    image: blessed,
+    image: blessed
   },
   {
     index: 3,
     name: 'loved',
-    image: loved,
-  },
+    image: loved
+  }
 ];
 
 export const fontAwesomeIcons = {
@@ -116,25 +116,25 @@ export const fontAwesomeIcons = {
   FaVideo: <FaVideo className="icon" />,
   FaRegBell: <FaRegBell className="icon" />,
   FaBirthdayCake: <FaBirthdayCake className="icon" />,
-  FaRegUser: <FaRegUser className="icon" />,
+  FaRegUser: <FaRegUser className="icon" />
 };
 
 export const privacyList = [
   {
     topText: 'Public',
     subText: 'Anyone on Chatty',
-    icon: <FaGlobe className="globe-icon globe" />,
+    icon: <FaGlobe className="globe-icon globe" />
   },
   {
     topText: 'Followers',
     subText: 'Your followers on Chatty',
-    icon: <FaUserCheck className="globe-icon globe" />,
+    icon: <FaUserCheck className="globe-icon globe" />
   },
   {
     topText: 'Private',
     subText: 'For you only',
-    icon: <FaLock className="globe-icon globe" />,
-  },
+    icon: <FaLock className="globe-icon globe" />
+  }
 ];
 
 export const bgColors = [
@@ -150,7 +150,7 @@ export const bgColors = [
   '#8bc34a',
   '#009688',
   '#03a9f4',
-  '#cddc39',
+  '#cddc39'
 ];
 
 export const avatarColors = [
@@ -177,7 +177,7 @@ export const avatarColors = [
   '#6a1b9a',
   '#1a237e',
   '#1de9b6',
-  '#d84315',
+  '#d84315'
 ];
 
 export const emptyPostData = {
@@ -198,7 +198,7 @@ export const emptyPostData = {
   imgVersion: '',
   imgId: '',
   createdAt: '',
-  video: '',
+  video: ''
 };
 
 export const reactionsMap = {
@@ -207,7 +207,7 @@ export const reactionsMap = {
   wow,
   sad,
   happy,
-  angry,
+  angry
 };
 
 export const reactionsColor = {
@@ -216,7 +216,7 @@ export const reactionsColor = {
   angry: '#e9710f',
   happy: '#f7b124',
   sad: '#f7b124',
-  wow: '#f7b124',
+  wow: '#f7b124'
 };
 
 export const notificationItems = [
@@ -225,29 +225,29 @@ export const notificationItems = [
     title: 'Direct Messages',
     description: 'New direct messages notifications.',
     toggle: true,
-    type: 'messages',
+    type: 'messages'
   },
   {
     index: 1,
     title: 'Follows',
     description: 'New followers notifications.',
     toggle: true,
-    type: 'follows',
+    type: 'follows'
   },
   {
     index: 2,
     title: 'Post Reactions',
     description: 'New reactions for your posts notifications.',
     toggle: true,
-    type: 'reactions',
+    type: 'reactions'
   },
   {
     index: 3,
     title: 'Comments',
     description: 'New comments for your posts notifications.',
     toggle: true,
-    type: 'comments',
-  },
+    type: 'comments'
+  }
 ];
 
 export const tabItems = (showPassword, showNotification) => {
@@ -258,13 +258,13 @@ export const tabItems = (showPassword, showNotification) => {
     {
       key: 'Change Password',
       show: showPassword,
-      icon: <FaKey className="banner-nav-item-name-icon" />,
+      icon: <FaKey className="banner-nav-item-name-icon" />
     },
     {
       key: 'Notifications',
       show: showNotification,
-      icon: <FaRegBell className="banner-nav-item-name-icon" />,
-    },
+      icon: <FaRegBell className="banner-nav-item-name-icon" />
+    }
   ];
   return items;
 };

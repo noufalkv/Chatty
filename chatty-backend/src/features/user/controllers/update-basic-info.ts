@@ -15,7 +15,7 @@ export class Edit {
     }
     userQueue.addUserJob('updateBasicInfoInDB', {
       key: `${req.currentUser!.userId}`,
-      value: req.body,
+      value: req.body
     });
     res.status(HTTP_STATUS.OK).json({ message: 'Updated successfully' });
   }
@@ -25,7 +25,7 @@ export class Edit {
     await userCache.updateSingleUserItemInCache(`${req.currentUser!.userId}`, 'social', req.body);
     userQueue.addUserJob('updateSocialLinksInDB', {
       key: `${req.currentUser!.userId}`,
-      value: req.body,
+      value: req.body
     });
     res.status(HTTP_STATUS.OK).json({ message: 'Updated successfully' });
   }

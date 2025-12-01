@@ -31,7 +31,7 @@ const Login = () => {
     try {
       const result = await authService.signIn({
         username,
-        password,
+        password
       });
       setLoggedIn(keepLoggedIn);
       setStoredUsername(username);

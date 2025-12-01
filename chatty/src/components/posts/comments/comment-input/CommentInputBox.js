@@ -24,7 +24,7 @@ const CommentInputBox = ({ post }) => {
         postId: post?._id,
         comment: comment.trim(),
         commentsCount: post.commentsCount,
-        profilePicture: profile?.profilePicture,
+        profilePicture: profile?.profilePicture
       };
       socketService?.socket?.emit('comment', commentBody);
       await postService.addComment(commentBody);
@@ -58,6 +58,6 @@ const CommentInputBox = ({ post }) => {
   );
 };
 CommentInputBox.propTypes = {
-  post: PropTypes.object,
+  post: PropTypes.object
 };
 export default CommentInputBox;

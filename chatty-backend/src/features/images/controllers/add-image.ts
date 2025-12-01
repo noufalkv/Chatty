@@ -55,7 +55,7 @@ export class Add {
         key: `${req.currentUser!.userId}`,
         value: url,
         imgId: result.public_id,
-        imgVersion: result.version.toString(),
+        imgVersion: result.version.toString()
       });
       res.status(HTTP_STATUS.OK).json({ message: 'Image added successfully' });
     } catch (error) {
@@ -85,17 +85,17 @@ export class Add {
     ) as Promise<IUserDocument>;
     const response: [IUserDocument, IUserDocument] = (await Promise.all([
       bgImageId,
-      bgImageVersion,
+      bgImageVersion
     ])) as [IUserDocument, IUserDocument];
     socketIOImageObject.emit('update user', {
       bgImageId: publicId,
       bgImageVersion: version,
-      userId: response[0],
+      userId: response[0]
     });
     imageQueue.addImageJob('updateBGImageInDB', {
       key: `${req.currentUser!.userId}`,
       imgId: publicId,
-      imgVersion: version.toString(),
+      imgVersion: version.toString()
     });
     res.status(HTTP_STATUS.OK).json({ message: 'Image added successfully' });
   }

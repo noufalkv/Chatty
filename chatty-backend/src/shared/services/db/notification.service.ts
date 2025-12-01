@@ -9,7 +9,7 @@ class NotificationService {
       { $lookup: { from: 'User', localField: 'userFrom', foreignField: '_id', as: 'userFrom' } },
       { $unwind: '$userFrom' },
       {
-        $lookup: { from: 'Auth', localField: 'userFrom.authId', foreignField: '_id', as: 'authId' },
+        $lookup: { from: 'Auth', localField: 'userFrom.authId', foreignField: '_id', as: 'authId' }
       },
       { $unwind: '$authId' },
       {
@@ -32,10 +32,10 @@ class NotificationService {
             profilePicture: '$userFrom.profilePicture',
             username: '$authId.username',
             avatarColor: '$authId.avatarColor',
-            uId: '$authId.uId',
-          },
-        },
-      },
+            uId: '$authId.uId'
+          }
+        }
+      }
     ]);
     return notifications;
   }

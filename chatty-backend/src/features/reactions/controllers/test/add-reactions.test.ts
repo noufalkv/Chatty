@@ -34,8 +34,8 @@ describe('AddReaction', () => {
           happy: 0,
           wow: 0,
           sad: 0,
-          angry: 0,
-        },
+          angry: 0
+        }
       },
       authUserPayload
     ) as Request;
@@ -57,7 +57,7 @@ describe('AddReaction', () => {
     );
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
-      message: 'Reaction added successfully',
+      message: 'Reaction added successfully'
     });
   });
 });

@@ -88,6 +88,6 @@ MessageSidebar.propTypes = {
   profile: PropTypes.object.isRequired,
   messageCount: PropTypes.number.isRequired,
   messageNotifications: PropTypes.array.isRequired,
-  openChatPage: PropTypes.func.isRequired,
+  openChatPage: PropTypes.func.isRequired
 };
 export default MessageSidebar;

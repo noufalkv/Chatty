@@ -41,7 +41,7 @@ RightMessageBubble.propTypes = {
   chat: PropTypes.object,
   showImageModal: PropTypes.bool,
   setImageUrl: PropTypes.func,
-  setShowImageModal: PropTypes.func,
+  setShowImageModal: PropTypes.func
 };
 
 export default RightMessageBubble;

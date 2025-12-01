@@ -18,8 +18,8 @@ jest.mock('@global/helpers/cloudinary-upload');
 Object.defineProperties(postServer, {
   socketIOPostObject: {
     value: new Server(),
-    writable: true,
-  },
+    writable: true
+  }
 });
 
 describe('Create', () => {
@@ -47,15 +47,15 @@ describe('Create', () => {
         key: spy.mock.calls[0][0].key,
         currentUserId: `${req.currentUser?.userId}`,
         uId: `${req.currentUser?.uId}`,
-        createdPost,
+        createdPost
       });
       expect(postQueue.addPostJob).toHaveBeenCalledWith('addPostToDB', {
         key: req.currentUser?.userId,
-        value: createdPost,
+        value: createdPost
       });
       expect(res.status).toHaveBeenCalledWith(201);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Post created successfully',
+        message: 'Post created successfully'
       });
     });
   });
@@ -106,15 +106,15 @@ describe('Create', () => {
         key: spy.mock.calls[0][0].key,
         currentUserId: `${req.currentUser?.userId}`,
         uId: `${req.currentUser?.uId}`,
-        createdPost,
+        createdPost
       });
       expect(postQueue.addPostJob).toHaveBeenCalledWith('addPostToDB', {
         key: req.currentUser?.userId,
-        value: createdPost,
+        value: createdPost
       });
       expect(res.status).toHaveBeenCalledWith(201);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Post created with image successfully',
+        message: 'Post created with image successfully'
       });
     });
   });

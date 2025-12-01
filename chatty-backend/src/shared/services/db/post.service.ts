@@ -2,7 +2,7 @@ import {
   IPostDocument,
   IGetPostsQuery,
   IQueryComplete,
-  IQueryDeleted,
+  IQueryDeleted
 } from '@post/interfaces/post.interface';
 import { PostModel } from '@post/models/post.schema';
 import { IUserDocument } from '@user/interfaces/user.interface';
@@ -37,7 +37,7 @@ class PostService {
       { $match: postQuery },
       { $sort: sort },
       { $skip: skip },
-      { $limit: limit },
+      { $limit: limit }
     ]);
     return posts;
   }
@@ -49,7 +49,7 @@ class PostService {
 
   public async deletePost(postId: string, userId: string): Promise<void> {
     const deletePost: Query<IQueryComplete & IQueryDeleted, IPostDocument> = PostModel.deleteOne({
-      _id: postId,
+      _id: postId
     });
     // delete reactions here
     const decrementPostCount: UpdateQuery<IUserDocument> = UserModel.updateOne(

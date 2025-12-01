@@ -75,7 +75,7 @@ export class FollowerCache extends BaseCache {
           followingCount: user.followingCount,
           profilePicture: user.profilePicture,
           uId: user.uId!,
-          userProfile: user,
+          userProfile: user
         };
         list.push(data);
       }

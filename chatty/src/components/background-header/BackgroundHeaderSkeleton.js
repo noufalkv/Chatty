@@ -41,7 +41,7 @@ const BackgroundHeaderSkeleton = ({ tabItems }) => {
 };
 
 BackgroundHeaderSkeleton.propTypes = {
-  tabItems: PropTypes.array,
+  tabItems: PropTypes.array
 };
 
 export default BackgroundHeaderSkeleton;

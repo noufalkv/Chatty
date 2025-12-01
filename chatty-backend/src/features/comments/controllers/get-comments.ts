@@ -35,7 +35,7 @@ export class Get {
 
     res.status(HTTP_STATUS.OK).json({
       message: 'Post comments names',
-      comments: commentsNames.length ? commentsNames[0] : [],
+      comments: commentsNames.length ? commentsNames[0] : []
     });
   }
 

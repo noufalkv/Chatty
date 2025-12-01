@@ -46,7 +46,7 @@ const Followers = () => {
     try {
       socketService?.socket?.emit('unblock user', {
         blockedUser: user._id,
-        blockedBy: profile?._id,
+        blockedBy: profile?._id
       });
       FollowersUtils.unblockUser(user, dispatch);
     } catch (error) {

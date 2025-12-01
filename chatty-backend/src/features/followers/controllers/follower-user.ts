@@ -36,7 +36,7 @@ export class Add {
     ) as Promise<IUserDocument>;
     const response: [IUserDocument, IUserDocument] = await Promise.all([
       cachedFollower,
-      cachedFollowee,
+      cachedFollowee
     ]);
 
     const followerObjectId: ObjectId = new ObjectId();
@@ -57,7 +57,7 @@ export class Add {
       keyOne: `${req.currentUser!.userId}`,
       keyTwo: `${followerId}`,
       username: req.currentUser!.username,
-      followerDocumentId: followerObjectId,
+      followerDocumentId: followerObjectId
     });
     res.status(HTTP_STATUS.OK).json({ message: 'Following user now' });
   }
@@ -72,7 +72,7 @@ export class Add {
       followingCount: user.followingCount,
       profilePicture: user.profilePicture,
       uId: user.uId!,
-      userProfile: user,
+      userProfile: user
     };
   }
 }

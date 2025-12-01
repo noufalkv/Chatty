@@ -12,7 +12,7 @@ export class Delete {
     await postCache.deletePostFromCache(req.params.postId, `${req.currentUser!.userId}`);
     postQueue.addPostJob('deletePostFromDB', {
       keyOne: req.params.postId,
-      keyTwo: req.currentUser!.userId,
+      keyTwo: req.currentUser!.userId
     });
     res.status(HTTP_STATUS.OK).json({ message: 'Post deleted successfully' });
   }

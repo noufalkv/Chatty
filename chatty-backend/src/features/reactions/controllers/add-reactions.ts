@@ -19,7 +19,7 @@ export class Add {
       type,
       avataColor: req.currentUser!.avatarColor,
       username: req.currentUser!.username,
-      profilePicture,
+      profilePicture
     } as IReactionDocument;
 
     await reactionCache.savePostReactionToCache(
@@ -37,7 +37,7 @@ export class Add {
       username: req.currentUser!.username,
       type,
       previousReaction,
-      reactionObject,
+      reactionObject
     };
     reactionQueue.addReactionJob('addReactionToDB', databaseReactionData);
     res.status(HTTP_STATUS.OK).json({ message: 'Reaction added successfully' });

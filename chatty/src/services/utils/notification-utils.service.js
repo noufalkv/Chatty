@@ -94,7 +94,7 @@ export class NotificationUtils {
         senderName: notification?.userFrom
           ? notification?.userFrom.username
           : notification?.username,
-        notificationType: notification?.notificationType,
+        notificationType: notification?.notificationType
       };
       items.push(item);
     }
@@ -120,7 +120,7 @@ export class NotificationUtils {
         reaction: notification?.reaction,
         senderName: notification?.userFrom
           ? notification?.userFrom.username
-          : notification?.username,
+          : notification?.username
       };
       setNotificationDialogContent(notificationDialog);
     }
@@ -150,7 +150,7 @@ export class NotificationUtils {
           messageId: data._id,
           conversationId: data.conversationId,
           body: data.body,
-          isRead: data.isRead,
+          isRead: data.isRead
         };
         const messageIndex = findIndex(
           messageNotifications,

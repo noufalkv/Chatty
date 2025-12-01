@@ -3,7 +3,7 @@ import reducer, { addToPosts } from '@redux/reducers/post/posts.reducer';
 const initialState = {
   posts: [],
   totalPostsCount: 0,
-  isLoading: false,
+  isLoading: false
 };
 const postData = {
   _id: '1234',
@@ -22,7 +22,7 @@ const postData = {
   reactions: [],
   imgVersion: '1233445',
   imgId: '123445',
-  createdAt: '2022-06-15',
+  createdAt: '2022-06-15'
 };
 
 describe('posts reducer', () => {
@@ -40,7 +40,7 @@ describe('posts reducer', () => {
     expect(reducer(initialState, addToPosts([postData, postData]))).toEqual({
       posts: [postData, postData],
       totalPostsCount: 0,
-      isLoading: false,
+      isLoading: false
     });
   });
 });

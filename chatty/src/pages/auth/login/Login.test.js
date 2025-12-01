@@ -8,7 +8,7 @@ import { act } from 'react-dom/test-utils';
 const mockedUsedNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockedUsedNavigate,
+  useNavigate: () => mockedUsedNavigate
 }));
 
 describe('SigIn', () => {

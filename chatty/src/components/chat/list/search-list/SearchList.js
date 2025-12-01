@@ -11,7 +11,7 @@ const SearchList = ({
   setSearch,
   setIsSearching,
   setSearchResult,
-  setComponentType,
+  setComponentType
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const SearchList = ({
     setSelectedUser(user);
     const url = `${location.pathname}?${createSearchParams({
       username: user.username.toLowerCase(),
-      id: user._id,
+      id: user._id
     })}`;
     navigate(url);
     setSearch('');
@@ -81,7 +81,7 @@ SearchList.propTypes = {
   setSearch: PropTypes.func,
   setIsSearching: PropTypes.func,
   setSearchResult: PropTypes.func,
-  setComponentType: PropTypes.func,
+  setComponentType: PropTypes.func
 };
 
 export default SearchList;

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  reactions: [],
+  reactions: []
 };
 
 const reactionsSlice = createSlice({
@@ -10,8 +10,8 @@ const reactionsSlice = createSlice({
   reducers: {
     addReactions: (state, action) => {
       state.reactions = action.payload;
-    },
-  },
+    }
+  }
 });
 
 export const { addReactions } = reactionsSlice.actions;

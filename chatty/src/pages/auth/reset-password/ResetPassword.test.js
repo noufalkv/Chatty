@@ -9,7 +9,7 @@ import { createSearchParams } from 'react-router-dom';
 describe('ResetPassword', () => {
   beforeEach(() => {
     const url = `/reset-password?${createSearchParams({
-      token: '1234567890',
+      token: '1234567890'
     })}`;
     const history = createBrowserHistory();
     history.push(url);

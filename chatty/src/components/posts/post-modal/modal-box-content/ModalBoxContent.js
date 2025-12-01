@@ -15,7 +15,7 @@ const ModalBoxContent = () => {
   const [selectedItem, setSelectedItem] = useState({
     topText: 'Public',
     subText: 'Anyone on Chatty',
-    icon: <FaGlobe className="globe-icon globe" />,
+    icon: <FaGlobe className="globe-icon globe" />
   });
   const [tooglePrivacy, setTogglePrivacy] = useDetectOutsideClick(privacyRef, false);
 

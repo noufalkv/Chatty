@@ -22,8 +22,8 @@ jest.mock('@service/queues/email.queue');
 Object.defineProperties(chatServer, {
   socketIOChatObject: {
     value: new Server(),
-    writable: true,
-  },
+    writable: true
+  }
 });
 
 describe('Add', () => {
@@ -56,7 +56,7 @@ describe('Add', () => {
     const templateParams = {
       username: existingUserTwo.username!,
       message: chatMessage.body,
-      header: `Message notification from ${req.currentUser!.username}`,
+      header: `Message notification from ${req.currentUser!.username}`
     };
     const template: string = notificationTemplate.notificationMessageTemplate(templateParams);
 
@@ -64,7 +64,7 @@ describe('Add', () => {
     expect(emailQueue.addEmailJob).toHaveBeenCalledWith('directMessageEmail', {
       receiverEmail: existingUserTwo.email!,
       template,
-      subject: `You've received messages from ${req.currentUser!.username!}`,
+      subject: `You've received messages from ${req.currentUser!.username!}`
     });
   });
 
@@ -78,7 +78,7 @@ describe('Add', () => {
     const templateParams = {
       username: existingUserTwo.username!,
       message: chatMessage.body,
-      header: `Message Notification from ${req.currentUser!.username}`,
+      header: `Message Notification from ${req.currentUser!.username}`
     };
     const template: string = notificationTemplate.notificationMessageTemplate(templateParams);
 
@@ -86,7 +86,7 @@ describe('Add', () => {
     expect(emailQueue.addEmailJob).not.toHaveBeenCalledWith('directMessageMail', {
       receiverEmail: req.currentUser!.email,
       template,
-      subject: `You've received messages from ${existingUserTwo.username!}`,
+      subject: `You've received messages from ${existingUserTwo.username!}`
     });
   });
 
@@ -129,7 +129,7 @@ describe('Add', () => {
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
       message: 'Message added',
-      conversationId: new mongoose.Types.ObjectId(`${chatMessage.conversationId}`),
+      conversationId: new mongoose.Types.ObjectId(`${chatMessage.conversationId}`)
     });
   });
 });

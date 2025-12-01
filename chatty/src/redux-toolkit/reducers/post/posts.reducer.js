@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   posts: [],
   totalPostsCount: 0,
-  isLoading: false,
+  isLoading: false
 };
 
 const postsSlice = createSlice({
@@ -13,7 +13,7 @@ const postsSlice = createSlice({
   reducers: {
     addToPosts: (state, action) => {
       state.posts = [...action.payload];
-    },
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(getPosts.pending, (state) => {
@@ -28,7 +28,7 @@ const postsSlice = createSlice({
     builder.addCase(getPosts.rejected, (state) => {
       state.isLoading = false;
     });
-  },
+  }
 });
 
 export const { addToPosts } = postsSlice.actions;

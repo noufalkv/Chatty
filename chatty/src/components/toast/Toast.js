@@ -73,7 +73,7 @@ Toast.propTypes = {
   toastList: PropTypes.array,
   position: PropTypes.string,
   autoDelete: PropTypes.bool,
-  autoDeleteTime: PropTypes.number,
+  autoDeleteTime: PropTypes.number
 };
 
 export default Toast;

@@ -42,7 +42,7 @@ export class PostCache extends BaseCache {
       videoId,
       videoVersion,
       reactions,
-      createdAt,
+      createdAt
     } = createdPost;
 
     const dataToSave = {
@@ -63,7 +63,7 @@ export class PostCache extends BaseCache {
       imgId: `${imgId}`,
       videoId: `${videoId}`,
       videoVersion: `${videoVersion}`,
-      createdAt: `${createdAt}`,
+      createdAt: `${createdAt}`
     };
 
     try {
@@ -264,7 +264,7 @@ export class PostCache extends BaseCache {
       imgId,
       videoId,
       videoVersion,
-      profilePicture,
+      profilePicture
     } = updatedPost;
     const dataToSave = {
       post: `${post}`,
@@ -276,7 +276,7 @@ export class PostCache extends BaseCache {
       videoVersion: `${videoVersion}`,
       profilePicture: `${profilePicture}`,
       imgVersion: `${imgVersion}`,
-      imgId: `${imgId}`,
+      imgId: `${imgId}`
     };
 
     try {

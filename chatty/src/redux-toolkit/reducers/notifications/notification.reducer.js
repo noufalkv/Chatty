@@ -11,7 +11,7 @@ const toastIcons = [
   { success: checkIcon, color: '#5cb85c' },
   { error: errorIcon, color: '#d9534f' },
   { info: infoIcon, color: '#5bc0de' },
-  { warning: warningIcon, color: '#f0ad4e' },
+  { warning: warningIcon, color: '#f0ad4e' }
 ];
 
 const notificationsSlice = createSlice({
@@ -26,7 +26,7 @@ const notificationsSlice = createSlice({
         description: message,
         type,
         icon: toast[type],
-        backgroundColor: toast.color,
+        backgroundColor: toast.color
       };
       list = cloneDeep(list);
       list.unshift(toastItem);
@@ -36,8 +36,8 @@ const notificationsSlice = createSlice({
     clearNotification: () => {
       list = [];
       return [];
-    },
-  },
+    }
+  }
 });
 
 export const { addNotification, clearNotification } = notificationsSlice.actions;

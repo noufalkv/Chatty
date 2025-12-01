@@ -8,7 +8,7 @@ import {
   postMockRequest,
   postMockResponse,
   updatedPost,
-  updatedPostWithImage,
+  updatedPostWithImage
 } from '@root/mocks/post.mock';
 import { PostCache } from '@service/redis/post.cache';
 import { postQueue } from '@service/queues/post.queue';
@@ -23,8 +23,8 @@ jest.mock('@global/helpers/cloudinary-upload');
 Object.defineProperties(postServer, {
   socketIOPostObject: {
     value: new Server(),
-    writable: true,
-  },
+    writable: true
+  }
 });
 
 describe('Update', () => {
@@ -40,7 +40,7 @@ describe('Update', () => {
   describe('posts', () => {
     it('should send correct json response', async () => {
       const req: Request = postMockRequest(updatedPost, authUserPayload, {
-        postId: `${postMockData._id}`,
+        postId: `${postMockData._id}`
       }) as Request;
       const res: Response = postMockResponse();
       const postSpy = jest
@@ -58,11 +58,11 @@ describe('Update', () => {
       );
       expect(postQueue.addPostJob).toHaveBeenCalledWith('updatePostInDB', {
         key: `${postMockData._id}`,
-        value: postMockData,
+        value: postMockData
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Post updated successfully',
+        message: 'Post updated successfully'
       });
     });
   });
@@ -76,7 +76,7 @@ describe('Update', () => {
       updatedPost.post = updatedPostWithImage.post;
       updatedPostWithImage.image = 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==';
       const req: Request = postMockRequest(updatedPostWithImage, authUserPayload, {
-        postId: `${postMockData._id}`,
+        postId: `${postMockData._id}`
       }) as Request;
       const res: Response = postMockResponse();
       const postSpy = jest
@@ -97,11 +97,11 @@ describe('Update', () => {
       );
       expect(postQueue.addPostJob).toHaveBeenCalledWith('updatePostInDB', {
         key: `${postMockData._id}`,
-        value: postMockData,
+        value: postMockData
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Post with image updated successfully',
+        message: 'Post with image updated successfully'
       });
     });
 
@@ -113,7 +113,7 @@ describe('Update', () => {
       updatedPost.post = updatedPostWithImage.post;
       updatedPostWithImage.image = 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==';
       const req: Request = postMockRequest(updatedPostWithImage, authUserPayload, {
-        postId: `${postMockData._id}`,
+        postId: `${postMockData._id}`
       }) as Request;
       const res: Response = postMockResponse();
       const postSpy = jest
@@ -137,11 +137,11 @@ describe('Update', () => {
       );
       expect(postQueue.addPostJob).toHaveBeenCalledWith('updatePostInDB', {
         key: `${postMockData._id}`,
-        value: postMockData,
+        value: postMockData
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Post with image updated successfully',
+        message: 'Post with image updated successfully'
       });
     });
   });

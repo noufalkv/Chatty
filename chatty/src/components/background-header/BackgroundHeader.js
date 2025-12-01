@@ -23,7 +23,7 @@ const BackgroundHeader = ({
   saveImage,
   cancelFileSelection,
   removeBackgroundImage,
-  galleryImages,
+  galleryImages
 }) => {
   const [selectedBackground, setSelectedBackground] = useState('');
   const [selectedProfileImage, setSelectedProfileImage] = useState('');
@@ -161,7 +161,7 @@ const BackgroundHeader = ({
               data-testid="profile-pic"
               className="profile-pic"
               style={{
-                width: `${user?.profilePicture ? '180px' : ''}`,
+                width: `${user?.profilePicture ? '180px' : ''}`
               }}
             >
               <Avatar
@@ -260,7 +260,7 @@ BackgroundHeader.propTypes = {
   saveImage: PropTypes.func,
   cancelFileSelection: PropTypes.func,
   removeBackgroundImage: PropTypes.func,
-  galleryImages: PropTypes.array,
+  galleryImages: PropTypes.array
 };
 
 export default BackgroundHeader;

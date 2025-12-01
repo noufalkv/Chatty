@@ -5,7 +5,7 @@ import { orderBy } from 'lodash';
 const initialState = {
   chatList: [],
   selectedChatUser: null,
-  isLoading: false,
+  isLoading: false
 };
 
 const chatSlice = createSlice({
@@ -21,7 +21,7 @@ const chatSlice = createSlice({
       const { isLoading, user } = action.payload;
       state.selectedChatUser = user;
       state.isLoading = isLoading;
-    },
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(getConversationList.pending, (state) => {
@@ -36,7 +36,7 @@ const chatSlice = createSlice({
     builder.addCase(getConversationList.rejected, (state) => {
       state.isLoading = false;
     });
-  },
+  }
 });
 
 export const { addToChatList, setSelectedChatUser } = chatSlice.actions;

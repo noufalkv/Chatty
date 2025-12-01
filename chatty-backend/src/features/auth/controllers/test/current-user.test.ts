@@ -36,7 +36,7 @@ describe('CurrentUser', () => {
       expect(res.json).toHaveBeenCalledWith({
         token: null,
         isUser: false,
-        user: null,
+        user: null
       });
     });
 
@@ -54,7 +54,7 @@ describe('CurrentUser', () => {
       expect(res.json).toHaveBeenCalledWith({
         token: req.session?.jwt,
         isUser: true,
-        user: existingUser,
+        user: existingUser
       });
     });
   });

@@ -49,7 +49,7 @@ describe('Get', () => {
         message: 'Get users',
         users: [existingUser],
         followers: [mockFollowerData],
-        totalUsers: 1,
+        totalUsers: 1
       });
     });
 
@@ -72,7 +72,7 @@ describe('Get', () => {
         message: 'Get users',
         users: [existingUser],
         followers: [mockFollowerData],
-        totalUsers: 1,
+        totalUsers: 1
       });
     });
   });
@@ -89,7 +89,7 @@ describe('Get', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'Get user profile',
-        user: existingUser,
+        user: existingUser
       });
     });
 
@@ -104,7 +104,7 @@ describe('Get', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'Get user profile',
-        user: existingUser,
+        user: existingUser
       });
     });
   });
@@ -114,7 +114,7 @@ describe('Get', () => {
       const req: Request = authMockRequest({}, {}, authUserPayload, {
         username: existingUser.username,
         userId: existingUser._id,
-        uId: existingUser.uId,
+        uId: existingUser.uId
       }) as Request;
       const res: Response = authMockResponse();
       jest.spyOn(UserCache.prototype, 'getUserFromCache').mockResolvedValue(existingUser);
@@ -129,7 +129,7 @@ describe('Get', () => {
       expect(res.json).toHaveBeenCalledWith({
         message: 'Get user profile and posts',
         user: existingUser,
-        posts: [postMockData],
+        posts: [postMockData]
       });
     });
 
@@ -137,7 +137,7 @@ describe('Get', () => {
       const req: Request = authMockRequest({}, {}, authUserPayload, {
         username: existingUser.username,
         userId: existingUser._id,
-        uId: existingUser.uId,
+        uId: existingUser.uId
       }) as Request;
       const res: Response = authMockResponse();
       jest.spyOn(UserCache.prototype, 'getUserFromCache').mockResolvedValue(null);
@@ -150,13 +150,13 @@ describe('Get', () => {
       await Get.prototype.profileAndPosts(req, res);
       expect(userService.getUserById).toHaveBeenCalledWith(existingUser._id);
       expect(postService.getPosts).toHaveBeenCalledWith({ username: userName }, 0, 100, {
-        createdAt: -1,
+        createdAt: -1
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'Get user profile and posts',
         user: existingUser,
-        posts: [postMockData],
+        posts: [postMockData]
       });
     });
   });
@@ -164,7 +164,7 @@ describe('Get', () => {
   describe('profileByUserId', () => {
     it('should send success json response if user in cache', async () => {
       const req: Request = authMockRequest({}, {}, authUserPayload, {
-        userId: existingUser._id,
+        userId: existingUser._id
       }) as Request;
       const res: Response = authMockResponse();
       jest.spyOn(UserCache.prototype, 'getUserFromCache').mockResolvedValue(existingUser);
@@ -174,13 +174,13 @@ describe('Get', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'Get user profile by id',
-        user: existingUser,
+        user: existingUser
       });
     });
 
     it('should send success json response if user in database', async () => {
       const req: Request = authMockRequest({}, {}, authUserPayload, {
-        userId: existingUser._id,
+        userId: existingUser._id
       }) as Request;
       const res: Response = authMockResponse();
       jest.spyOn(UserCache.prototype, 'getUserFromCache').mockResolvedValue(null);
@@ -191,7 +191,7 @@ describe('Get', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'Get user profile by id',
-        user: existingUser,
+        user: existingUser
       });
     });
   });
@@ -210,7 +210,7 @@ describe('Get', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'User suggestions',
-        users: [existingUser],
+        users: [existingUser]
       });
     });
 
@@ -225,7 +225,7 @@ describe('Get', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'User suggestions',
-        users: [existingUser],
+        users: [existingUser]
       });
     });
   });

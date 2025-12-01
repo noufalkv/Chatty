@@ -10,10 +10,10 @@ describe('Toast', () => {
     const props = {
       position: 'top-left',
       toastList: [
-        { id: 1, backgroundColor: '#5cb85c', icon: checkIcon, description: 'This is a message' },
+        { id: 1, backgroundColor: '#5cb85c', icon: checkIcon, description: 'This is a message' }
       ],
       autoDelete: false,
-      autoDeleteTime: 100,
+      autoDeleteTime: 100
     };
     const { baseElement } = render(<Toast {...props} />);
     const toastContainer = baseElement.querySelector('.toast-notification-container');
@@ -28,10 +28,10 @@ describe('Toast', () => {
     const props = {
       position: 'top-left',
       toastList: [
-        { id: 1, backgroundColor: '#5cb85c', icon: checkIcon, description: 'This is a message' },
+        { id: 1, backgroundColor: '#5cb85c', icon: checkIcon, description: 'This is a message' }
       ],
       autoDelete: false,
-      autoDeleteTime: 100,
+      autoDeleteTime: 100
     };
     render(<Toast {...props} />);
     const toastContainerElements = screen.getAllByTestId('toast-notification');
@@ -50,10 +50,10 @@ describe('Toast', () => {
       position: 'top-left',
       toastList: [
         { id: 1, backgroundColor: '#5cb85c', icon: checkIcon, description: 'This is a message' },
-        { id: 2, backgroundColor: '#d9534f', icon: errorIcon, description: 'This is an error' },
+        { id: 2, backgroundColor: '#d9534f', icon: errorIcon, description: 'This is an error' }
       ],
       autoDelete: false,
-      autoDeleteTime: 100,
+      autoDeleteTime: 100
     };
     render(<Toast {...props} />);
     const buttonElements = screen.getAllByRole('button');
@@ -66,10 +66,10 @@ describe('Toast', () => {
     const props = {
       position: 'top-left',
       toastList: [
-        { id: 0, backgroundColor: '#5cb85c', icon: checkIcon, description: 'This is a message' },
+        { id: 0, backgroundColor: '#5cb85c', icon: checkIcon, description: 'This is a message' }
       ],
       autoDelete: false,
-      autoDeleteTime: 0,
+      autoDeleteTime: 0
     };
     const { rerender } = render(<Toast {...props} />);
     expect(screen.queryAllByTestId('toast-notification').length).toEqual(1);

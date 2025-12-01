@@ -7,13 +7,13 @@ import { ObjectId } from 'mongodb';
 class ChatService {
   public async addMessageToDB(data: IMessageData): Promise<void> {
     const conversation: IConversationDocument[] = await ConversationModel.find({
-      _id: data?.conversationId,
+      _id: data?.conversationId
     }).exec();
     if (conversation.length === 0) {
       await ConversationModel.create({
         _id: data?.conversationId,
         senderId: data.senderId,
-        receiverId: data.receiverId,
+        receiverId: data.receiverId
       });
     }
 
@@ -33,7 +33,7 @@ class ChatService {
       gifUrl: data.gifUrl,
       selectedImage: data.selectedImage,
       reaction: data.reaction,
-      createdAt: data.createdAt,
+      createdAt: data.createdAt
     });
   }
 
@@ -43,8 +43,8 @@ class ChatService {
       {
         $group: {
           _id: '$conversationId',
-          result: { $last: '$$ROOT' },
-        },
+          result: { $last: '$$ROOT' }
+        }
       },
       {
         $project: {
@@ -63,10 +63,10 @@ class ChatService {
           gifUrl: '$result.gifUrl',
           selectedImage: '$result.selectedImage',
           reaction: '$result.reaction',
-          createdAt: '$result.createdAt',
-        },
+          createdAt: '$result.createdAt'
+        }
       },
-      { $sort: { createdAt: 1 } },
+      { $sort: { createdAt: 1 } }
     ]);
     return messages;
   }
@@ -79,12 +79,12 @@ class ChatService {
     const query = {
       $or: [
         { senderId, receiverId },
-        { senderId: receiverId, receiverId: senderId },
-      ],
+        { senderId: receiverId, receiverId: senderId }
+      ]
     };
     const messages: IMessageData[] = await MessageModel.aggregate([
       { $match: query },
-      { $sort: sort },
+      { $sort: sort }
     ]);
     return messages;
   }
@@ -104,8 +104,8 @@ class ChatService {
     const query = {
       $or: [
         { senderId, receiverId, isRead: false },
-        { senderId: receiverId, receiverId: senderId, isRead: false },
-      ],
+        { senderId: receiverId, receiverId: senderId, isRead: false }
+      ]
     };
     await MessageModel.updateMany(query, { $set: { isRead: true } }).exec();
   }

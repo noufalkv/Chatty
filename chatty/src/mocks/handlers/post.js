@@ -45,7 +45,7 @@ export const getPostCommentsNamesMock = rest.get(
 
 export const addPostMock = rest.post(`${BASE_URL}/post`, (req, res, ctx) => {
   const result = {
-    message: 'Post created successfully',
+    message: 'Post created successfully'
   };
   return res(ctx.json(result));
 });
@@ -54,7 +54,7 @@ export const updatePostMock = rest.put(
   `${BASE_URL}/post/6027f77087c9d9ccb1555269`,
   (req, res, ctx) => {
     const result = {
-      message: 'Post updated successfully',
+      message: 'Post updated successfully'
     };
     return res(ctx.json(result));
   }
@@ -68,5 +68,5 @@ export const postsHandlers = [
   getPostCommentsMock,
   getPostCommentsNamesMock,
   addPostMock,
-  updatePostMock,
+  updatePostMock
 ];

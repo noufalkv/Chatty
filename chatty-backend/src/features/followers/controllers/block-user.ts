@@ -12,7 +12,7 @@ export class AddUser {
     blockedUserQueue.addBlockedUserJob('addBlockedUserToDB', {
       keyOne: `${req.currentUser!.userId}`,
       keyTwo: `${followerId}`,
-      type: 'block',
+      type: 'block'
     });
     res.status(HTTP_STATUS.OK).json({ message: 'User blocked' });
   }
@@ -23,7 +23,7 @@ export class AddUser {
     blockedUserQueue.addBlockedUserJob('removeBlockedUserFromDB', {
       keyOne: `${req.currentUser!.userId}`,
       keyTwo: `${followerId}`,
-      type: 'unblock',
+      type: 'unblock'
     });
     res.status(HTTP_STATUS.OK).json({ message: 'User unblocked' });
   }

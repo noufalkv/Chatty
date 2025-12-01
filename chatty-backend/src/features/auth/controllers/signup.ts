@@ -42,7 +42,7 @@ export class SignUp {
       username,
       email,
       password,
-      avatarColor,
+      avatarColor
     });
     try {
       if (!avatarImage) {
@@ -90,7 +90,7 @@ export class SignUp {
         uId: data.uId,
         email: data.email,
         username: data.username,
-        avatarColor: data.avatarColor,
+        avatarColor: data.avatarColor
       },
       config.JWT_TOKEN!
     );
@@ -105,7 +105,7 @@ export class SignUp {
       email: Helpers.lowerCase(email),
       password,
       avatarColor,
-      createdAt: new Date(),
+      createdAt: new Date()
     } as IAuthDocument;
   }
 
@@ -135,14 +135,14 @@ export class SignUp {
         messages: true,
         reactions: true,
         comments: true,
-        follows: true,
+        follows: true
       },
       social: {
         facebook: '',
         instagram: '',
         twitter: '',
-        youtube: '',
-      },
+        youtube: ''
+      }
     } as unknown as IUserDocument;
   }
 }

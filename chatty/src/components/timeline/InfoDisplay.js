@@ -10,7 +10,7 @@ import {
   FaInstagram,
   FaMapMarkerAlt,
   FaTwitter,
-  FaYoutube,
+  FaYoutube
 } from 'react-icons/fa';
 
 const InfoDisplay = ({
@@ -26,7 +26,7 @@ const InfoDisplay = ({
   loading,
   setEditableInputs,
   setEditableSocialInputs,
-  updateInfo,
+  updateInfo
 }) => {
   const [editIntroBtn, setEditIntroBtn] = useState(true);
   const { quote, work, school, location } = editableInputs;
@@ -109,7 +109,7 @@ const InfoDisplay = ({
                   } else {
                     setEditableSocialInputs({
                       ...editableSocialInputs,
-                      instagram: event.target.value,
+                      instagram: event.target.value
                     });
                   }
                 }}
@@ -151,7 +151,7 @@ const InfoDisplay = ({
                   } else {
                     setEditableSocialInputs({
                       ...editableSocialInputs,
-                      twitter: event.target.value,
+                      twitter: event.target.value
                     });
                   }
                 }}
@@ -259,7 +259,7 @@ InfoDisplay.propTypes = {
   loading: PropTypes.bool,
   setEditableInputs: PropTypes.func,
   setEditableSocialInputs: PropTypes.func,
-  updateInfo: PropTypes.func,
+  updateInfo: PropTypes.func
 };
 
 export default InfoDisplay;

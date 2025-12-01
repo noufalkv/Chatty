@@ -31,12 +31,12 @@ export class Remove {
       removeFollowerFromCache,
       removeFolloweeFromCache,
       followersCount,
-      followeeCount,
+      followeeCount
     ]);
 
     followerQueue.addFollowerJob('removeFollowerFromDB', {
       keyOne: `${followeeId}`,
-      keyTwo: `${followerId}`,
+      keyTwo: `${followerId}`
     });
     res.status(HTTP_STATUS.OK).json({ message: 'Unfollowed user now' });
   }

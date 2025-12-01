@@ -21,7 +21,7 @@ describe('SignOut', () => {
     expect(res.json).toHaveBeenCalledWith({
       message: 'Logout successful',
       user: {},
-      token: '',
+      token: ''
     });
   });
 });

@@ -20,7 +20,7 @@ const NotificationSkeleton = () => {
                       style={{
                         display: 'flex',
                         justifyContent: 'space-between',
-                        marginBottom: '5px',
+                        marginBottom: '5px'
                       }}
                     >
                       <Skeleton baseColor="#EFF1F6" width={500} height={20} />

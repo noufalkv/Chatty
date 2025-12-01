@@ -11,7 +11,7 @@ export const postMockRequest = (
 ) => ({
   body,
   params,
-  currentUser,
+  currentUser
 });
 
 export const postMockResponse = (): Response => {
@@ -47,7 +47,7 @@ export const newPost: IBody = {
   image: '',
   privacy: 'Public',
   profilePicture: 'http://place-hold.it/500x500',
-  feelings: 'happy',
+  feelings: 'happy'
 };
 
 export const postMockData: IPostDocument = {
@@ -72,8 +72,8 @@ export const postMockData: IPostDocument = {
     happy: 0,
     wow: 0,
     sad: 0,
-    angry: 0,
-  },
+    angry: 0
+  }
 } as unknown as IPostDocument;
 
 export const updatedPost = {
@@ -86,7 +86,7 @@ export const updatedPost = {
   imgId: '',
   imgVersion: '',
   videoId: '',
-  videoVersion: '',
+  videoVersion: ''
 };
 
 export const updatedPostWithImage = {
@@ -98,5 +98,5 @@ export const updatedPostWithImage = {
   gifUrl: '',
   imgId: '',
   imgVersion: '',
-  image: '',
+  image: ''
 };

@@ -58,5 +58,5 @@ export const authHandlers = [
   forgotPasswordMock,
   forgotPasswordMockError,
   resetPasswordMock,
-  resetPasswordMockError,
+  resetPasswordMockError
 ];

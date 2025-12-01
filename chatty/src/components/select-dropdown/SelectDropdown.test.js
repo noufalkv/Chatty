@@ -8,7 +8,7 @@ describe('SelectDropdown', () => {
   it('should have empty list', () => {
     const props = {
       isActive: false,
-      setSelectedItem: null,
+      setSelectedItem: null
     };
     render(<SelectDropdown {...props} />);
     const listElement = screen.getByRole('list');
@@ -19,7 +19,7 @@ describe('SelectDropdown', () => {
     const props = {
       isActive: false,
       setSelectedItem: null,
-      items: privacyList,
+      items: privacyList
     };
     render(<SelectDropdown {...props} />);
     const listElement = screen.getByRole('list');
@@ -30,7 +30,7 @@ describe('SelectDropdown', () => {
     const props = {
       isActive: false,
       setSelectedItem: null,
-      items: privacyList,
+      items: privacyList
     };
     render(<SelectDropdown {...props} />);
     const listElement = screen.getByRole('list');
@@ -47,7 +47,7 @@ describe('SelectDropdown', () => {
     const props = {
       isActive: false,
       setSelectedItem: onClick,
-      items: privacyList,
+      items: privacyList
     };
     render(<SelectDropdown {...props} />);
     const listElement = screen.getByRole('list');
@@ -63,7 +63,7 @@ describe('SelectDropdown', () => {
     const props = {
       isActive: false,
       setSelectedItem: onClick,
-      items: privacyList,
+      items: privacyList
     };
     render(<SelectDropdown {...props} />);
     const { container } = render(<ModalBoxContent />);

@@ -13,7 +13,7 @@ const Providers = ({ children }) => {
   );
 };
 Providers.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
 
 const customRender = (ui, options) => render(ui, { wrapper: Providers, ...options });
@@ -21,7 +21,7 @@ const renderWithRouter = (ui) => {
   const history = createBrowserHistory();
   return {
     history,
-    ...render(ui, { wrapper: Providers }),
+    ...render(ui, { wrapper: Providers })
   };
 };
 

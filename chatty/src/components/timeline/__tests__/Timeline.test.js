@@ -13,8 +13,8 @@ import { createSearchParams } from 'react-router-dom';
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useParams: () => ({
-    username: 'Manny',
-  }),
+    username: 'Manny'
+  })
 }));
 
 describe('Timeline', () => {
@@ -25,7 +25,7 @@ describe('Timeline', () => {
     });
     const url = `/app/social/profile/${existingUser?.username}?${createSearchParams({
       id: existingUser._id,
-      uId: existingUser.uId,
+      uId: existingUser.uId
     })}`;
     const history = createBrowserHistory();
     history.push(url);
@@ -38,7 +38,7 @@ describe('Timeline', () => {
   it('should be in the document', async () => {
     const props = {
       loading: true,
-      userProfileData: undefined,
+      userProfileData: undefined
     };
     render(<Timeline {...props} />);
     let timelineComponent;
@@ -51,7 +51,7 @@ describe('Timeline', () => {
   it('should display skeleton', async () => {
     const props = {
       loading: true,
-      userProfileData: undefined,
+      userProfileData: undefined
     };
     render(<Timeline {...props} />);
     let postFormSkeleton;
@@ -69,7 +69,7 @@ describe('Timeline', () => {
   it('should display empty message', async () => {
     const props = {
       loading: false,
-      userProfileData: null,
+      userProfileData: null
     };
     render(<Timeline {...props} />);
     let emptyPage;
@@ -83,7 +83,7 @@ describe('Timeline', () => {
   it('should display side components', async () => {
     const props = {
       loading: false,
-      userProfileData: undefined,
+      userProfileData: undefined
     };
     render(<Timeline {...props} />);
     let countContainer;
@@ -103,8 +103,8 @@ describe('Timeline', () => {
       loading: false,
       userProfileData: {
         posts: [postMockData],
-        user: existingUser,
-      },
+        user: existingUser
+      }
     };
     render(<Timeline {...props} />);
     let postForm;
@@ -121,8 +121,8 @@ describe('Timeline', () => {
       loading: false,
       userProfileData: {
         posts: [postMockData],
-        user: existingUser,
-      },
+        user: existingUser
+      }
     };
     render(<Timeline {...props} />);
     await act(() => {});
@@ -137,8 +137,8 @@ describe('Timeline', () => {
       loading: false,
       userProfileData: {
         posts: [postMockData],
-        user: existingUserTwo,
-      },
+        user: existingUserTwo
+      }
     };
     render(<Timeline {...props} />);
     let postForm;

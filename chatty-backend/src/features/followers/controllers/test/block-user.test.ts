@@ -22,7 +22,7 @@ describe('AddUser', () => {
   describe('block', () => {
     it('should send correct json response', async () => {
       const req: Request = followersMockRequest({}, authUserPayload, {
-        followerId: '6064861bc25eaa5a5d2f9bf4',
+        followerId: '6064861bc25eaa5a5d2f9bf4'
       }) as Request;
       const res: Response = followersMockResponse();
       jest.spyOn(FollowerCache.prototype, 'updateBlockedUserPropInCache');
@@ -44,11 +44,11 @@ describe('AddUser', () => {
       expect(blockedUserQueue.addBlockedUserJob).toHaveBeenCalledWith('addBlockedUserToDB', {
         keyOne: `${req.currentUser?.userId}`,
         keyTwo: '6064861bc25eaa5a5d2f9bf4',
-        type: 'block',
+        type: 'block'
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'User blocked',
+        message: 'User blocked'
       });
     });
   });
@@ -56,7 +56,7 @@ describe('AddUser', () => {
   describe('unblock', () => {
     it('should send correct json response', async () => {
       const req: Request = followersMockRequest({}, authUserPayload, {
-        followerId: '6064861bc25eaa5a5d2f9bf4',
+        followerId: '6064861bc25eaa5a5d2f9bf4'
       }) as Request;
       const res: Response = followersMockResponse();
       jest.spyOn(FollowerCache.prototype, 'updateBlockedUserPropInCache');
@@ -78,11 +78,11 @@ describe('AddUser', () => {
       expect(blockedUserQueue.addBlockedUserJob).toHaveBeenCalledWith('removeBlockedUserFromDB', {
         keyOne: `${req.currentUser?.userId}`,
         keyTwo: '6064861bc25eaa5a5d2f9bf4',
-        type: 'unblock',
+        type: 'unblock'
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'User unblocked',
+        message: 'User unblocked'
       });
     });
   });

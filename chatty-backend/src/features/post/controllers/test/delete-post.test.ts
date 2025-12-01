@@ -14,8 +14,8 @@ jest.mock('@service/redis/post.cache');
 Object.defineProperties(postServer, {
   socketIOPostObject: {
     value: new Server(),
-    writable: true,
-  },
+    writable: true
+  }
 });
 
 describe('Delete', () => {
@@ -46,11 +46,11 @@ describe('Delete', () => {
     );
     expect(postQueue.addPostJob).toHaveBeenCalledWith('deletePostFromDB', {
       keyOne: req.params.postId,
-      keyTwo: req.currentUser?.userId,
+      keyTwo: req.currentUser?.userId
     });
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
-      message: 'Post deleted successfully',
+      message: 'Post deleted successfully'
     });
   });
 });

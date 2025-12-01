@@ -2,7 +2,7 @@ import { BaseCache } from '@service/redis/base.cache';
 import {
   INotificationSettings,
   ISocialLinks,
-  IUserDocument,
+  IUserDocument
 } from '@user/interfaces/user.interface';
 import Logger from 'bunyan';
 import { indexOf, findIndex } from 'lodash';
@@ -51,7 +51,7 @@ export class UserCache extends BaseCache {
       quote,
       bgImageId,
       bgImageVersion,
-      social,
+      social
     } = createdUser;
     const dataToSave = {
       _id: `${_id}`,
@@ -73,7 +73,7 @@ export class UserCache extends BaseCache {
       school: `${school}`,
       quote: `${quote}`,
       bgImageVersion: `${bgImageVersion}`,
-      bgImageId: `${bgImageId}`,
+      bgImageId: `${bgImageId}`
     };
 
     try {

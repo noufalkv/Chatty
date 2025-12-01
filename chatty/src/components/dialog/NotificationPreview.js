@@ -12,7 +12,7 @@ const NotificationPreview = ({
   reaction,
   senderName,
   secondButtonText,
-  secondBtnHandler,
+  secondBtnHandler
 }) => {
   return (
     <>
@@ -53,7 +53,7 @@ NotificationPreview.propTypes = {
   reaction: PropTypes.string,
   senderName: PropTypes.string,
   secondButtonText: PropTypes.string,
-  secondBtnHandler: PropTypes.func,
+  secondBtnHandler: PropTypes.func
 };
 
 export default NotificationPreview;

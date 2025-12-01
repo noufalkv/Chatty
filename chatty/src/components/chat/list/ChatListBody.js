@@ -27,7 +27,7 @@ const ChatListBody = ({ data, profile }) => {
 
 ChatListBody.propTypes = {
   data: PropTypes.object,
-  profile: PropTypes.object,
+  profile: PropTypes.object
 };
 
 export default ChatListBody;

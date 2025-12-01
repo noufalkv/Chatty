@@ -2,7 +2,7 @@ import {
   ICommentDocument,
   ICommentJob,
   ICommentNameList,
-  IQueryComment,
+  IQueryComment
 } from '@comment/interfaces/comment.interface';
 import { CommentsModel } from '@comment/models/comment.schema';
 import { IPostDocument } from '@post/interfaces/post.interface';
@@ -13,7 +13,7 @@ import { IUserDocument } from '@user/interfaces/user.interface';
 import { NotificationModel } from '@notification/models/notification.schema';
 import {
   INotificationDocument,
-  INotificationTemplate,
+  INotificationTemplate
 } from '@notification/interfaces/notification.interface';
 import { socketIONotificationObject } from '@socket/notification';
 import { notificationTemplate } from '@service/emails/templates/notifications/notification-template';
@@ -36,7 +36,7 @@ class CommentService {
     const response: [ICommentDocument, IPostDocument, IUserDocument] = await Promise.all([
       comments,
       post,
-      user,
+      user
     ]);
 
     if (response[2].notifications.comments && userFrom !== userTo) {
@@ -54,19 +54,19 @@ class CommentService {
         imgId: response[1].imgId!,
         imgVersion: response[1].imgVersion!,
         gifUrl: response[1].gifUrl!,
-        reaction: '',
+        reaction: ''
       });
       socketIONotificationObject.emit('insert notification', notifications, { userTo });
       const templateParams: INotificationTemplate = {
         username: response[2].username!,
         message: `${username} commented on your post.`,
-        header: 'Comment Notification',
+        header: 'Comment Notification'
       };
       const template: string = notificationTemplate.notificationMessageTemplate(templateParams);
       emailQueue.addEmailJob('commentsEmail', {
         receiverEmail: response[2].email!,
         template,
-        subject: 'Post notification',
+        subject: 'Post notification'
       });
     }
   }
@@ -77,7 +77,7 @@ class CommentService {
   ): Promise<ICommentDocument[]> {
     const comments: ICommentDocument[] = await CommentsModel.aggregate([
       { $match: query },
-      { $sort: sort },
+      { $sort: sort }
     ]);
     return comments;
   }
@@ -90,7 +90,7 @@ class CommentService {
       { $match: query },
       { $sort: sort },
       { $group: { _id: null, names: { $addToSet: '$username' }, count: { $sum: 1 } } },
-      { $project: { _id: 0 } },
+      { $project: { _id: 0 } }
     ]);
     return commentsNamesList;
   }

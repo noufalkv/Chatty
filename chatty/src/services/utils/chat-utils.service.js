@@ -24,7 +24,7 @@ export class ChatUtils {
       receiverId: user.receiverId,
       receiverName: user.receiverUsername,
       senderId: profile?._id,
-      senderName: profile?.username,
+      senderName: profile?.username
     };
     socketService?.socket?.emit('join room', users);
   }
@@ -53,7 +53,7 @@ export class ChatUtils {
     chatMessages,
     isRead,
     gifUrl,
-    selectedImage,
+    selectedImage
   }) {
     const chatConversationId = find(
       chatMessages,
@@ -69,7 +69,7 @@ export class ChatUtils {
       body: message.trim(),
       isRead,
       gifUrl,
-      selectedImage,
+      selectedImage
     };
     return messageData;
   }
@@ -82,7 +82,7 @@ export class ChatUtils {
     params,
     pathname,
     navigate,
-    dispatch,
+    dispatch
   }) {
     if (chatMessageList.length) {
       dispatch(setSelectedChatUser({ isLoading: false, user: chatMessageList[0] }));

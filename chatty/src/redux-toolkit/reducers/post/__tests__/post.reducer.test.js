@@ -21,7 +21,7 @@ const postData = {
   imgVersion: '1233445',
   imgId: '123445',
   createdAt: '2022-06-15',
-  video: '',
+  video: ''
 };
 
 describe('post reducer', () => {

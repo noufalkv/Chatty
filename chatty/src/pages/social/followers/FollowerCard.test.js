@@ -16,8 +16,8 @@ socketService.setupSocketConnection();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useParams: () => ({
-    username: 'Manny',
-  }),
+    username: 'Manny'
+  })
 }));
 
 describe('FollowerCard', () => {
@@ -27,7 +27,7 @@ describe('FollowerCard', () => {
     });
     const url = `/app/social/profile/${existingUser?.username}?${createSearchParams({
       id: existingUser?._id,
-      uId: existingUser?.uId,
+      uId: existingUser?.uId
     })}`;
     const history = createBrowserHistory();
     history.push(url);
@@ -62,7 +62,7 @@ describe('FollowerCard', () => {
     expect(cardElementButtons[0].children[0].textContent).toEqual('Block');
     expect(socketService.socket.emit).toHaveBeenCalledWith('block user', {
       blockedUser: existingUserTwo._id,
-      blockedBy: existingUser._id,
+      blockedBy: existingUser._id
     });
     expect(FollowersUtils.blockUser).toHaveBeenCalledWith(existingUserTwo, expect.any(Function));
     expect(FollowersUtils.socketIOBlockAndUnblockCard).toHaveBeenCalledWith(
@@ -83,7 +83,7 @@ describe('FollowerCard', () => {
     expect(cardElementButtons[0].children[0].textContent).toEqual('Unblock');
     expect(socketService.socket.emit).toHaveBeenCalledWith('unblock user', {
       blockedUser: existingUserTwo._id,
-      blockedBy: existingUser._id,
+      blockedBy: existingUser._id
     });
     expect(FollowersUtils.unblockUser).toHaveBeenCalledWith(existingUserTwo, expect.any(Function));
     expect(FollowersUtils.socketIOBlockAndUnblockCard).toHaveBeenCalledWith(

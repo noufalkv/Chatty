@@ -70,5 +70,5 @@ export const followingHandlers = [
   blockUserMock,
   unblockUserMock,
   emptyUserFollowingMock,
-  emptyUserFollowersMock,
+  emptyUserFollowersMock
 ];

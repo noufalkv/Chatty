@@ -2,7 +2,7 @@ import reducer, { addUser, clearUser, updateUserProfile } from '@redux//reducers
 
 const initialState = {
   token: '',
-  profile: null,
+  profile: null
 };
 
 describe('user reducer', () => {
@@ -20,7 +20,7 @@ describe('user reducer', () => {
       reducer(initialState, addUser({ token: '1234', profile: { username: 'manny' } }))
     ).toEqual({
       token: '1234',
-      profile: { username: 'manny' },
+      profile: { username: 'manny' }
     });
   });
 
@@ -29,7 +29,7 @@ describe('user reducer', () => {
     initialState.profile = { username: 'Manny' };
     expect(reducer(initialState, updateUserProfile({ username: 'Sunny' }))).toEqual({
       token: '123456',
-      profile: { username: 'Sunny' },
+      profile: { username: 'Sunny' }
     });
   });
 
@@ -38,7 +38,7 @@ describe('user reducer', () => {
     initialState.profile = { username: 'Manny' };
     expect(reducer(initialState, clearUser())).toEqual({
       token: '',
-      profile: null,
+      profile: null
     });
   });
 });

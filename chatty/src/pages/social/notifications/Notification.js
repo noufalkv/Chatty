@@ -19,7 +19,7 @@ const Notification = () => {
     imgUrl: '',
     comment: '',
     reaction: '',
-    senderName: '',
+    senderName: ''
   });
   const dispatch = useDispatch();
 
@@ -86,7 +86,7 @@ const Notification = () => {
               imgUrl: '',
               comment: '',
               reaction: '',
-              senderName: '',
+              senderName: ''
             });
           }}
         />
