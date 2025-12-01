@@ -9,7 +9,13 @@ import { IReactions } from '@reaction/interfaces/reaction.interface';
 
 const log: Logger = config.createLogger('postCache');
 
-export type PostCacheMultiType = string | number | Buffer | RedisCommandRawReply[] | IPostDocument | IPostDocument[];
+export type PostCacheMultiType =
+  | string
+  | number
+  | Buffer
+  | RedisCommandRawReply[]
+  | IPostDocument
+  | IPostDocument[];
 
 export class PostCache extends BaseCache {
   constructor() {
@@ -36,7 +42,7 @@ export class PostCache extends BaseCache {
       videoId,
       videoVersion,
       reactions,
-      createdAt
+      createdAt,
     } = createdPost;
 
     const dataToSave = {
@@ -57,7 +63,7 @@ export class PostCache extends BaseCache {
       imgId: `${imgId}`,
       videoId: `${videoId}`,
       videoVersion: `${videoVersion}`,
-      createdAt: `${createdAt}`
+      createdAt: `${createdAt}`,
     };
 
     try {
@@ -80,7 +86,11 @@ export class PostCache extends BaseCache {
     }
   }
 
-  public async getPostsFromCache(key: string, start: number, end: number): Promise<IPostDocument[]> {
+  public async getPostsFromCache(
+    key: string,
+    start: number,
+    end: number
+  ): Promise<IPostDocument[]> {
     try {
       if (!this.client.isOpen) {
         await this.client.connect();
@@ -120,7 +130,11 @@ export class PostCache extends BaseCache {
     }
   }
 
-  public async getPostsWithImagesFromCache(key: string, start: number, end: number): Promise<IPostDocument[]> {
+  public async getPostsWithImagesFromCache(
+    key: string,
+    start: number,
+    end: number
+  ): Promise<IPostDocument[]> {
     try {
       if (!this.client.isOpen) {
         await this.client.connect();
@@ -148,7 +162,11 @@ export class PostCache extends BaseCache {
     }
   }
 
-  public async getPostsWithVideosFromCache(key: string, start: number, end: number): Promise<IPostDocument[]> {
+  public async getPostsWithVideosFromCache(
+    key: string,
+    start: number,
+    end: number
+  ): Promise<IPostDocument[]> {
     try {
       if (!this.client.isOpen) {
         await this.client.connect();
@@ -236,7 +254,18 @@ export class PostCache extends BaseCache {
   }
 
   public async updatePostInCache(key: string, updatedPost: IPostDocument): Promise<IPostDocument> {
-    const { post, bgColor, feelings, privacy, gifUrl, imgVersion, imgId, videoId, videoVersion, profilePicture } = updatedPost;
+    const {
+      post,
+      bgColor,
+      feelings,
+      privacy,
+      gifUrl,
+      imgVersion,
+      imgId,
+      videoId,
+      videoVersion,
+      profilePicture,
+    } = updatedPost;
     const dataToSave = {
       post: `${post}`,
       bgColor: `${bgColor}`,
@@ -247,7 +276,7 @@ export class PostCache extends BaseCache {
       videoVersion: `${videoVersion}`,
       profilePicture: `${profilePicture}`,
       imgVersion: `${imgVersion}`,
-      imgId: `${imgId}`
+      imgId: `${imgId}`,
     };
 
     try {

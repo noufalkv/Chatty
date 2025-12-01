@@ -19,7 +19,9 @@ export class Update {
     if (newPassword !== confirmPassword) {
       throw new BadRequestError('Passwords do not match.');
     }
-    const existingUser: IAuthDocument = await authService.getAuthUserByUsername(req.currentUser!.username);
+    const existingUser: IAuthDocument = await authService.getAuthUserByUsername(
+      req.currentUser!.username
+    );
     const passwordsMatch: boolean = await existingUser.comparePassword(currentPassword);
     if (!passwordsMatch) {
       throw new BadRequestError('Invalid credentials');
@@ -31,12 +33,17 @@ export class Update {
       username: existingUser.username!,
       email: existingUser.email!,
       ipaddress: publicIP.address(),
-      date: moment().format('DD//MM//YYYY HH:mm')
+      date: moment().format('DD//MM//YYYY HH:mm'),
     };
-    const template: string = resetPasswordTemplate.passwordResetConfirmationTemplate(templateParams);
-    emailQueue.addEmailJob('changePassword', { template, receiverEmail: existingUser.email!, subject: 'Password update confirmation' });
+    const template: string =
+      resetPasswordTemplate.passwordResetConfirmationTemplate(templateParams);
+    emailQueue.addEmailJob('changePassword', {
+      template,
+      receiverEmail: existingUser.email!,
+      subject: 'Password update confirmation',
+    });
     res.status(HTTP_STATUS.OK).json({
-      message: 'Password updated successfully. You will be redirected shortly to the login page.'
+      message: 'Password updated successfully. You will be redirected shortly to the login page.',
     });
   }
 }

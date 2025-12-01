@@ -1,6 +1,11 @@
 import { Request, Response } from 'express';
 import { authUserPayload } from '@root/mocks/auth.mock';
-import { chatMessage, chatMockRequest, chatMockResponse, messageDataMock } from '@root/mocks/chat.mock';
+import {
+  chatMessage,
+  chatMockRequest,
+  chatMockResponse,
+  messageDataMock,
+} from '@root/mocks/chat.mock';
 import { MessageCache } from '@service/redis/message.cache';
 import { Get } from '@chat/controllers/get-chat-message';
 import { chatService } from '@service/db/chat.service';
@@ -23,13 +28,15 @@ describe('Get', () => {
     it('should send correct json response if chat list exist in redis', async () => {
       const req: Request = chatMockRequest({}, {}, authUserPayload) as Request;
       const res: Response = chatMockResponse();
-      jest.spyOn(MessageCache.prototype, 'getUserConversationList').mockResolvedValue([messageDataMock]);
+      jest
+        .spyOn(MessageCache.prototype, 'getUserConversationList')
+        .mockResolvedValue([messageDataMock]);
 
       await Get.prototype.conversationList(req, res);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'User conversation list',
-        list: [messageDataMock]
+        list: [messageDataMock],
       });
     });
 
@@ -44,7 +51,7 @@ describe('Get', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'User conversation list',
-        list: [messageDataMock]
+        list: [messageDataMock],
       });
     });
 
@@ -58,7 +65,7 @@ describe('Get', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'User conversation list',
-        list: []
+        list: [],
       });
     });
   });
@@ -66,22 +73,24 @@ describe('Get', () => {
   describe('messages', () => {
     it('should send correct json response if chat messages exist in redis', async () => {
       const req: Request = chatMockRequest({}, chatMessage, authUserPayload, {
-        receiverId: '60263f14648fed5246e322d8'
+        receiverId: '60263f14648fed5246e322d8',
       }) as Request;
       const res: Response = chatMockResponse();
-      jest.spyOn(MessageCache.prototype, 'getChatMessagesFromCache').mockResolvedValue([messageDataMock]);
+      jest
+        .spyOn(MessageCache.prototype, 'getChatMessagesFromCache')
+        .mockResolvedValue([messageDataMock]);
 
       await Get.prototype.messages(req, res);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'User chat messages',
-        messages: [messageDataMock]
+        messages: [messageDataMock],
       });
     });
 
     it('should send correct json response if no chat message response from redis', async () => {
       const req: Request = chatMockRequest({}, chatMessage, authUserPayload, {
-        receiverId: '60263f14648fed5246e322d8'
+        receiverId: '60263f14648fed5246e322d8',
       }) as Request;
       const res: Response = chatMockResponse();
       jest.spyOn(MessageCache.prototype, 'getChatMessagesFromCache').mockResolvedValue([]);
@@ -91,13 +100,13 @@ describe('Get', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'User chat messages',
-        messages: [messageDataMock]
+        messages: [messageDataMock],
       });
     });
 
     it('should send correct json response with empty chat messages if it does not exist (redis & database)', async () => {
       const req: Request = chatMockRequest({}, chatMessage, authUserPayload, {
-        receiverId: '6064793b091bf02b6a71067a'
+        receiverId: '6064793b091bf02b6a71067a',
       }) as Request;
       const res: Response = chatMockResponse();
       jest.spyOn(MessageCache.prototype, 'getChatMessagesFromCache').mockResolvedValue([]);
@@ -107,7 +116,7 @@ describe('Get', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'User chat messages',
-        messages: []
+        messages: [],
       });
     });
   });

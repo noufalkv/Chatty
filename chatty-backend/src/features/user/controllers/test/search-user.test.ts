@@ -29,12 +29,14 @@ describe('Search', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'Search results',
-        search: [searchedUserMock]
+        search: [searchedUserMock],
       });
     });
 
     it('should send correct json response if searched user does not exist', async () => {
-      const req: Request = chatMockRequest({}, {}, authUserPayload, { query: 'DannyBoy' }) as Request;
+      const req: Request = chatMockRequest({}, {}, authUserPayload, {
+        query: 'DannyBoy',
+      }) as Request;
       const res: Response = chatMockResponse();
       jest.spyOn(userService, 'searchUsers').mockResolvedValue([]);
 
@@ -42,7 +44,7 @@ describe('Search', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'Search results',
-        search: []
+        search: [],
       });
     });
   });

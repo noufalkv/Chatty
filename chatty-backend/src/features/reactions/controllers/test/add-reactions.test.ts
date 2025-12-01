@@ -34,8 +34,8 @@ describe('AddReaction', () => {
           happy: 0,
           wow: 0,
           sad: 0,
-          angry: 0
-        }
+          angry: 0,
+        },
       },
       authUserPayload
     ) as Request;
@@ -51,10 +51,13 @@ describe('AddReaction', () => {
       spy.mock.calls[0][3],
       spy.mock.calls[0][4]
     );
-    expect(reactionQueue.addReactionJob).toHaveBeenCalledWith(reactionSpy.mock.calls[0][0], reactionSpy.mock.calls[0][1]);
+    expect(reactionQueue.addReactionJob).toHaveBeenCalledWith(
+      reactionSpy.mock.calls[0][0],
+      reactionSpy.mock.calls[0][1]
+    );
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
-      message: 'Reaction added successfully'
+      message: 'Reaction added successfully',
     });
   });
 });

@@ -41,7 +41,11 @@ export class FollowerCache extends BaseCache {
     }
   }
 
-  public async updateFollowersCountInCache(userId: string, prop: string, value: number): Promise<void> {
+  public async updateFollowersCountInCache(
+    userId: string,
+    prop: string,
+    value: number
+  ): Promise<void> {
     try {
       if (!this.client.isOpen) {
         await this.client.connect();
@@ -71,7 +75,7 @@ export class FollowerCache extends BaseCache {
           followingCount: user.followingCount,
           profilePicture: user.profilePicture,
           uId: user.uId!,
-          userProfile: user
+          userProfile: user,
         };
         list.push(data);
       }
@@ -82,7 +86,12 @@ export class FollowerCache extends BaseCache {
     }
   }
 
-  public async updateBlockedUserPropInCache(key: string, prop: string, value: string, type: 'block' | 'unblock'): Promise<void> {
+  public async updateBlockedUserPropInCache(
+    key: string,
+    prop: string,
+    value: string,
+    type: 'block' | 'unblock'
+  ): Promise<void> {
     try {
       if (!this.client.isOpen) {
         await this.client.connect();

@@ -17,8 +17,8 @@ jest.mock('@service/redis/message.cache');
 Object.defineProperties(chatServer, {
   socketIOChatObject: {
     value: new Server(),
-    writable: true
-  }
+    writable: true,
+  },
 });
 
 describe('Delete', () => {
@@ -37,7 +37,7 @@ describe('Delete', () => {
         senderId: `${existingUser._id}`,
         receiverId: '60263f14648fed5246e322d8',
         messageId: `${mockMessageId}`,
-        type: 'deleteForMe'
+        type: 'deleteForMe',
       }) as Request;
       const res: Response = chatMockResponse();
       jest.spyOn(MessageCache.prototype, 'markMessageAsDeleted').mockResolvedValue(messageDataMock);
@@ -46,15 +46,18 @@ describe('Delete', () => {
 
       await Delete.prototype.markMessageAsDeleted(req, res);
       expect(chatServer.socketIOChatObject.emit).toHaveBeenCalledTimes(2);
-      expect(chatServer.socketIOChatObject.emit).toHaveBeenCalledWith('message read', messageDataMock);
+      expect(chatServer.socketIOChatObject.emit).toHaveBeenCalledWith(
+        'message read',
+        messageDataMock
+      );
       expect(chatServer.socketIOChatObject.emit).toHaveBeenCalledWith('chat list', messageDataMock);
       expect(chatQueue.addChatJob).toHaveBeenCalledWith('markMessageAsDeletedInDB', {
         messageId: new mongoose.Types.ObjectId(mockMessageId),
-        type: 'deleteForMe'
+        type: 'deleteForMe',
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Message marked as deleted'
+        message: 'Message marked as deleted',
       });
     });
 
@@ -63,7 +66,7 @@ describe('Delete', () => {
         senderId: `${existingUser._id}`,
         receiverId: '60263f14648fed5246e322d8',
         messageId: `${mockMessageId}`,
-        type: 'deleteForEveryone'
+        type: 'deleteForEveryone',
       }) as Request;
       const res: Response = chatMockResponse();
       jest.spyOn(MessageCache.prototype, 'markMessageAsDeleted').mockResolvedValue(messageDataMock);
@@ -72,15 +75,18 @@ describe('Delete', () => {
 
       await Delete.prototype.markMessageAsDeleted(req, res);
       expect(chatServer.socketIOChatObject.emit).toHaveBeenCalledTimes(2);
-      expect(chatServer.socketIOChatObject.emit).toHaveBeenCalledWith('message read', messageDataMock);
+      expect(chatServer.socketIOChatObject.emit).toHaveBeenCalledWith(
+        'message read',
+        messageDataMock
+      );
       expect(chatServer.socketIOChatObject.emit).toHaveBeenCalledWith('chat list', messageDataMock);
       expect(chatQueue.addChatJob).toHaveBeenCalledWith('markMessageAsDeletedInDB', {
         messageId: new mongoose.Types.ObjectId(mockMessageId),
-        type: 'deleteForEveryone'
+        type: 'deleteForEveryone',
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Message marked as deleted'
+        message: 'Message marked as deleted',
       });
     });
   });

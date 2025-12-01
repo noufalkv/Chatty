@@ -14,7 +14,13 @@ class HealthRoutes {
 
   public health(): Router {
     this.router.get('/health', (req: Request, res: Response) => {
-      res.status(HTTP_STATUS.OK).send(`Health: Server instance is healthy with process id ${process.pid} on ${moment().format('LL')}`);
+      res
+        .status(HTTP_STATUS.OK)
+        .send(
+          `Health: Server instance is healthy with process id ${process.pid} on ${moment().format(
+            'LL'
+          )}`
+        );
     });
 
     return this.router;
@@ -22,7 +28,9 @@ class HealthRoutes {
 
   public env(): Router {
     this.router.get('/env', (req: Request, res: Response) => {
-      res.status(HTTP_STATUS.OK).send(`This is the ${config.NODE_ENV} environment.rfrgrg5t3e2e3e3r4g5g`);
+      res
+        .status(HTTP_STATUS.OK)
+        .send(`This is the ${config.NODE_ENV} environment.rfrgrg5t3e2e3e3r4g5g`);
     });
 
     return this.router;
@@ -32,11 +40,15 @@ class HealthRoutes {
     this.router.get('/instance', async (req: Request, res: Response) => {
       const response = await axios({
         method: 'get',
-        url: config.EC2_URL
+        url: config.EC2_URL,
       });
       res
         .status(HTTP_STATUS.OK)
-        .send(`Server is running on EC2 instance with id ${response.data} and process id ${process.pid} on ${moment().format('LL')}`);
+        .send(
+          `Server is running on EC2 instance with id ${response.data} and process id ${
+            process.pid
+          } on ${moment().format('LL')}`
+        );
     });
 
     return this.router;
@@ -50,14 +62,16 @@ class HealthRoutes {
       const end: number = performance.now();
       const response = await axios({
         method: 'get',
-        url: config.EC2_URL
+        url: config.EC2_URL,
       });
       res
         .status(HTTP_STATUS.OK)
         .send(
-          `Fibonacci series of ${num} is ${result} and it took ${end - start}ms and runs with process id ${process.pid} on ${
-            response.data
-          } at ${moment().format('LL')}`
+          `Fibonacci series of ${num} is ${result} and it took ${
+            end - start
+          }ms and runs with process id ${process.pid} on ${response.data} at ${moment().format(
+            'LL'
+          )}`
         );
     });
 

@@ -12,7 +12,7 @@ export function uploads(
       overwrite,
       invalidate,
       fileLength: file ? file.length : 0,
-      fileType: file ? file.substring(0, 50) : 'N/A'
+      fileType: file ? file.substring(0, 50) : 'N/A',
     });
 
     cloudinary.v2.uploader.upload(
@@ -20,14 +20,17 @@ export function uploads(
       {
         public_id,
         overwrite,
-        invalidate
+        invalidate,
       },
       (error: UploadApiErrorResponse | undefined, result: UploadApiResponse | undefined) => {
         if (error) {
           console.error('Cloudinary upload error:', error);
           reject(error);
         } else {
-          console.log('Cloudinary upload success:', { public_id: result?.public_id, version: result?.version });
+          console.log('Cloudinary upload success:', {
+            public_id: result?.public_id,
+            version: result?.version,
+          });
           resolve(result);
         }
       }
@@ -46,7 +49,7 @@ export function videoUpload(
       public_id,
       overwrite,
       invalidate,
-      fileLength: file ? file.length : 0
+      fileLength: file ? file.length : 0,
     });
 
     cloudinary.v2.uploader.upload(
@@ -56,14 +59,17 @@ export function videoUpload(
         chunk_size: 50000,
         public_id,
         overwrite,
-        invalidate
+        invalidate,
       },
       (error: UploadApiErrorResponse | undefined, result: UploadApiResponse | undefined) => {
         if (error) {
           console.error('Cloudinary video upload error:', error);
           reject(error);
         } else {
-          console.log('Cloudinary video upload success:', { public_id: result?.public_id, version: result?.version });
+          console.log('Cloudinary video upload success:', {
+            public_id: result?.public_id,
+            version: result?.version,
+          });
           resolve(result);
         }
       }

@@ -60,7 +60,7 @@ export class CommentCache extends BaseCache {
       }
       const response: ICommentNameList = {
         count: commentsCount,
-        names: list
+        names: list,
       };
       return [response];
     } catch (error) {
@@ -69,7 +69,10 @@ export class CommentCache extends BaseCache {
     }
   }
 
-  public async getSingleCommentFromCache(postId: string, commentId: string): Promise<ICommentDocument[]> {
+  public async getSingleCommentFromCache(
+    postId: string,
+    commentId: string
+  ): Promise<ICommentDocument[]> {
     try {
       if (!this.client.isOpen) {
         await this.client.connect();

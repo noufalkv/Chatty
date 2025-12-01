@@ -6,12 +6,14 @@ import { ObjectId } from 'mongodb';
 
 class ChatService {
   public async addMessageToDB(data: IMessageData): Promise<void> {
-    const conversation: IConversationDocument[] = await ConversationModel.find({ _id: data?.conversationId }).exec();
+    const conversation: IConversationDocument[] = await ConversationModel.find({
+      _id: data?.conversationId,
+    }).exec();
     if (conversation.length === 0) {
       await ConversationModel.create({
         _id: data?.conversationId,
         senderId: data.senderId,
-        receiverId: data.receiverId
+        receiverId: data.receiverId,
       });
     }
 
@@ -31,7 +33,7 @@ class ChatService {
       gifUrl: data.gifUrl,
       selectedImage: data.selectedImage,
       reaction: data.reaction,
-      createdAt: data.createdAt
+      createdAt: data.createdAt,
     });
   }
 
@@ -41,8 +43,8 @@ class ChatService {
       {
         $group: {
           _id: '$conversationId',
-          result: { $last: '$$ROOT' }
-        }
+          result: { $last: '$$ROOT' },
+        },
       },
       {
         $project: {
@@ -61,22 +63,29 @@ class ChatService {
           gifUrl: '$result.gifUrl',
           selectedImage: '$result.selectedImage',
           reaction: '$result.reaction',
-          createdAt: '$result.createdAt'
-        }
+          createdAt: '$result.createdAt',
+        },
       },
-      { $sort: { createdAt: 1 } }
+      { $sort: { createdAt: 1 } },
     ]);
     return messages;
   }
 
-  public async getMessages(senderId: ObjectId, receiverId: ObjectId, sort: Record<string, 1 | -1>): Promise<IMessageData[]> {
+  public async getMessages(
+    senderId: ObjectId,
+    receiverId: ObjectId,
+    sort: Record<string, 1 | -1>
+  ): Promise<IMessageData[]> {
     const query = {
       $or: [
         { senderId, receiverId },
-        { senderId: receiverId, receiverId: senderId }
-      ]
+        { senderId: receiverId, receiverId: senderId },
+      ],
     };
-    const messages: IMessageData[] = await MessageModel.aggregate([{ $match: query }, { $sort: sort }]);
+    const messages: IMessageData[] = await MessageModel.aggregate([
+      { $match: query },
+      { $sort: sort },
+    ]);
     return messages;
   }
 
@@ -84,7 +93,10 @@ class ChatService {
     if (type === 'deleteForMe') {
       await MessageModel.updateOne({ _id: messageId }, { $set: { deleteForMe: true } }).exec();
     } else {
-      await MessageModel.updateOne({ _id: messageId }, { $set: { deleteForMe: true, deleteForEveryone: true } }).exec();
+      await MessageModel.updateOne(
+        { _id: messageId },
+        { $set: { deleteForMe: true, deleteForEveryone: true } }
+      ).exec();
     }
   }
 
@@ -92,17 +104,28 @@ class ChatService {
     const query = {
       $or: [
         { senderId, receiverId, isRead: false },
-        { senderId: receiverId, receiverId: senderId, isRead: false }
-      ]
+        { senderId: receiverId, receiverId: senderId, isRead: false },
+      ],
     };
     await MessageModel.updateMany(query, { $set: { isRead: true } }).exec();
   }
 
-  public async updateMessageReaction(messageId: ObjectId, senderName: string, reaction: string, type: 'add' | 'remove'): Promise<void> {
+  public async updateMessageReaction(
+    messageId: ObjectId,
+    senderName: string,
+    reaction: string,
+    type: 'add' | 'remove'
+  ): Promise<void> {
     if (type === 'add') {
-      await MessageModel.updateOne({ _id: messageId }, { $push: { reaction: { senderName, type: reaction } } }).exec();
+      await MessageModel.updateOne(
+        { _id: messageId },
+        { $push: { reaction: { senderName, type: reaction } } }
+      ).exec();
     } else {
-      await MessageModel.updateOne({ _id: messageId }, { $pull: { reaction: { senderName } } }).exec();
+      await MessageModel.updateOne(
+        { _id: messageId },
+        { $pull: { reaction: { senderName } } }
+      ).exec();
     }
   }
 }

@@ -38,7 +38,10 @@ describe('SignIn', () => {
   });
 
   it('should throw an error if username length is less than minimum length', () => {
-    const req: Request = authMockRequest({}, { username: WRONG_USERNAME, password: WRONG_PASSWORD }) as Request;
+    const req: Request = authMockRequest(
+      {},
+      { username: WRONG_USERNAME, password: WRONG_PASSWORD }
+    ) as Request;
     const res: Response = authMockResponse();
     SignIn.prototype.read(req, res).catch((error: CustomError) => {
       expect(error.statusCode).toEqual(400);
@@ -47,7 +50,10 @@ describe('SignIn', () => {
   });
 
   it('should throw an error if username length is greater than maximum length', () => {
-    const req: Request = authMockRequest({}, { username: LONG_USERNAME, password: WRONG_PASSWORD }) as Request;
+    const req: Request = authMockRequest(
+      {},
+      { username: LONG_USERNAME, password: WRONG_PASSWORD }
+    ) as Request;
     const res: Response = authMockResponse();
     SignIn.prototype.read(req, res).catch((error: CustomError) => {
       expect(error.statusCode).toEqual(400);
@@ -65,7 +71,10 @@ describe('SignIn', () => {
   });
 
   it('should throw an error if password length is less than minimum length', () => {
-    const req: Request = authMockRequest({}, { username: USERNAME, password: WRONG_PASSWORD }) as Request;
+    const req: Request = authMockRequest(
+      {},
+      { username: USERNAME, password: WRONG_PASSWORD }
+    ) as Request;
     const res: Response = authMockResponse();
     SignIn.prototype.read(req, res).catch((error: CustomError) => {
       expect(error.statusCode).toEqual(400);
@@ -74,7 +83,10 @@ describe('SignIn', () => {
   });
 
   it('should throw an error if password length is greater than maximum length', () => {
-    const req: Request = authMockRequest({}, { username: USERNAME, password: LONG_PASSWORD }) as Request;
+    const req: Request = authMockRequest(
+      {},
+      { username: USERNAME, password: LONG_PASSWORD }
+    ) as Request;
     const res: Response = authMockResponse();
     SignIn.prototype.read(req, res).catch((error: CustomError) => {
       expect(error.statusCode).toEqual(400);
@@ -88,7 +100,9 @@ describe('SignIn', () => {
     jest.spyOn(authService, 'getAuthUserByUsername').mockResolvedValueOnce(null as any);
 
     SignIn.prototype.read(req, res).catch((error: CustomError) => {
-      expect(authService.getAuthUserByUsername).toHaveBeenCalledWith(Helpers.firstLetterUppercase(req.body.username));
+      expect(authService.getAuthUserByUsername).toHaveBeenCalledWith(
+        Helpers.firstLetterUppercase(req.body.username)
+      );
       expect(error.statusCode).toEqual(400);
       expect(error.serializeErrors().message).toEqual('Invalid credentials');
     });
@@ -100,7 +114,9 @@ describe('SignIn', () => {
     jest.spyOn(authService, 'getAuthUserByUsername').mockResolvedValueOnce(null as any);
 
     SignIn.prototype.read(req, res).catch((error: CustomError) => {
-      expect(authService.getAuthUserByUsername).toHaveBeenCalledWith(Helpers.firstLetterUppercase(req.body.username));
+      expect(authService.getAuthUserByUsername).toHaveBeenCalledWith(
+        Helpers.firstLetterUppercase(req.body.username)
+      );
       expect(error.statusCode).toEqual(400);
       expect(error.serializeErrors().message).toEqual('Invalid credentials');
     });
@@ -119,7 +135,7 @@ describe('SignIn', () => {
     expect(res.json).toHaveBeenCalledWith({
       message: 'User login successfully',
       user: mergedAuthAndUserData,
-      token: req.session?.jwt
+      token: req.session?.jwt,
     });
   });
 });

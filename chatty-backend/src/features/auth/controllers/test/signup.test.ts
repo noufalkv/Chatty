@@ -31,7 +31,7 @@ describe('SignUp', () => {
         email: 'manny@test.com',
         password: 'qwerty',
         avatarColor: 'red',
-        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
       }
     ) as Request;
     const res: Response = authMockResponse();
@@ -48,7 +48,7 @@ describe('SignUp', () => {
         email: 'manny@test.com',
         password: 'qwerty',
         avatarColor: 'red',
-        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
       }
     ) as Request;
     const res: Response = authMockResponse();
@@ -65,7 +65,7 @@ describe('SignUp', () => {
         email: 'manny@test.com',
         password: 'qwerty',
         avatarColor: 'red',
-        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
       }
     ) as Request;
     const res: Response = authMockResponse();
@@ -82,7 +82,7 @@ describe('SignUp', () => {
         email: 'not valid',
         password: 'qwerty',
         avatarColor: 'red',
-        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
       }
     ) as Request;
     const res: Response = authMockResponse();
@@ -95,7 +95,13 @@ describe('SignUp', () => {
   it('should throw an error if email is not available', async () => {
     const req: Request = authMockRequest(
       {},
-      { username: 'Manny', email: '', password: 'qwerty', avatarColor: 'red', avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==' }
+      {
+        username: 'Manny',
+        email: '',
+        password: 'qwerty',
+        avatarColor: 'red',
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
+      }
     ) as Request;
     const res: Response = authMockResponse();
     jest.spyOn(authService, 'getUserByUsernameOrEmail').mockResolvedValue(null as any);
@@ -111,7 +117,7 @@ describe('SignUp', () => {
         email: 'manny@test.com',
         password: '',
         avatarColor: 'red',
-        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
       }
     ) as Request;
     const res: Response = authMockResponse();
@@ -128,7 +134,7 @@ describe('SignUp', () => {
         email: 'manny@test.com',
         password: 'ma',
         avatarColor: 'red',
-        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
       }
     ) as Request;
     const res: Response = authMockResponse();
@@ -145,7 +151,7 @@ describe('SignUp', () => {
         email: 'manny@test.com',
         password: 'mathematics1',
         avatarColor: 'red',
-        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
       }
     ) as Request;
     const res: Response = authMockResponse();
@@ -162,7 +168,7 @@ describe('SignUp', () => {
         email: 'manny@test.com',
         password: 'qwerty',
         avatarColor: 'red',
-        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
       }
     ) as Request;
     const res: Response = authMockResponse();
@@ -179,21 +185,25 @@ describe('SignUp', () => {
         email: 'manny@test.com',
         password: 'qwerty',
         avatarColor: 'red',
-        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ=='
+        avatarImage: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==',
       }
     ) as Request;
     const res: Response = authMockResponse();
 
     jest.spyOn(authService, 'getUserByUsernameOrEmail').mockResolvedValue(null as any);
     const userSpy = jest.spyOn(UserCache.prototype, 'saveUserToCache');
-    jest.spyOn(cloudinaryUploads, 'uploads').mockImplementation((): any => Promise.resolve({ version: '1234737373', public_id: '123456' }));
+    jest
+      .spyOn(cloudinaryUploads, 'uploads')
+      .mockImplementation((): any =>
+        Promise.resolve({ version: '1234737373', public_id: '123456' })
+      );
 
     await SignUp.prototype.create(req, res);
     expect(req.session?.jwt).toBeDefined();
     expect(res.json).toHaveBeenCalledWith({
       message: 'User created successfully',
       user: userSpy.mock.calls[0][2],
-      token: req.session?.jwt
+      token: req.session?.jwt,
     });
   });
 });

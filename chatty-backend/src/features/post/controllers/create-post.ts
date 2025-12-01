@@ -37,14 +37,14 @@ export class Create {
       videoId: '',
       videoVersion: '',
       createdAt: new Date(),
-      reactions: { like: 0, love: 0, happy: 0, sad: 0, wow: 0, angry: 0 }
+      reactions: { like: 0, love: 0, happy: 0, sad: 0, wow: 0, angry: 0 },
     } as IPostDocument;
     socketIOPostObject.emit('add post', createdPost);
     await postCache.savePostToCache({
       key: postObjectId,
       currentUserId: `${req.currentUser!.userId}`,
       uId: `${req.currentUser!.uId}`,
-      createdPost
+      createdPost,
     });
     postQueue.addPostJob('addPostToDB', { key: req.currentUser!.userId, value: createdPost });
     res.status(HTTP_STATUS.CREATED).json({ message: 'Post created successfully' });
@@ -78,20 +78,20 @@ export class Create {
       videoId: '',
       videoVersion: '',
       createdAt: new Date(),
-      reactions: { like: 0, love: 0, happy: 0, sad: 0, wow: 0, angry: 0 }
+      reactions: { like: 0, love: 0, happy: 0, sad: 0, wow: 0, angry: 0 },
     } as IPostDocument;
     socketIOPostObject.emit('add post', createdPost);
     await postCache.savePostToCache({
       key: postObjectId,
       currentUserId: `${req.currentUser!.userId}`,
       uId: `${req.currentUser!.uId}`,
-      createdPost
+      createdPost,
     });
     postQueue.addPostJob('addPostToDB', { key: req.currentUser!.userId, value: createdPost });
     imageQueue.addImageJob('addImageToDB', {
       key: `${req.currentUser!.userId}`,
       imgId: result.public_id,
-      imgVersion: result.version.toString()
+      imgVersion: result.version.toString(),
     });
     res.status(HTTP_STATUS.CREATED).json({ message: 'Post created with image successfully' });
   }
@@ -124,14 +124,14 @@ export class Create {
       videoId: result.public_id,
       videoVersion: result.version.toString(),
       createdAt: new Date(),
-      reactions: { like: 0, love: 0, happy: 0, sad: 0, wow: 0, angry: 0 }
+      reactions: { like: 0, love: 0, happy: 0, sad: 0, wow: 0, angry: 0 },
     } as IPostDocument;
     socketIOPostObject.emit('add post', createdPost);
     await postCache.savePostToCache({
       key: postObjectId,
       currentUserId: `${req.currentUser!.userId}`,
       uId: `${req.currentUser!.uId}`,
-      createdPost
+      createdPost,
     });
     postQueue.addPostJob('addPostToDB', { key: req.currentUser!.userId, value: createdPost });
     res.status(HTTP_STATUS.CREATED).json({ message: 'Post created with video successfully' });

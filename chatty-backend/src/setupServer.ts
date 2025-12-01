@@ -62,7 +62,7 @@ export class ChattyServer {
         keys: [config.SECRET_KEY_ONE!, config.SECRET_KEY_TWO!],
         maxAge: 24 * 7 * 3600000,
         // secure: true
-        secure: config.NODE_ENV !== 'development'
+        secure: config.NODE_ENV !== 'development',
         // sameSite: 'none' // comment this line when running the server locally
       })
     );
@@ -73,7 +73,7 @@ export class ChattyServer {
         origin: config.CLIENT_URL,
         credentials: true,
         optionsSuccessStatus: 200,
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
       })
     );
   }
@@ -91,7 +91,7 @@ export class ChattyServer {
   private apiMonitoring(app: Application): void {
     app.use(
       apiStats.getMiddleware({
-        uriPath: '/api-monitoring'
+        uriPath: '/api-monitoring',
       })
     );
   }
@@ -128,8 +128,8 @@ export class ChattyServer {
     const io: Server = new Server(httpServer, {
       cors: {
         origin: config.CLIENT_URL,
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
-      }
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      },
     });
     const pubClient = createClient({ url: config.REDIS_URL });
     const subClient = pubClient.duplicate();
@@ -151,7 +151,8 @@ export class ChattyServer {
     const followerSocketHandler: SocketIOFollowerHandler = new SocketIOFollowerHandler(io);
     const userSocketHandler: SocketIOUserHandler = new SocketIOUserHandler(io);
     const chatSocketHandler: SocketIOChatHandler = new SocketIOChatHandler(io);
-    const notificationSocketHandler: SocketIONotificationHandler = new SocketIONotificationHandler();
+    const notificationSocketHandler: SocketIONotificationHandler =
+      new SocketIONotificationHandler();
     const imageSocketHandler: SocketIOImageHandler = new SocketIOImageHandler();
 
     postSocketHandler.listen();

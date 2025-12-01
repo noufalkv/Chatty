@@ -15,8 +15,8 @@ jest.mock('@service/redis/message.cache');
 Object.defineProperties(chatServer, {
   socketIOChatObject: {
     value: new Server(),
-    writable: true
-  }
+    writable: true,
+  },
 });
 
 describe('Message', () => {
@@ -37,12 +37,14 @@ describe('Message', () => {
           conversationId: '602854c81c9ca7939aaeba43',
           messageId: `${mockMessageId}`,
           reaction: 'love',
-          type: 'add'
+          type: 'add',
         },
         authUserPayload
       ) as Request;
       const res: Response = chatMockResponse();
-      jest.spyOn(MessageCache.prototype, 'updateMessageReaction').mockResolvedValue(messageDataMock);
+      jest
+        .spyOn(MessageCache.prototype, 'updateMessageReaction')
+        .mockResolvedValue(messageDataMock);
       jest.spyOn(chatServer.socketIOChatObject, 'emit');
 
       await Message.prototype.reaction(req, res);
@@ -54,10 +56,13 @@ describe('Message', () => {
         'add'
       );
       expect(chatServer.socketIOChatObject.emit).toHaveBeenCalledTimes(1);
-      expect(chatServer.socketIOChatObject.emit).toHaveBeenCalledWith('message reaction', messageDataMock);
+      expect(chatServer.socketIOChatObject.emit).toHaveBeenCalledWith(
+        'message reaction',
+        messageDataMock
+      );
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Message reaction added'
+        message: 'Message reaction added',
       });
     });
 
@@ -68,7 +73,7 @@ describe('Message', () => {
           conversationId: '602854c81c9ca7939aaeba43',
           messageId: `${mockMessageId}`,
           reaction: 'love',
-          type: 'add'
+          type: 'add',
         },
         authUserPayload
       ) as Request;
@@ -80,11 +85,11 @@ describe('Message', () => {
         messageId: mockMessageId,
         senderName: req.currentUser!.username,
         reaction: 'love',
-        type: 'add'
+        type: 'add',
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Message reaction added'
+        message: 'Message reaction added',
       });
     });
   });

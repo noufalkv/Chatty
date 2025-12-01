@@ -22,7 +22,10 @@ export class SignUp {
     console.log(req.body);
 
     const { username, email, password, avatarColor, avatarImage } = req.body;
-    const checkIfUserExist: IAuthDocument = await authService.getUserByUsernameOrEmail(username, email);
+    const checkIfUserExist: IAuthDocument = await authService.getUserByUsernameOrEmail(
+      username,
+      email
+    );
     if (checkIfUserExist) {
       throw new BadRequestError('Invalid credentials');
     }
@@ -39,7 +42,7 @@ export class SignUp {
       username,
       email,
       password,
-      avatarColor
+      avatarColor,
     });
     try {
       if (!avatarImage) {
@@ -50,7 +53,12 @@ export class SignUp {
       const randomNum = Math.floor(Math.random() * 10000);
       const safePublicId = `avatar_${timestamp}_${randomNum}`;
 
-      const result: UploadApiResponse = (await uploads(avatarImage, safePublicId, true, true)) as UploadApiResponse;
+      const result: UploadApiResponse = (await uploads(
+        avatarImage,
+        safePublicId,
+        true,
+        true
+      )) as UploadApiResponse;
       if (!result?.public_id) {
         throw new BadRequestError('File upload: Error occurred. Try again.');
       }
@@ -66,7 +74,9 @@ export class SignUp {
 
       const userJwt: string = SignUp.prototype.signToken(authData, userObjectId);
       req.session = { jwt: userJwt };
-      res.status(HTTP_STATUS.CREATED).json({ message: 'User created successfully', user: userDataForCache, token: userJwt });
+      res
+        .status(HTTP_STATUS.CREATED)
+        .json({ message: 'User created successfully', user: userDataForCache, token: userJwt });
     } catch (error) {
       console.error('Avatar upload error:', error);
       throw new BadRequestError('File upload: Error occurred. Try again.');
@@ -80,7 +90,7 @@ export class SignUp {
         uId: data.uId,
         email: data.email,
         username: data.username,
-        avatarColor: data.avatarColor
+        avatarColor: data.avatarColor,
       },
       config.JWT_TOKEN!
     );
@@ -95,7 +105,7 @@ export class SignUp {
       email: Helpers.lowerCase(email),
       password,
       avatarColor,
-      createdAt: new Date()
+      createdAt: new Date(),
     } as IAuthDocument;
   }
 
@@ -125,14 +135,14 @@ export class SignUp {
         messages: true,
         reactions: true,
         comments: true,
-        follows: true
+        follows: true,
       },
       social: {
         facebook: '',
         instagram: '',
         twitter: '',
-        youtube: ''
-      }
+        youtube: '',
+      },
     } as unknown as IUserDocument;
   }
 }

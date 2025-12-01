@@ -54,7 +54,7 @@ describe('Password', () => {
       expect(emailQueue.addEmailJob).toHaveBeenCalled();
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Password reset email sent.'
+        message: 'Password reset email sent.',
       });
     });
   });
@@ -70,7 +70,10 @@ describe('Password', () => {
     });
 
     it('should throw an error if password and confirmPassword are different', () => {
-      const req: Request = authMockRequest({}, { password: CORRECT_PASSWORD, confirmPassword: `${CORRECT_PASSWORD}2` }) as Request;
+      const req: Request = authMockRequest(
+        {},
+        { password: CORRECT_PASSWORD, confirmPassword: `${CORRECT_PASSWORD}2` }
+      ) as Request;
       const res: Response = authMockResponse();
       Password.prototype.update(req, res).catch((error: CustomError) => {
         expect(error.statusCode).toEqual(400);
@@ -79,9 +82,14 @@ describe('Password', () => {
     });
 
     it('should throw error if reset token has expired', () => {
-      const req: Request = authMockRequest({}, { password: CORRECT_PASSWORD, confirmPassword: CORRECT_PASSWORD }, null, {
-        token: ''
-      }) as Request;
+      const req: Request = authMockRequest(
+        {},
+        { password: CORRECT_PASSWORD, confirmPassword: CORRECT_PASSWORD },
+        null,
+        {
+          token: '',
+        }
+      ) as Request;
       const res: Response = authMockResponse();
       jest.spyOn(authService, 'getAuthUserByPasswordToken').mockResolvedValue(null as any);
       Password.prototype.update(req, res).catch((error: CustomError) => {
@@ -91,9 +99,14 @@ describe('Password', () => {
     });
 
     it('should send correct json response', async () => {
-      const req: Request = authMockRequest({}, { password: CORRECT_PASSWORD, confirmPassword: CORRECT_PASSWORD }, null, {
-        token: '12sde3'
-      }) as Request;
+      const req: Request = authMockRequest(
+        {},
+        { password: CORRECT_PASSWORD, confirmPassword: CORRECT_PASSWORD },
+        null,
+        {
+          token: '12sde3',
+        }
+      ) as Request;
       const res: Response = authMockResponse();
       jest.spyOn(authService, 'getAuthUserByPasswordToken').mockResolvedValue(authMock);
       jest.spyOn(emailQueue, 'addEmailJob');
@@ -101,7 +114,7 @@ describe('Password', () => {
       expect(emailQueue.addEmailJob).toHaveBeenCalled();
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Password successfully updated.'
+        message: 'Password successfully updated.',
       });
     });
   });

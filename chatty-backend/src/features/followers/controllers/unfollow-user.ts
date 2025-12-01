@@ -12,15 +12,31 @@ export class Remove {
       `following:${req.currentUser!.userId}`,
       followeeId
     );
-    const removeFolloweeFromCache: Promise<void> = followerCache.removeFollowerFromCache(`followers:${followeeId}`, followerId);
+    const removeFolloweeFromCache: Promise<void> = followerCache.removeFollowerFromCache(
+      `followers:${followeeId}`,
+      followerId
+    );
 
-    const followersCount: Promise<void> = followerCache.updateFollowersCountInCache(`${followeeId}`, 'followersCount', -1);
-    const followeeCount: Promise<void> = followerCache.updateFollowersCountInCache(`${followerId}`, 'followingCount', -1);
-    await Promise.all([removeFollowerFromCache, removeFolloweeFromCache, followersCount, followeeCount]);
+    const followersCount: Promise<void> = followerCache.updateFollowersCountInCache(
+      `${followeeId}`,
+      'followersCount',
+      -1
+    );
+    const followeeCount: Promise<void> = followerCache.updateFollowersCountInCache(
+      `${followerId}`,
+      'followingCount',
+      -1
+    );
+    await Promise.all([
+      removeFollowerFromCache,
+      removeFolloweeFromCache,
+      followersCount,
+      followeeCount,
+    ]);
 
     followerQueue.addFollowerJob('removeFollowerFromDB', {
       keyOne: `${followeeId}`,
-      keyTwo: `${followerId}`
+      keyTwo: `${followerId}`,
     });
     res.status(HTTP_STATUS.OK).json({ message: 'Unfollowed user now' });
   }

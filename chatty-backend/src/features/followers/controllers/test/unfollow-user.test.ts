@@ -23,7 +23,7 @@ describe('Remove', () => {
   it('should send correct json response', async () => {
     const req: Request = followersMockRequest({}, authUserPayload, {
       followerId: '6064861bc25eaa5a5d2f9bf4',
-      followeeId: `${existingUser._id}`
+      followeeId: `${existingUser._id}`,
     }) as Request;
     const res: Response = followersMockResponse();
     jest.spyOn(FollowerCache.prototype, 'removeFollowerFromCache');
@@ -41,15 +41,23 @@ describe('Remove', () => {
       req.params.followerId
     );
     expect(FollowerCache.prototype.updateFollowersCountInCache).toHaveBeenCalledTimes(2);
-    expect(FollowerCache.prototype.updateFollowersCountInCache).toHaveBeenCalledWith(`${req.params.followeeId}`, 'followersCount', -1);
-    expect(FollowerCache.prototype.updateFollowersCountInCache).toHaveBeenCalledWith(`${req.params.followerId}`, 'followingCount', -1);
+    expect(FollowerCache.prototype.updateFollowersCountInCache).toHaveBeenCalledWith(
+      `${req.params.followeeId}`,
+      'followersCount',
+      -1
+    );
+    expect(FollowerCache.prototype.updateFollowersCountInCache).toHaveBeenCalledWith(
+      `${req.params.followerId}`,
+      'followingCount',
+      -1
+    );
     expect(followerQueue.addFollowerJob).toHaveBeenCalledWith('removeFollowerFromDB', {
       keyOne: `${req.params.followeeId}`,
-      keyTwo: `${req.params.followerId}`
+      keyTwo: `${req.params.followerId}`,
     });
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
-      message: 'Unfollowed user now'
+      message: 'Unfollowed user now',
     });
   });
 });

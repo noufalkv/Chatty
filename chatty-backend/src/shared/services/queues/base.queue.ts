@@ -44,7 +44,7 @@ export abstract class BaseQueue {
 
     createBullBoard({
       queues: bullAdapters,
-      serverAdapter
+      serverAdapter,
     });
 
     this.log = config.createLogger(`${queueName}Queue`);
@@ -108,7 +108,11 @@ export abstract class BaseQueue {
     this.queue.add(name, data, { attempts: 3, backoff: { type: 'fixed', delay: 5000 } });
   }
 
-  protected processJob(name: string, concurrency: number, callback: Queue.ProcessCallbackFunction<void>): void {
+  protected processJob(
+    name: string,
+    concurrency: number,
+    callback: Queue.ProcessCallbackFunction<void>
+  ): void {
     this.queue.process(name, concurrency, callback);
   }
 }

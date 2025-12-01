@@ -12,8 +12,8 @@ jest.mock('@service/queues/base.queue');
 Object.defineProperties(notificationServer, {
   socketIONotificationObject: {
     value: new Server(),
-    writable: true
-  }
+    writable: true,
+  },
 });
 
 describe('Delete', () => {
@@ -27,17 +27,24 @@ describe('Delete', () => {
   });
 
   it('should send correct json response', async () => {
-    const req: Request = notificationMockRequest({}, authUserPayload, { notificationId: '12345' }) as Request;
+    const req: Request = notificationMockRequest({}, authUserPayload, {
+      notificationId: '12345',
+    }) as Request;
     const res: Response = notificationMockResponse();
     jest.spyOn(notificationServer.socketIONotificationObject, 'emit');
     jest.spyOn(notificationQueue, 'addNotificationJob');
 
     await Delete.prototype.notification(req, res);
-    expect(notificationServer.socketIONotificationObject.emit).toHaveBeenCalledWith('delete notification', req.params.notificationId);
-    expect(notificationQueue.addNotificationJob).toHaveBeenCalledWith('deleteNotification', { key: req.params.notificationId });
+    expect(notificationServer.socketIONotificationObject.emit).toHaveBeenCalledWith(
+      'delete notification',
+      req.params.notificationId
+    );
+    expect(notificationQueue.addNotificationJob).toHaveBeenCalledWith('deleteNotification', {
+      key: req.params.notificationId,
+    });
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
-      message: 'Notification deleted successfully'
+      message: 'Notification deleted successfully',
     });
   });
 });

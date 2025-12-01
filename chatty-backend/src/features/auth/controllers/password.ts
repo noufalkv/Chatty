@@ -25,11 +25,22 @@ export class Password {
 
     const randomBytes: Buffer = await Promise.resolve(crypto.randomBytes(20));
     const randomCharacters: string = randomBytes.toString('hex');
-    await authService.updatePasswordToken(`${existingUser._id!}`, randomCharacters, Date.now() * 60 * 60 * 1000);
+    await authService.updatePasswordToken(
+      `${existingUser._id!}`,
+      randomCharacters,
+      Date.now() * 60 * 60 * 1000
+    );
 
     const resetLink = `${config.CLIENT_URL}/reset-password?token=${randomCharacters}`;
-    const template: string = forgotPasswordTemplate.passwordResetTemplate(existingUser.username!, resetLink);
-    emailQueue.addEmailJob('forgotPasswordEmail', { template, receiverEmail: email, subject: 'Reset your password' });
+    const template: string = forgotPasswordTemplate.passwordResetTemplate(
+      existingUser.username!,
+      resetLink
+    );
+    emailQueue.addEmailJob('forgotPasswordEmail', {
+      template,
+      receiverEmail: email,
+      subject: 'Reset your password',
+    });
     res.status(HTTP_STATUS.OK).json({ message: 'Password reset email sent.' });
   }
 
@@ -54,10 +65,15 @@ export class Password {
       username: existingUser.username!,
       email: existingUser.email!,
       ipaddress: publicIP.address(),
-      date: moment().format('DD//MM//YYYY HH:mm')
+      date: moment().format('DD//MM//YYYY HH:mm'),
     };
-    const template: string = resetPasswordTemplate.passwordResetConfirmationTemplate(templateParams);
-    emailQueue.addEmailJob('forgotPasswordEmail', { template, receiverEmail: existingUser.email!, subject: 'Password Reset Confirmation' });
+    const template: string =
+      resetPasswordTemplate.passwordResetConfirmationTemplate(templateParams);
+    emailQueue.addEmailJob('forgotPasswordEmail', {
+      template,
+      receiverEmail: existingUser.email!,
+      subject: 'Password Reset Confirmation',
+    });
     res.status(HTTP_STATUS.OK).json({ message: 'Password successfully updated.' });
   }
 }

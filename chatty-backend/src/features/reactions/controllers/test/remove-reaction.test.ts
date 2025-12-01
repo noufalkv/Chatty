@@ -29,8 +29,8 @@ describe('Remove', () => {
         happy: 0,
         wow: 0,
         sad: 0,
-        angry: 0
-      })
+        angry: 0,
+      }),
     }) as Request;
     const res: Response = reactionMockResponse();
     jest.spyOn(ReactionCache.prototype, 'removePostReactionFromCache');
@@ -42,10 +42,13 @@ describe('Remove', () => {
       `${req.currentUser?.username}`,
       JSON.parse(req.params.postReactions)
     );
-    expect(reactionQueue.addReactionJob).toHaveBeenCalledWith(spy.mock.calls[0][0], spy.mock.calls[0][1]);
+    expect(reactionQueue.addReactionJob).toHaveBeenCalledWith(
+      spy.mock.calls[0][0],
+      spy.mock.calls[0][1]
+    );
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
-      message: 'Reaction removed from post'
+      message: 'Reaction removed from post',
     });
   });
 });

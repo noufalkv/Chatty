@@ -28,7 +28,12 @@ export class Add {
       const safePublicId = `profile_${req.currentUser!.userId}_${timestamp}_${randomNum}`;
 
       console.log('Starting image upload with public_id:', safePublicId);
-      const result: UploadApiResponse = (await uploads(req.body.image, safePublicId, true, true)) as UploadApiResponse;
+      const result: UploadApiResponse = (await uploads(
+        req.body.image,
+        safePublicId,
+        true,
+        true
+      )) as UploadApiResponse;
 
       console.log('Upload result:', { public_id: result?.public_id, version: result?.version });
 
@@ -50,7 +55,7 @@ export class Add {
         key: `${req.currentUser!.userId}`,
         value: url,
         imgId: result.public_id,
-        imgVersion: result.version.toString()
+        imgVersion: result.version.toString(),
       });
       res.status(HTTP_STATUS.OK).json({ message: 'Image added successfully' });
     } catch (error) {
@@ -65,7 +70,9 @@ export class Add {
 
   @joiValidation(addImageSchema)
   public async backgroundImage(req: Request, res: Response): Promise<void> {
-    const { version, publicId }: IBgUploadResponse = await Add.prototype.backgroundUpload(req.body.image);
+    const { version, publicId }: IBgUploadResponse = await Add.prototype.backgroundUpload(
+      req.body.image
+    );
     const bgImageId: Promise<IUserDocument> = userCache.updateSingleUserItemInCache(
       `${req.currentUser!.userId}`,
       'bgImageId',
@@ -76,16 +83,19 @@ export class Add {
       'bgImageVersion',
       version
     ) as Promise<IUserDocument>;
-    const response: [IUserDocument, IUserDocument] = (await Promise.all([bgImageId, bgImageVersion])) as [IUserDocument, IUserDocument];
+    const response: [IUserDocument, IUserDocument] = (await Promise.all([
+      bgImageId,
+      bgImageVersion,
+    ])) as [IUserDocument, IUserDocument];
     socketIOImageObject.emit('update user', {
       bgImageId: publicId,
       bgImageVersion: version,
-      userId: response[0]
+      userId: response[0],
     });
     imageQueue.addImageJob('updateBGImageInDB', {
       key: `${req.currentUser!.userId}`,
       imgId: publicId,
-      imgVersion: version.toString()
+      imgVersion: version.toString(),
     });
     res.status(HTTP_STATUS.OK).json({ message: 'Image added successfully' });
   }

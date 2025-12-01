@@ -32,7 +32,7 @@ describe('Get', () => {
       expect(res.json).toHaveBeenCalledWith({
         message: 'All posts',
         posts: [postMockData],
-        totalPosts: 1
+        totalPosts: 1,
       });
     });
 
@@ -50,7 +50,7 @@ describe('Get', () => {
       expect(res.json).toHaveBeenCalledWith({
         message: 'All posts',
         posts: [postMockData],
-        totalPosts: 1
+        totalPosts: 1,
       });
     });
 
@@ -67,7 +67,7 @@ describe('Get', () => {
       expect(res.json).toHaveBeenCalledWith({
         message: 'All posts',
         posts: [],
-        totalPosts: 0
+        totalPosts: 0,
       });
     });
   });
@@ -76,14 +76,16 @@ describe('Get', () => {
     it('should send correct json response if posts exist in cache', async () => {
       const req: Request = postMockRequest(newPost, authUserPayload, { page: '1' }) as Request;
       const res: Response = postMockResponse();
-      jest.spyOn(PostCache.prototype, 'getPostsWithImagesFromCache').mockResolvedValue([postMockData]);
+      jest
+        .spyOn(PostCache.prototype, 'getPostsWithImagesFromCache')
+        .mockResolvedValue([postMockData]);
 
       await Get.prototype.postsWithImages(req, res);
       expect(PostCache.prototype.getPostsWithImagesFromCache).toHaveBeenCalledWith('post', 0, 10);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'All posts with images',
-        posts: [postMockData]
+        posts: [postMockData],
       });
     });
 
@@ -94,11 +96,13 @@ describe('Get', () => {
       jest.spyOn(postService, 'getPosts').mockResolvedValue([postMockData]);
 
       await Get.prototype.postsWithImages(req, res);
-      expect(postService.getPosts).toHaveBeenCalledWith({ imgId: '$ne', gifUrl: '$ne' }, 0, 10, { createdAt: -1 });
+      expect(postService.getPosts).toHaveBeenCalledWith({ imgId: '$ne', gifUrl: '$ne' }, 0, 10, {
+        createdAt: -1,
+      });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'All posts with images',
-        posts: [postMockData]
+        posts: [postMockData],
       });
     });
 
@@ -112,7 +116,7 @@ describe('Get', () => {
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
         message: 'All posts with images',
-        posts: []
+        posts: [],
       });
     });
   });

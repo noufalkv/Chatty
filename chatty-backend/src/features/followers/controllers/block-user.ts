@@ -12,7 +12,7 @@ export class AddUser {
     blockedUserQueue.addBlockedUserJob('addBlockedUserToDB', {
       keyOne: `${req.currentUser!.userId}`,
       keyTwo: `${followerId}`,
-      type: 'block'
+      type: 'block',
     });
     res.status(HTTP_STATUS.OK).json({ message: 'User blocked' });
   }
@@ -23,14 +23,28 @@ export class AddUser {
     blockedUserQueue.addBlockedUserJob('removeBlockedUserFromDB', {
       keyOne: `${req.currentUser!.userId}`,
       keyTwo: `${followerId}`,
-      type: 'unblock'
+      type: 'unblock',
     });
     res.status(HTTP_STATUS.OK).json({ message: 'User unblocked' });
   }
 
-  private async updateBlockedUser(followerId: string, userId: string, type: 'block' | 'unblock'): Promise<void> {
-    const blocked: Promise<void> = followerCache.updateBlockedUserPropInCache(`${userId}`, 'blocked', `${followerId}`, type);
-    const blockedBy: Promise<void> = followerCache.updateBlockedUserPropInCache(`${followerId}`, 'blockedBy', `${userId}`, type);
+  private async updateBlockedUser(
+    followerId: string,
+    userId: string,
+    type: 'block' | 'unblock'
+  ): Promise<void> {
+    const blocked: Promise<void> = followerCache.updateBlockedUserPropInCache(
+      `${userId}`,
+      'blocked',
+      `${followerId}`,
+      type
+    );
+    const blockedBy: Promise<void> = followerCache.updateBlockedUserPropInCache(
+      `${followerId}`,
+      'blockedBy',
+      `${userId}`,
+      type
+    );
     await Promise.all([blocked, blockedBy]);
   }
 }

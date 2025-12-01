@@ -20,8 +20,8 @@ jest.mock('@global/helpers/cloudinary-upload');
 Object.defineProperties(imageServer, {
   socketIOImageObject: {
     value: new Server(),
-    writable: true
-  }
+    writable: true,
+  },
 });
 
 describe('Add', () => {
@@ -38,7 +38,9 @@ describe('Add', () => {
     it('should call image upload method', async () => {
       const req: Request = imagesMockRequest({}, { image: 'testing' }, authUserPayload) as Request;
       const res: Response = imagesMockResponse();
-      jest.spyOn(cloudinaryUploads, 'uploads').mockImplementation((): any => Promise.resolve({ version: '1234', public_id: '123456' }));
+      jest
+        .spyOn(cloudinaryUploads, 'uploads')
+        .mockImplementation((): any => Promise.resolve({ version: '1234', public_id: '123456' }));
 
       await Add.prototype.profileImage(req, res);
       expect(cloudinaryUploads.uploads).toHaveBeenCalledWith(
@@ -49,16 +51,20 @@ describe('Add', () => {
       );
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Image added successfully'
+        message: 'Image added successfully',
       });
     });
 
     it('should call updateSingleUserItemInCache method', async () => {
       const req: Request = imagesMockRequest({}, { image: 'testing' }, authUserPayload) as Request;
       const res: Response = imagesMockResponse();
-      jest.spyOn(UserCache.prototype, 'updateSingleUserItemInCache').mockResolvedValue(existingUser);
+      jest
+        .spyOn(UserCache.prototype, 'updateSingleUserItemInCache')
+        .mockResolvedValue(existingUser);
       jest.spyOn(imageServer.socketIOImageObject, 'emit');
-      jest.spyOn(cloudinaryUploads, 'uploads').mockImplementation((): any => Promise.resolve({ version: '1234', public_id: '123456' }));
+      jest
+        .spyOn(cloudinaryUploads, 'uploads')
+        .mockImplementation((): any => Promise.resolve({ version: '1234', public_id: '123456' }));
 
       await Add.prototype.profileImage(req, res);
       expect(UserCache.prototype.updateSingleUserItemInCache).toHaveBeenCalledWith(
@@ -66,17 +72,22 @@ describe('Add', () => {
         'profilePicture',
         expect.stringContaining('dxsuaev5w/image/upload/v1234/123456')
       );
-      expect(imageServer.socketIOImageObject.emit).toHaveBeenCalledWith('update user', existingUser);
+      expect(imageServer.socketIOImageObject.emit).toHaveBeenCalledWith(
+        'update user',
+        existingUser
+      );
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Image added successfully'
+        message: 'Image added successfully',
       });
     });
 
     it('should call addImageJob method', async () => {
       const req: Request = imagesMockRequest({}, { image: 'testing' }, authUserPayload) as Request;
       const res: Response = imagesMockResponse();
-      jest.spyOn(cloudinaryUploads, 'uploads').mockImplementation((): any => Promise.resolve({ version: '1234', public_id: '123456' }));
+      jest
+        .spyOn(cloudinaryUploads, 'uploads')
+        .mockImplementation((): any => Promise.resolve({ version: '1234', public_id: '123456' }));
       jest.spyOn(imageQueue, 'addImageJob');
 
       await Add.prototype.profileImage(req, res);
@@ -86,27 +97,33 @@ describe('Add', () => {
           key: `${req.currentUser?.userId}`,
           value: expect.stringContaining('dxsuaev5w/image/upload/v1234/123456'),
           imgId: '123456',
-          imgVersion: '1234'
+          imgVersion: '1234',
         })
       );
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Image added successfully'
+        message: 'Image added successfully',
       });
     });
   });
 
   describe('backgroundImage', () => {
     it('should upload new image', async () => {
-      const req: Request = imagesMockRequest({}, { image: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==' }, authUserPayload) as Request;
+      const req: Request = imagesMockRequest(
+        {},
+        { image: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==' },
+        authUserPayload
+      ) as Request;
       const res: Response = imagesMockResponse();
-      jest.spyOn(cloudinaryUploads, 'uploads').mockImplementation((): any => Promise.resolve({ version: '2467', public_id: '987654' }));
+      jest
+        .spyOn(cloudinaryUploads, 'uploads')
+        .mockImplementation((): any => Promise.resolve({ version: '2467', public_id: '987654' }));
 
       await Add.prototype.backgroundImage(req, res);
       expect(cloudinaryUploads.uploads).toHaveBeenCalledWith(req.body.image);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Image added successfully'
+        message: 'Image added successfully',
       });
     });
 
@@ -123,62 +140,92 @@ describe('Add', () => {
       expect(cloudinaryUploads.uploads).not.toHaveBeenCalledWith(req.body.image);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Image added successfully'
+        message: 'Image added successfully',
       });
     });
 
     it('should return bad request error', async () => {
-      const req: Request = imagesMockRequest({}, { image: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==' }, authUserPayload) as Request;
+      const req: Request = imagesMockRequest(
+        {},
+        { image: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==' },
+        authUserPayload
+      ) as Request;
       const res: Response = imagesMockResponse();
       jest
         .spyOn(cloudinaryUploads, 'uploads')
-        .mockImplementation((): any => Promise.resolve({ version: '', public_id: '', message: 'Upload error' }));
+        .mockImplementation((): any =>
+          Promise.resolve({ version: '', public_id: '', message: 'Upload error' })
+        );
 
       try {
         await Add.prototype.backgroundImage(req, res);
         fail('Expected an error to be thrown');
       } catch (error) {
         expect((error as CustomError).statusCode).toEqual(400);
-        expect((error as CustomError).serializeErrors().message).toEqual('File upload: Error occurred. Try again.');
+        expect((error as CustomError).serializeErrors().message).toEqual(
+          'File upload: Error occurred. Try again.'
+        );
       }
     });
 
     it('should call updateSingleUserItemInCache method', async () => {
-      const req: Request = imagesMockRequest({}, { image: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==' }, authUserPayload) as Request;
+      const req: Request = imagesMockRequest(
+        {},
+        { image: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==' },
+        authUserPayload
+      ) as Request;
       const res: Response = imagesMockResponse();
-      jest.spyOn(UserCache.prototype, 'updateSingleUserItemInCache').mockResolvedValue(existingUser);
+      jest
+        .spyOn(UserCache.prototype, 'updateSingleUserItemInCache')
+        .mockResolvedValue(existingUser);
       jest.spyOn(imageServer.socketIOImageObject, 'emit');
-      jest.spyOn(cloudinaryUploads, 'uploads').mockImplementation((): any => Promise.resolve({ version: '1234', public_id: '123456' }));
+      jest
+        .spyOn(cloudinaryUploads, 'uploads')
+        .mockImplementation((): any => Promise.resolve({ version: '1234', public_id: '123456' }));
 
       await Add.prototype.backgroundImage(req, res);
-      expect(UserCache.prototype.updateSingleUserItemInCache).toHaveBeenCalledWith(`${req.currentUser!.userId}`, 'bgImageId', '123456');
-      expect(UserCache.prototype.updateSingleUserItemInCache).toHaveBeenCalledWith(`${req.currentUser!.userId}`, 'bgImageVersion', '1234');
+      expect(UserCache.prototype.updateSingleUserItemInCache).toHaveBeenCalledWith(
+        `${req.currentUser!.userId}`,
+        'bgImageId',
+        '123456'
+      );
+      expect(UserCache.prototype.updateSingleUserItemInCache).toHaveBeenCalledWith(
+        `${req.currentUser!.userId}`,
+        'bgImageVersion',
+        '1234'
+      );
       expect(imageServer.socketIOImageObject.emit).toHaveBeenCalledWith('update user', {
         bgImageId: '123456',
         bgImageVersion: '1234',
-        userId: existingUser
+        userId: existingUser,
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Image added successfully'
+        message: 'Image added successfully',
       });
     });
 
     it('should call addImageJob method', async () => {
-      const req: Request = imagesMockRequest({}, { image: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==' }, authUserPayload) as Request;
+      const req: Request = imagesMockRequest(
+        {},
+        { image: 'data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==' },
+        authUserPayload
+      ) as Request;
       const res: Response = imagesMockResponse();
-      jest.spyOn(cloudinaryUploads, 'uploads').mockImplementation((): any => Promise.resolve({ version: '1234', public_id: '123456' }));
+      jest
+        .spyOn(cloudinaryUploads, 'uploads')
+        .mockImplementation((): any => Promise.resolve({ version: '1234', public_id: '123456' }));
       jest.spyOn(imageQueue, 'addImageJob');
 
       await Add.prototype.backgroundImage(req, res);
       expect(imageQueue.addImageJob).toHaveBeenCalledWith('updateBGImageInDB', {
         key: `${req.currentUser?.userId}`,
         imgId: '123456',
-        imgVersion: '1234'
+        imgVersion: '1234',
       });
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
-        message: 'Image added successfully'
+        message: 'Image added successfully',
       });
     });
   });
